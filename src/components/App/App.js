@@ -20,7 +20,7 @@ function App() {
         <Route path='/signup'>
           <Register />
         </Route>
-        <Route path='/'>
+        <Route exact path='/'>
           <Main />
         </Route>
         <Route path='/movies'>
