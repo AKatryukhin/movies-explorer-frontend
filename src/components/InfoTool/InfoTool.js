@@ -2,6 +2,7 @@ import React from 'react';
 import unionyes from '../images/Union-yes.png';
 import unionno from '../images/Union-no.png';
 import { AppContext } from '../contexts/AppContext';
+import './InfoTool';
 
 function InfoTooltip({ isOpen, onClose, title, icon }) {
   const value = React.useContext(AppContext);
