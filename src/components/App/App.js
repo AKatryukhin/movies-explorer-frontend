@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { CurrentUserContext } from "../../context/currentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   return (
