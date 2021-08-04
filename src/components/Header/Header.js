@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, Redirect, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -23,7 +23,7 @@ function Header() {
             </Link>
           </div>
           <Link className='header__link' to='/profile'>
-            <button>Аккаунт</button>
+            <button className='header__account-button'>Аккаунт</button>
           </Link>
         </>
       ) : (
@@ -32,7 +32,7 @@ function Header() {
             Регистрация
           </Link>
           <Link className='header__link' to='/signin'>
-            <button>Войти</button>
+            <button className='header__signin-button'>Войти</button>
           </Link>
         </>
       )}
