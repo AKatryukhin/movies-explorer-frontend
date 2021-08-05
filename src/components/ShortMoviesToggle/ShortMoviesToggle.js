@@ -1,19 +1,7 @@
-// import React from 'react';
-// import './NavTab';
-
-// function NavTab() {
-//   return (
-   
-    
-//   );
-// }
-
-// export default NavTab; 
-  
 // import React, { useState } from "react";
 // import "./ToggleSwitch.css";
 
-// function ToggleSwitch({ onCheckboxToggle }) {
+// function ShortMoviesToggle({ onCheckboxToggle }) {
 //     const [isChecked, setChecked] = useState(false);
 //     function onChange(event) {
 //         onCheckboxToggle(!isChecked);
@@ -25,8 +13,8 @@
 //             <input
 //                 type="checkbox"
 //                 className="toggle-switch__checkbox"
-//                 name="toggleSwitch"
-//                 id="toggleSwitch"
+//                 name="shortMoviesToggle"
+//                 id="shortMoviesToggle"
 //                 checked={isChecked}
 //                 onChange={(e) => onChange(e)}
 //             />
@@ -34,4 +22,4 @@
 //     );
 // }
 
-// export default ToggleSwitch;
+// export default ShortMoviesToggle;
