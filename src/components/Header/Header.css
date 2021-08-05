@@ -4,16 +4,22 @@
   justify-content: space-between;
   align-items: center;
   padding: 18px 70px;
-  background-color: #202020;
+  background-color: #073042;
 }
 
 .header_loggedIn {
-  background-color: #073042;
+  background-color: #202020;
 }
 
 .header__logo {
   width: 38px;
   height: 38px;
+}
+
+.header__icon {
+  width: 12px;
+  height: 14px;
+  margin-right: 7px;
 }
 
 .header__links {
@@ -30,21 +36,24 @@
   font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.4;
 }
 
 .header__link:last-of-type {
   margin-right: 0;
-  margin: 3px 0 0;
 }
 
 .header__link_active {
   font-weight: 500;
 }
 
+.header__link:hover {
+  opacity: .8;
+}
+
 .header__signin-button {
-  width: 100px;
+  width: 76px;
   height: 32px;
   border: none;
   cursor: pointer;
@@ -56,56 +65,54 @@
   font-size: 12px;
   line-height: 1.4;
 }
-/*
-.header__profile-link {
-  display: flex;
-  column-gap: 13px;
-  align-items: center;
+
+.header__signin-button:hover {
+  box-shadow: 0px 0px 10px rgb(18, 21, 226);
+}
+
+.header__link-films {
+  margin-right: 16px;
+  text-decoration: none;
+  color: #fff;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.header__link-films:hover {
+  opacity: .8;
+}
+
+.header__link-films_active {
+  font-weight: 500;
+}
+
+.header__link-films:last-of-type {
+  margin-right: 0;
 }
 
 .header__profile-button {
-  width: 30px;
-  height: 30px;
-
-  border: none;
-  border-radius: 6px;
-  background: #313131 url('../../images/icons/profile-icon.svg') no-repeat center center;
-
-  cursor: pointer;
-}
-
-.header__button {
-  width: 76px;
+  width: 100px;
   height: 32px;
-
-  background-color: #3DDC84;
-  border: none;
-  border-radius: 3px;
-  padding: 0;
-
+  border: 2px solid rgba(170, 170, 170, .2);
   cursor: pointer;
-}
-
-.header__link {
-  text-decoration: none;
-  color: inherit;
-
-  font-family: Inter;
+  border-radius: 50px;
+  background-color: #202020;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  color: #fff;
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  
-  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
-.header__link_active {
-  font-weight: 600;
+.header__profile-button:hover {
+  box-shadow: 0px 0px 10px rgb(216, 216, 226);
 }
+/*
 
-.header__link:hover {
-  opacity: .8;
-}
 
 @media screen and (max-width: 768px) {
   .header {
@@ -119,7 +126,7 @@
       max-width: calc(100% - 28px);
       padding: 0 14px;
   }
-  .header__button {
+  .header__profile-button {
       width: 54px;
       height: 26px;
   }

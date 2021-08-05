@@ -11,7 +11,7 @@ import Register from '../Register/Register';
 import { AppContext } from '../contexts/AppContext';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   return (
     <>
