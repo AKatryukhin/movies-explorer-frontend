@@ -1,11 +1,11 @@
 // import React from 'react';
-// import './Login';
+// import './Techs';
 
-// function Login() {
+// function Techs() {
 //   return (
    
     
 //   );
 // }
 
-// export default Login; 
+// export default Techs; 

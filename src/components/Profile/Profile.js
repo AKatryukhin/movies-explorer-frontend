@@ -1,11 +1,11 @@
-import React from 'react';
-import './Profile';
+// import React from 'react';
+// import './Profile';
 
-function Profile() {
-  return (
+// function Profile() {
+//   return (
    
     
-  );
-}
+//   );
+// }
 
-export default Profile; 
+// export default Profile; 

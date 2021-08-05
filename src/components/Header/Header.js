@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -14,27 +14,40 @@ function Header() {
       </label> */}
       {value.loggedIn ? (
         <>
-          <div className='header__film-container'>
-            <Link className='header__link-film' to='/movies'>
-              Фильмы
-            </Link>
-            <Link className='header__link-film' to='/saved-movies'>
-              Сохранённые фильмы
-            </Link>
-          </div>
-          <Link className='header__link' to='/profile'>
-            <button className='header__account-button'>Аккаунт</button>
-          </Link>
+          <ul className='header__links'>
+              <NavLink
+                to='/movies'
+                className='header__link'
+                activeClassName='header__link_active'
+              >
+                Фильмы
+              </NavLink>
+              <NavLink
+                to='/saved-movies'
+                className='header__link'
+                activeClassName='header__link_active'
+              >
+                Сохранённые фильмы
+              </NavLink>
+              <NavLink
+                to='/profile'
+                className='header__link header__link-profile'
+                activeClassName='header__link_active'
+              >
+                <button className='header__profile-button'>Аккаунт</button>
+              </NavLink>
+          </ul>
+          )}
         </>
       ) : (
-        <>
-          <Link className='header__link' to='/signup'>
-            Регистрация
-          </Link>
-          <Link className='header__link' to='/signin'>
-            <button className='header__signin-button'>Войти</button>
-          </Link>
-        </>
+        <ul className='header__links'>
+            <Link to='/signup' className='header__link'>
+              Регистрация
+            </Link>
+            <Link to='/signin' className='header__link'>
+              <button className='header__signin-button'>Войти</button>
+            </Link>
+        </ul>
       )}
     </header>
   );

@@ -1,11 +1,11 @@
-import React from 'react';
-import './Movies';
+// import React from 'react';
+// import './Movies';
 
-function Movies() {
-  return (
+// function Movies() {
+//   return (
    
     
-  );
-}
+//   );
+// }
 
-export default Movies; 
+// export default Movies; 

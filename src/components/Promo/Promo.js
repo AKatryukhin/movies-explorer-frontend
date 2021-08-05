@@ -1,11 +1,11 @@
 // import React from 'react';
-// import './Login';
+// import './Promo';
 
-// function Login() {
+// function Promo() {
 //   return (
    
     
 //   );
 // }
 
-// export default Login; 
+// export default Promo; 

@@ -11,8 +11,9 @@ import Register from '../Register/Register';
 
 function App() {
   return (
-    <div className='body'>
+    <>
       <Header />
+      <main className="content">
       <Switch>
         <Route path='/signin'>
           <Login />
@@ -32,9 +33,10 @@ function App() {
         <Route path='/profile'>
           <Profile />
         </Route>
-      </Switch>
+        </Switch>
+        </main>
       <Footer />
-    </div>
+      </>
   );
 }
 

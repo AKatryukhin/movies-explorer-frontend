@@ -1,11 +1,11 @@
-import React from 'react';
-import './SavedMovies';
+// import React from 'react';
+// import './SavedMovies';
 
-function SavedMovies() {
-  return (
+// function SavedMovies() {
+//   return (
    
     
-  );
-}
+//   );
+// }
 
-export default SavedMoviesr; 
+// export default SavedMoviesr; 
