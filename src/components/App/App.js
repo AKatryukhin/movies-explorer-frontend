@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
@@ -8,12 +8,20 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import { AppContext } from '../contexts/AppContext';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <>
+       <AppContext.Provider
+        value={{
+          loggedIn: loggedIn,
+        }}
+      >
       <Header />
-      <main className="content">
+      {/* <main className="content">
       <Switch>
         <Route path='/signin'>
           <Login />
@@ -34,8 +42,9 @@ function App() {
           <Profile />
         </Route>
         </Switch>
-        </main>
-      <Footer />
+        </main> */}
+        </AppContext.Provider>
+      {/* <Footer />   */}
       </>
   );
 }
