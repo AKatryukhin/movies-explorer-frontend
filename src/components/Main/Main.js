@@ -9,10 +9,10 @@ function Main({ loggedIn }) {
   return (
     <>
       <Promo />
-      <AboutProject />
+      {/* <AboutProject />
       <Techs />
       <AboutMe />
-      <Portfolio />
+      <Portfolio /> */}
     </>
   );
 }

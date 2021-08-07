@@ -11,7 +11,7 @@ import Register from '../Register/Register';
 import { AppContext } from '../contexts/AppContext';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <>
@@ -21,18 +21,17 @@ function App() {
         }}
       >
       <Header />
-      {/* <main className="content">
       <Switch>
-        <Route path='/signin'>
+        {/* <Route path='/signin'>
           <Login />
         </Route>
         <Route path='/signup'>
           <Register />
-        </Route>
+        </Route> */}
         <Route exact path='/'>
           <Main />
         </Route>
-        <Route path='/movies'>
+        {/* <Route path='/movies'>
           <Movies />
         </Route>
         <Route path='/saved-movies'>
@@ -40,11 +39,10 @@ function App() {
         </Route>
         <Route path='/profile'>
           <Profile />
-        </Route>
+        </Route> */}
         </Switch>
-        </main> */}
+        {/* <Footer />   */}
         </AppContext.Provider>
-      {/* <Footer />   */}
       </>
   );
 }
