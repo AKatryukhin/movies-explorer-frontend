@@ -10,8 +10,8 @@ function Main({ loggedIn }) {
   return (
     <main className='content'>
       <Promo />
-      {/* <AboutProject />
-      <Techs />
+      <AboutProject />
+      {/* <Techs />
       <AboutMe />
       <Portfolio /> */}
     </main>

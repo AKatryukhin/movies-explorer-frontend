@@ -1,0 +1,36 @@
+
+
+
+
+
+
+.project__graph {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 36px;
+  row-gap: 14px;
+}
+
+.project__graph-text {
+  margin: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+
+  color: #8B8B8B;
+}
+
+.project__graph-green {
+  padding-top: 8px;
+  background-color: #3DDC84;
+  color: #000;
+}
+
+.project__graph-grey {
+  padding-top: 8px;
+  background-color: #303030;
+  color: #fff;
+}
