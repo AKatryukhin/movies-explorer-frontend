@@ -1,18 +1,11 @@
 @import url(./vendor/normalize.css);
 @import url(./fonts/fonts.css);
 
-body {
-  background-color: #202020;
-  height: 100%;
-  font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
-  background-color: #202020;
-}
-
-#root {
+.page {
   min-height: 100vh;
   min-width: 320px;
   max-width: 1280px;
-  
+  background-color: #202020;
   margin: 0 auto;
   color: #fff;
   
@@ -28,3 +21,26 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.page__header {
+  padding: 18px 70px 0;
+}
+
+/* @media screen and (max-width: 767px) {
+  .page__header {
+    padding: 28px 30px 42px;
+    margin: 0 auto;
+  }
+} */
+
+/* .page__footer {
+  padding-top: 66px;
+  padding-bottom: 60px;
+}
+
+@media screen and (max-width: 767px) {
+  .page__footer {
+      margin-top: 48px;
+      margin-bottom: 36px;
+  }
+} */

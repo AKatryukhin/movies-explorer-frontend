@@ -20,6 +20,7 @@ function App() {
           loggedIn: loggedIn,
         }}
       >
+        <div className='page'>
       <Header />
       <Switch>
         {/* <Route path='/signin'>
@@ -41,7 +42,8 @@ function App() {
           <Profile />
         </Route> */}
         </Switch>
-        {/* <Footer />   */}
+          {/* <Footer />   */}
+          </div>
         </AppContext.Provider>
       </>
   );
