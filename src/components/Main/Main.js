@@ -11,7 +11,8 @@ function Main({ loggedIn }) {
     <main className='content'>
       <Promo />
       <AboutProject />
-      {/* <Techs />
+      <Techs />
+      {/*
       <AboutMe />
       <Portfolio /> */}
     </main>

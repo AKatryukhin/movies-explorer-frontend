@@ -46,7 +46,7 @@
   display: grid;
   grid-template-columns: 1fr 4fr;
   row-gap: 14px;
-  margin-bottom: 110px;
+  margin-bottom: 10px;
 }
 
 .project__graph-text {
