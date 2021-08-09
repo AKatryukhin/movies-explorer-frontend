@@ -15,24 +15,24 @@ function App() {
 
   return (
     <>
-       <AppContext.Provider
+      <AppContext.Provider
         value={{
           loggedIn: loggedIn,
         }}
       >
-        <div className='page'>
-      <Header />
-      <Switch>
-        {/* <Route path='/signin'>
+          <div className='page'>
+            <Header />
+            <Switch>
+              {/* <Route path='/signin'>
           <Login />
         </Route>
         <Route path='/signup'>
           <Register />
         </Route> */}
-        <Route exact path='/'>
-          <Main />
-        </Route>
-        {/* <Route path='/movies'>
+              <Route exact path='/'>
+                <Main />
+              </Route>
+              {/* <Route path='/movies'>
           <Movies />
         </Route>
         <Route path='/saved-movies'>
@@ -41,11 +41,11 @@ function App() {
         <Route path='/profile'>
           <Profile />
         </Route> */}
-        </Switch>
-          {/* <Footer />   */}
+            </Switch>
+            {/* <Footer />   */}
           </div>
-        </AppContext.Provider>
-      </>
+      </AppContext.Provider>
+    </>
   );
 }
 

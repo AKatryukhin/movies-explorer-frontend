@@ -1,4 +1,5 @@
 .content {
+  margin: 0;
   flex-shrink: 0;
   display: grid;
   grid-row-gap: 100px;
