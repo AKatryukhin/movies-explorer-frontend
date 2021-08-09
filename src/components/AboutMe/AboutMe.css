@@ -1,0 +1,27 @@
+.aboutme {
+  background-color: #202020;
+  padding-top: 10px;
+  padding-bottom: 66px;
+}
+
+.aboutme__title-container {
+  width: 100%;
+  border-bottom: 1px solid #DADADA;
+  padding: 10px 0 23px;
+  margin-bottom: 90px;
+}
+
+.aboutme__title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.aboutme__content-container {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}

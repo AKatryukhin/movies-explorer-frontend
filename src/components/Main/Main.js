@@ -12,9 +12,8 @@ function Main({ loggedIn }) {
       <Promo />
       <AboutProject />
       <Techs />
-      {/*
       <AboutMe />
-      <Portfolio /> */}
+      {/* <Portfolio /> */}
     </main>
   );
 }
