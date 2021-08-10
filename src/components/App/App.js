@@ -11,7 +11,7 @@ import Register from '../Register/Register';
 import { AppContext } from '../contexts/AppContext';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   return (
     <>
@@ -32,10 +32,10 @@ function App() {
               <Route exact path='/'>
                 <Main />
               </Route>
-              {/* <Route path='/movies'>
+             <Route path='/movies'>
           <Movies />
         </Route>
-        <Route path='/saved-movies'>
+         {/* <Route path='/saved-movies'>
           <SavedMovies />
         </Route>
         <Route path='/profile'>

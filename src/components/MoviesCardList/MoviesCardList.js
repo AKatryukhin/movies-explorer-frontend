@@ -1,11 +1,11 @@
-import React from 'react';
-import './MoviesCardList';
+// import React from 'react';
+// import './MoviesCardList';
 
-function MoviesCardList() {
-  return (
+// function MoviesCardList() {
+//   return (
    
     
-  );
-}
+//   );
+// }
 
-export default MoviesCardList; 
+// export default MoviesCardList; 
