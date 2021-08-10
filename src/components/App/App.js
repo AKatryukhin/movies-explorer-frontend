@@ -42,7 +42,7 @@ function App() {
           <Profile />
         </Route> */}
             </Switch>
-            {/* <Footer />   */}
+            <Footer />  
           </div>
       </AppContext.Provider>
     </>

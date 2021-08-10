@@ -27,6 +27,10 @@
   padding: 18px 70px 0;
 }
 
+.page__footer {
+  padding: 79px 70px 20px;
+}
+
 /* @media screen and (max-width: 767px) {
   .page__header {
     padding: 28px 30px 42px;
