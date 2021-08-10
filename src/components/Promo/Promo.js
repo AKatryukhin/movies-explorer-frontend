@@ -6,6 +6,7 @@ import banner from '../../images/banner.png';
 function Promo() {
   return (
     <section className='promo section'>
+      <div className="promo__content-container">
       <div className='promo__title-container'>
         <h1 className='promo__title'>
           Учебный проект студента факультета Веб&nbsp;-&nbsp;разработки.
@@ -15,13 +16,14 @@ function Promo() {
         </p>
         <Link to='/' className='promo__link'>
           <button className='promo__knowmore-button'>Узнать больше</button>
-        </Link>
+          </Link>
       </div>
       <img
         className='promo__banner'
         src={banner}
         alt='баннер страницы «О проекте»'
-      />
+        />
+        </div>
     </section>
   );
 }

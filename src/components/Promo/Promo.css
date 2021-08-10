@@ -1,14 +1,17 @@
 .promo {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   background-color: #073042;
   padding-top: 75px;
   padding-bottom: 50px;
 }
 
+.promo__content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .promo__title-container {
-  width: 640px;
+  max-width: 640px;
   display: flex;
   flex-direction: column;
 

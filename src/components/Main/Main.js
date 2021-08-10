@@ -13,7 +13,7 @@ function Main({ loggedIn }) {
       <AboutProject />
       <Techs />
       <AboutMe />
-      {/* <Portfolio /> */}
+      <Portfolio />
     </main>
   );
 }
