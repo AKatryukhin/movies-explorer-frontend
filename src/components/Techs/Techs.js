@@ -3,9 +3,9 @@ import './Techs.css';
 
 function Techs() {
   return (
-    <section className='techs content__container'>
-      <div className='techs__title-container'>
-        <h3 className='techs__title'>Технологии</h3>
+    <section className='techs section'>
+      <div className='section__title-container techs__title-container'>
+        <h3 className='section__title'>Технологии</h3>
       </div>
       <div className='techs__content-container'>
         <h2 className='techs__subtitle'>7 технологий</h2>

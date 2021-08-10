@@ -3,9 +3,9 @@ import './AboutProject.css';
 
 function AboutProject() {
   return (
-    <section className='project content__container'>
-      <div className="project__title-container">
-      <h3 className="project__title">
+    <section className='project section'>
+      <div className="section__title-container project__title-container">
+      <h3 className="section__title">
       О проекте
       </h3>
       </div>

@@ -6,6 +6,27 @@
   grid-row-gap: 100px;
 }
 
+.section {
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+.section__title-container {
+  width: 100%;
+  padding: 10px 0 23px;
+  border-bottom: 1px solid #DADADA;
+}
+
+.section__title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+
 /* @media screen and (max-width: 984px) {
   .content {
     grid-row-gap: 88px;
@@ -19,7 +40,4 @@
   }
 } */
 
-.content__container {
-  padding-left: 70px;
-  padding-right: 70px;
-}
+

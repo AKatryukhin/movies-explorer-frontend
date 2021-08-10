@@ -5,9 +5,9 @@ import photo from '../../images/myphoto.png';
 
 function AboutMe() {
   return (
-    <section className='aboutme content__container'>
-      <div className='aboutme__title-container'>
-        <h3 className='aboutme__title'>Студент</h3>
+    <section className='aboutme section'>
+      <div className='section__title-container aboutme__title-container'>
+        <h3 className='section__title'>Студент</h3>
       </div>
       <div className='aboutme__content-container'>
         <div className='aboutme__title-container'>

@@ -5,7 +5,7 @@ import banner from '../../images/banner.png';
 
 function Promo() {
   return (
-    <section className='promo content__container'>
+    <section className='promo section'>
       <div className='promo__title-container'>
         <h1 className='promo__title'>
           Учебный проект студента факультета Веб&nbsp;-&nbsp;разработки.
