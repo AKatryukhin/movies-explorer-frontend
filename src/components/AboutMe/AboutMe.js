@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './AboutMe.css';
 import photo from '../../images/myphoto.png';
-import icon from '../../images/icon-link.svg';
 
 function AboutMe() {
   return (
@@ -29,29 +28,9 @@ function AboutMe() {
               Github
             </Link>
           </ul>
-          <Link to='/' className='aboutme__link-portfolio'>
-            Портфолио
-          </Link>
         </div>
         <img className='aboutme__photo' src={photo} alt='Фото студента' />
       </div>
-      <ul className='aboutme__project-links'>
-        <li className='aboutme__project-li'>
-          <Link to='/' className='aboutme__project-link'>
-          Статичный сайт <img className='aboutme__project-link-icon' src={icon} alt='Иконка ссылки' />
-          </Link>
-        </li>
-        <li className='aboutme__project-li'>
-          <Link to='/' className='aboutme__project-link'>
-          Адаптивный сайт <img className='aboutme__project-link-icon' src={icon} alt='Иконка ссылки' />
-          </Link>
-        </li>
-        <li className='aboutme__project-li'>
-          <Link to='/' className='aboutme__project-link'>
-          Одностраничное приложение <img className='aboutme__project-link-icon' src={icon} alt='Иконка ссылки' />
-          </Link>
-        </li>
-      </ul>
     </section>
   );
 }

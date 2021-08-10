@@ -1,7 +1,6 @@
 .aboutme {
   background-color: #202020;
   padding-top: 10px;
-  padding-bottom: 125px;
 }
 
 .aboutme__title-container {
@@ -12,7 +11,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 50px;
 }
 
 .aboutme__info-container {
@@ -49,7 +47,7 @@
   flex-direction: row;
   align-items: center;
   padding: 0;
-  margin-bottom: 100px;
+  margin: 0;
 }
 
 .aboutme__social-link {
@@ -70,50 +68,8 @@
   opacity: .8;
 }
 
-.aboutme__link-portfolio {
-  text-decoration: none;
-  color: #8B8B8B;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.1;
-}
-
-.aboutme__link-portfolio:hover {
-  opacity: .8;
-}
-
 .aboutme__photo {
 width: 270px;
 height: 327px;
 }
 
-.aboutme__project-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding:0;
-}
-
-.aboutme__project-li {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #424242;
-  padding-bottom: 19px;
-}
-
-.aboutme__project-li:last-of-type {
-  margin-bottom: 0;
-}
-
-.aboutme__project-link {
-color:#fff;
-text-decoration: none;
-font-style: normal;
-font-weight: 400;
-font-size: 30px;
-line-height: 1.7;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-}
