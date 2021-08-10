@@ -1,7 +1,7 @@
 .aboutme {
   background-color: #202020;
   padding-top: 10px;
-  padding-bottom: 66px;
+  padding-bottom: 125px;
 }
 
 .aboutme__title-container {
@@ -9,6 +9,110 @@
 }
 
 .aboutme__content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.aboutme__info-container {
+  max-width: 600px;
+}
+
+.aboutme__name {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin: 0 0 18px;
+}
+
+.aboutme__info {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.1;
+  margin: 0 0 26px;
+}
+
+.aboutme__about {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 99px;
+}
+
+.aboutme__social-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 100px;
+}
+
+.aboutme__social-link {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.aboutme__social-link:last-of-type {
+  margin-right: 0;
+}
+
+.aboutme__social-link:hover {
+  opacity: .8;
+}
+
+.aboutme__link-portfolio {
+  text-decoration: none;
+  color: #8B8B8B;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.aboutme__link-portfolio:hover {
+  opacity: .8;
+}
+
+.aboutme__photo {
+width: 270px;
+height: 327px;
+}
+
+.aboutme__project-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding:0;
+}
+
+.aboutme__project-li {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #424242;
+  padding-bottom: 19px;
+}
+
+.aboutme__project-li:last-of-type {
+  margin-bottom: 0;
+}
+
+.aboutme__project-link {
+text-decoration: none;
+color: #fff;
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 1.7;
 display: flex;
 flex-direction: row;
 justify-content: space-between;

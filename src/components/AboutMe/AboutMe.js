@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './AboutMe.css';
 import photo from '../../images/myphoto.png';
+import icon from '../../images/icon-link.svg';
 
 function AboutMe() {
   return (
@@ -10,10 +11,10 @@ function AboutMe() {
         <h3 className='section__title'>Студент</h3>
       </div>
       <div className='aboutme__content-container'>
-        <div className='aboutme__title-container'>
-          <h1 className='aboutme__title'>Адександр</h1>
-          <p className='aboutme__subtitle'>Фронтенд-разработчик, 35 лет</p>
-          <p className='aboutme__description'>
+        <div className='aboutme__info-container'>
+          <h1 className='aboutme__name'>Адександр</h1>
+          <p className='aboutme__info'>Фронтенд-разработчик, 35 лет</p>
+          <p className='aboutme__about'>
             Я родился и живу в Саратове, закончил факультет экономики СГУ. У
             меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
             бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
@@ -34,6 +35,23 @@ function AboutMe() {
         </div>
         <img className='aboutme__photo' src={photo} alt='Фото студента' />
       </div>
+      <ul className='aboutme__project-links'>
+        <li className='aboutme__project-li'>
+          <Link to='/' className='aboutme__project-link'>
+          Статичный сайт <img className='aboutme__project-link-icon' src={icon} alt='Иконка ссылки' />
+          </Link>
+        </li>
+        <li className='aboutme__project-li'>
+          <Link to='/' className='aboutme__project-link'>
+          Адаптивный сайт <img className='aboutme__project-link-icon' src={icon} alt='Иконка ссылки' />
+          </Link>
+        </li>
+        <li className='aboutme__project-li'>
+          <Link to='/' className='aboutme__project-link'>
+          Одностраничное приложение <img className='aboutme__project-link-icon' src={icon} alt='Иконка ссылки' />
+          </Link>
+        </li>
+      </ul>
     </section>
   );
 }
