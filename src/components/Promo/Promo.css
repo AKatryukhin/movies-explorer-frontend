@@ -14,7 +14,6 @@
   max-width: 640px;
   display: flex;
   flex-direction: column;
-
 }
 
 .promo__title {
@@ -33,13 +32,13 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 1.2;
-  opacity: .5;
+  opacity: 0.5;
   margin: 0 0 146px;
 }
 
 .promo__knowmore-button {
-  color:#fff;
-  border: 1px solid rgba(255, 255, 255, .6);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
   box-sizing: border-box;
   border-radius: 3px;
   width: 130px;

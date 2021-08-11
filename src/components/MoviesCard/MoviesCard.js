@@ -2,7 +2,6 @@ import React from 'react';
 import './MoviesCard.css';
 
 function MoviesCard({ movie, isLiked = true }) {
-
   return (
     <article className='movie'>
       <div className='movie__info-container'>

@@ -1,16 +1,16 @@
 .portfolio {
- margin: 0;
- padding-bottom: 100px;
+  margin: 0;
+  padding-bottom: 100px;
 }
 
 .portfolio__title {
-  color: #8B8B8B;
+  color: #8b8b8b;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.1;
   margin: 0 0 50px;
-  }
+}
 
 .portfolio__project-links {
   list-style: none;
@@ -34,13 +34,13 @@
 }
 
 .portfolio__project-link {
-color:#fff;
-text-decoration: none;
-font-style: normal;
-font-weight: 400;
-font-size: 30px;
-line-height: 1.7;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+  color: #fff;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

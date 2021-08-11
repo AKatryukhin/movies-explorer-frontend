@@ -8,7 +8,13 @@ import { AppContext } from '../contexts/AppContext';
 function Header() {
   const value = React.useContext(AppContext);
   return (
-    <header className={value.loggedIn ? 'header page__header header_loggedIn' : 'header page__header'}>
+    <header
+      className={
+        value.loggedIn
+          ? 'header page__header header_loggedIn'
+          : 'header page__header'
+      }
+    >
       {value.loggedIn ? (
         <>
           <Link to='/'>

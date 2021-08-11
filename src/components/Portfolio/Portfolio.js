@@ -10,17 +10,32 @@ function Portfolio() {
       <ul className='portfolio__project-links'>
         <li className='portfolio__project-li'>
           <Link to='/' className='portfolio__project-link'>
-          Статичный сайт <img className='portfolio__project-link-icon' src={icon} alt='Иконка ссылки' />
+            Статичный сайт{' '}
+            <img
+              className='portfolio__project-link-icon'
+              src={icon}
+              alt='Иконка ссылки'
+            />
           </Link>
         </li>
         <li className='portfolio__project-li'>
           <Link to='/' className='portfolio__project-link'>
-          Адаптивный сайт <img className='portfolio__project-link-icon' src={icon} alt='Иконка ссылки' />
+            Адаптивный сайт{' '}
+            <img
+              className='portfolio__project-link-icon'
+              src={icon}
+              alt='Иконка ссылки'
+            />
           </Link>
         </li>
         <li className='portfolio__project-li'>
           <Link to='/' className='portfolio__project-link'>
-          Одностраничное приложение <img className='portfolio__project-link-icon' src={icon} alt='Иконка ссылки' />
+            Одностраничное приложение{' '}
+            <img
+              className='portfolio__project-link-icon'
+              src={icon}
+              alt='Иконка ссылки'
+            />
           </Link>
         </li>
       </ul>

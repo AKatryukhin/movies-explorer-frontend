@@ -5,9 +5,9 @@ import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
+// import Profile from '../Profile/Profile';
+// import Login from '../Login/Login';
+// import Register from '../Register/Register';
 import { AppContext } from '../contexts/AppContext';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
       <AppContext.Provider
         value={{
           loggedIn: loggedIn,
-          isLoading: isLoading
+          isLoading: isLoading,
         }}
       >
         <div className='page'>
@@ -37,10 +37,10 @@ function App() {
             <Route path='/movies'>
               <Movies />
             </Route>
-            {/* <Route path='/saved-movies'>
-          <SavedMovies />
-        </Route>
-        <Route path='/profile'>
+            <Route path='/saved-movies'>
+              <SavedMovies />
+            </Route>
+            {/*<Route path='/profile'>
           <Profile />
         </Route> */}
           </Switch>

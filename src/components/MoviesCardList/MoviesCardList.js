@@ -1,35 +1,30 @@
 import React from 'react';
 import './MoviesCardList.css';
-import movies from '../../utils/constants.js'
+import { movies, savedMovies } from '../../utils/constants.js';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
-console.log(movies)
-
-
-function MoviesCardList() {
+function MoviesCardList({ isSavedMovies = false }) {
   return (
-    <section className="movies-cardist section">
-      <div className="movies-cardlist__items">
-        {/* {isSavedPage && */}
-          
-        {movies.map((movie) => (
-          <MoviesCard
-            key={movie._id}
-            movie={movie}
-          />
-        ))}
+    <section className='movies-cardlist section'>
+      <div className='movies-cardlist__items'>
+        {!isSavedMovies
+          ? movies.map((movie) => <MoviesCard key={movie._id} movie={movie} />)
+          : savedMovies.map((movie) => (
+              <MoviesCard key={movie._id} movie={movie} />
+            ))}
       </div>
-      {/* {!isSavedPage && currentCount < movies.length && ( */}
-      <button
-        className="movies-cardlist__more-button"
-        aria-label="Показать еще"
-      >
-        Ещё
-      </button>
-      {/* } */}
+      {!isSavedMovies ? (
+        <button
+          className='movies-cardlist__more-button'
+          aria-label='Показать еще'
+        >
+          Ещё
+        </button>
+      ) : (
+        <div className='movies-cardlist__empty'></div>
+      )}
     </section>
   );
 }
 
 export default MoviesCardList;
-   

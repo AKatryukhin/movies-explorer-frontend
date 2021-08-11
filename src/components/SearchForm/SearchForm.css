@@ -6,7 +6,7 @@
 .search__content-container {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid rgba(170, 170, 170, .2);
+  border-bottom: 1px solid rgba(170, 170, 170, 0.2);
   padding-bottom: 44px;
 }
 .search__form {
@@ -16,7 +16,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border: 1.5px solid rgba(170, 170, 170, .2);
+  border: 1.5px solid rgba(170, 170, 170, 0.2);
   border-radius: 8px;
   margin-bottom: 27px;
 }
@@ -31,20 +31,20 @@
   padding: 25px 0 25px 25px;
   box-sizing: border-box;
   border: none;
-  border-bottom: 1px solid rgba(0,0,0,.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   position: relative;
   background-color: #202020;
 }
 
 .popup__input_type_error {
-  border-bottom: 1px solid rgb(255,0,0);
+  border-bottom: 1px solid rgb(255, 0, 0);
 }
 
 .search__submit {
   width: 100px;
   height: 52px;
   color: #fff;
-  background-color: #4285F4;
+  background-color: #4285f4;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

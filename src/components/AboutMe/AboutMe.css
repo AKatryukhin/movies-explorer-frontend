@@ -65,11 +65,10 @@
 }
 
 .aboutme__social-link:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .aboutme__photo {
-width: 270px;
-height: 327px;
+  width: 270px;
+  height: 327px;
 }
-

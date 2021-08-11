@@ -11,69 +11,83 @@ import movie10 from '../images/films/10.png';
 import movie11 from '../images/films/11.png';
 import movie12 from '../images/films/12.png';
 
-
-
-const movies = [
+export const movies = [
   {
     name: '1',
     link: movie1,
-    _id: 1
+    _id: 1,
   },
   {
     name: '2',
     link: movie2,
-    _id: 2
+    _id: 2,
   },
   {
     name: '3',
     link: movie3,
-    _id: 3
+    _id: 3,
   },
   {
     name: '4',
     link: movie4,
-    _id: 4
+    _id: 4,
   },
   {
     name: '5',
     link: movie5,
-    _id: 5
+    _id: 5,
   },
   {
     name: '6',
     link: movie6,
-    _id: 6
+    _id: 6,
   },
   {
     name: '7',
     link: movie7,
-    _id: 7
+    _id: 7,
   },
   {
     name: '8',
     link: movie8,
-    _id: 8
+    _id: 8,
   },
   {
     name: '9',
     link: movie9,
-    _id: 9
+    _id: 9,
   },
   {
     name: '10',
     link: movie10,
-    _id: 10
+    _id: 10,
   },
   {
     name: '11',
     link: movie11,
-    _id: 11
+    _id: 11,
   },
   {
     name: '12',
     link: movie12,
-    _id: 12
+    _id: 12,
   },
-]; 
+];
 
-export default movies;
+export const savedMovies = [
+  {
+    name: '1',
+    link: movie1,
+    _id: 1,
+  },
+  {
+    name: '2',
+    link: movie2,
+    _id: 2,
+  },
+  {
+    name: '3',
+    link: movie3,
+    _id: 3,
+  },
+];
