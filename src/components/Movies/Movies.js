@@ -2,17 +2,21 @@ import React from 'react';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
-// import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { AppContext } from '../contexts/AppContext';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 // import MoviesCard from '../MoviesCard/MoviesCard';
 
-function Movies(isLoading=true) {
+function Movies() {
+
+  const value = React.useContext(AppContext);
+
   return (
-    <section className='movies'>
+    <main className='movies'>
       <SearchForm />
-      {isLoading && <Preloader />}
-      {/* <MoviesCardList />
-      <MoviesCard /> */}
-    </section>
+      {value.isLoading && <Preloader />}
+      <MoviesCardList />
+      {/* <MoviesCard /> */}
+    </main>
   );
 }
 

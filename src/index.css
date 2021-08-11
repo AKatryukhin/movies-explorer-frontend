@@ -31,6 +31,27 @@
   padding: 79px 70px 20px;
 }
 
+.section {
+  padding-left: 70px;
+  padding-right: 70px;
+  max-width: 1280px;
+}
+
+.section__title-container {
+  width: 100%;
+  padding: 10px 0 23px;
+  border-bottom: 1px solid #DADADA;
+}
+
+.section__title {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
 /* @media screen and (max-width: 767px) {
   .page__header {
     padding: 28px 30px 42px;

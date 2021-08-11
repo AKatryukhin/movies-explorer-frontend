@@ -12,38 +12,40 @@ import { AppContext } from '../contexts/AppContext';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
       <AppContext.Provider
         value={{
           loggedIn: loggedIn,
+          isLoading: isLoading
         }}
       >
-          <div className='page'>
-            <Header />
-            <Switch>
-              {/* <Route path='/signin'>
+        <div className='page'>
+          <Header />
+          <Switch>
+            {/* <Route path='/signin'>
           <Login />
         </Route>
         <Route path='/signup'>
           <Register />
         </Route> */}
-              <Route exact path='/'>
-                <Main />
-              </Route>
-             <Route path='/movies'>
-          <Movies />
-        </Route>
-         {/* <Route path='/saved-movies'>
+            <Route exact path='/'>
+              <Main />
+            </Route>
+            <Route path='/movies'>
+              <Movies />
+            </Route>
+            {/* <Route path='/saved-movies'>
           <SavedMovies />
         </Route>
         <Route path='/profile'>
           <Profile />
         </Route> */}
-            </Switch>
-            <Footer />  
-          </div>
+          </Switch>
+          <Footer />
+        </div>
       </AppContext.Provider>
     </>
   );

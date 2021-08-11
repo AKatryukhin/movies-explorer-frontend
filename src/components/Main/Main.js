@@ -6,7 +6,8 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import './Main.css';
 
-function Main({ loggedIn }) {
+function Main() {
+
   return (
     <main className='content'>
       <Promo />

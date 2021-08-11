@@ -1,0 +1,58 @@
+.movie__info-container {
+  background-color: #222222;
+  padding: 11px 11px;
+}
+
+.movie__name {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.2;
+  margin: 0 0 11px;
+}
+
+.movie__lenght {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.2;
+  color: #8b8b8b;
+  margin: 0;
+}
+
+.movie__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie__header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie__like-button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50px;
+
+  background-color: #313131;
+  background-image: url('../../images/icon__button-like-noactive.png');
+  background-repeat: no-repeat;
+  background-position: center;
+
+  cursor: pointer;
+}
+
+.movie__like-button:hover {
+  opacity: 0.8;
+}
+
+.movie__like-button_active {
+  background-color: #3ddc84;
+  background-image: url('../../images/icon__button-like-active.png');
+}
