@@ -1,6 +1,8 @@
 import React from 'react';
 import './SearchForm.css';
 import useFormAndValidation from '../hooks/useFormAndValidation.js';
+import initialCards from '../../utils/constants.js';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js'
 
 function SearchForm({ isSending = true, isDisabled = false }) {
   const { values, handleChange, resetForm, errors, isValid } =
@@ -17,18 +19,19 @@ function SearchForm({ isSending = true, isDisabled = false }) {
 
   return (
     <section className='search section'>
+      <div className='search__content-container'>
       <form
-        className='search-form'
+        className='search__form'
         onSubmit={handleSubmit}
-        name='search_form'
+        name='search__form'
         title='Поиск'
         isValid={isValid}
         isDisabled={!isValid || isSending}
-      >
+        >
         <input
           type='text'
-          className='search-input'
-          id='search-input'
+          className='search__input'
+          id='search__input'
           name='name'
           placeholder='Фильм'
           required
@@ -37,7 +40,6 @@ function SearchForm({ isSending = true, isDisabled = false }) {
           onChange={handleChange}
           value={name || ''}
         />
-        <span className='search__input-error'>{errors.email}</span>
         <button
           className='search__submit'
           type='submit'
@@ -46,7 +48,12 @@ function SearchForm({ isSending = true, isDisabled = false }) {
         >
           Поиск
         </button>
-      </form>
+        </form>
+        <span className='search__input-error'>{errors.email}</span>
+
+        <FilterCheckbox />
+      </div>
+
     </section>
   );
 }

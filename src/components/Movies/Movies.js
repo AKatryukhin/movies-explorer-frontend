@@ -5,11 +5,11 @@ import Preloader from '../Preloader/Preloader';
 // import MoviesCardList from '../MoviesCardList/MoviesCardList';
 // import MoviesCard from '../MoviesCard/MoviesCard';
 
-function Movies() {
+function Movies(isLoading=true) {
   return (
     <section className='movies'>
       <SearchForm />
-      <Preloader />
+      {isLoading && <Preloader />}
       {/* <MoviesCardList />
       <MoviesCard /> */}
     </section>
