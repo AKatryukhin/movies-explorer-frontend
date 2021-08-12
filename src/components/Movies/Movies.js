@@ -1,5 +1,7 @@
 import React from 'react';
 import './Movies.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import { AppContext } from '../contexts/AppContext';
@@ -9,11 +11,15 @@ function Movies() {
   const value = React.useContext(AppContext);
 
   return (
-    <main className='movies'>
-      <SearchForm />
-      {value.isLoading && <Preloader />}
-      <MoviesCardList />
-    </main>
+    <>
+      <Header />
+      <main className='movies'>
+        <SearchForm />
+        {value.isLoading && <Preloader />}
+        <MoviesCardList />
+      </main>
+      <Footer />
+    </>
   );
 }
 
