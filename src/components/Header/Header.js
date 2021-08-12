@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
 import logo from '../../images/header-logo.svg';
@@ -8,16 +9,35 @@ import { AppContext } from '../contexts/AppContext';
 function Header() {
   const value = React.useContext(AppContext);
   return (
-    <header
-      className={
-        value.loggedIn
-          ? 'header page__header header_loggedIn'
-          : 'header page__header'
-      }
-    >
-      {value.loggedIn ? (
-        <>
-          <Link to='/'>
+    <>
+    <Route exact path='/'>
+        <header className='header page__header'>
+        <Link to='/'>
+            <img className='header__logo' src={logo} alt='Логотип' />
+          </Link>
+          <nav className='header__links'>
+            <>
+              <NavLink
+                to='/signup'
+                className='header__link'
+                activeClassName='header__link_active'
+              >
+                Регистрация
+              </NavLink>
+              <NavLink
+                to='/signin'
+                className='header__link'
+                activeClassName='header__link_active'
+              >
+                <button className='header__signin-button'>Войти</button>
+              </NavLink>
+            </>
+          </nav> 
+    </header>
+      </Route>
+      <Route path={['/movies', '/saved-movies', '/profile']} >
+        <header className='header page__header header_loggedIn'>
+        <Link to='/'>
             <img className='header__logo' src={logo} alt='Логотип' />
           </Link>
           <nav className='header__links'>
@@ -49,33 +69,9 @@ function Header() {
               Аккаунт
             </button>
           </Link>
-        </>
-      ) : (
-        <>
-          <Link to='/'>
-            <img className='header__logo' src={logo} alt='Логотип' />
-          </Link>
-          <nav className='header__links'>
-            <>
-              <NavLink
-                to='/signup'
-                className='header__link'
-                activeClassName='header__link_active'
-              >
-                Регистрация
-              </NavLink>
-              <NavLink
-                to='/signin'
-                className='header__link'
-                activeClassName='header__link_active'
-              >
-                <button className='header__signin-button'>Войти</button>
-              </NavLink>
-            </>
-          </nav>
-        </>
-      )}
-    </header>
+        </header>
+        </Route>
+      </>
   );
 }
 
