@@ -5,7 +5,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 // import Login from '../Login/Login';
-// import Register from '../Register/Register';
+import Register from '../Register/Register';
 import { AppContext } from '../contexts/AppContext';
 
 function App() {
@@ -24,10 +24,10 @@ function App() {
           <Switch>
             {/* <Route path='/signin'>
           <Login />
-        </Route>
+        </Route>*/}
         <Route path='/signup'>
           <Register />
-        </Route> */}
+        </Route> 
             <Route exact path='/'>
               <Main />
             </Route>

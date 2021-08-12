@@ -24,7 +24,12 @@ function Profile({ logout }) {
       <Header />
       <section className='profile'>
         <h2 className='profile__title'>Привет, Александр!</h2>
-        <form className='profile__form' onSubmit={handleSubmit}>
+        <form
+          className='profile__form'
+          onSubmit={handleSubmit}
+          name='profile__form'
+          noValidate
+        >
           <label className='profile__label'>
             Имя
             <input
