@@ -8,12 +8,16 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 364px);
-  grid-template-rows: repeat(1, 271px);
+  grid-template-rows: repeat(4, 271px);
   grid-auto-rows: 1fr;
   gap: 30px 24px;
   padding-top: 70px;
   padding-bottom: 30px;
   margin-bottom: 50px;
+}
+
+.movies-cardlist__items_type_saved {
+  grid-template-rows: repeat(auto-fit, 271px);
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
