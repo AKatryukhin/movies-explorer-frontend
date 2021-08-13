@@ -12,13 +12,13 @@ function Main() {
   return (
     <>
       <Header />
-      {/* <main className='content'>
+      <main className='content'>
         <Promo />
-        <AboutProject />
+        {/* <AboutProject />
         <Techs />
         <AboutMe />
-        <Portfolio />
-      </main> */}
+        <Portfolio /> */}
+      </main>
       <Footer />
     </>
   );

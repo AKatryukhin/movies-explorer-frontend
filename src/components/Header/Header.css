@@ -28,14 +28,7 @@
   padding: 0;
 }
 
-@media screen and (max-width: 768px) {
-  .header__links {
-    display: none;
-  }
-  .header__links-start {
-    display: flex;
-  }
-}
+
 
 .header__link {
   margin-right: 30px;
@@ -118,16 +111,14 @@
   box-shadow: 0px 0px 10px rgb(216, 216, 226);
 }
 
-/* @media screen and (max-width: 768px) {
-  .header__link {
+@media screen and (max-width: 768px) {
+  .header__links {
     display: none;
   }
-
-  .header__profile-button {
-    display: none;
+  .header__links-start {
+    display: flex;
   }
-} */
-
+}
 
 @media screen and (max-width: 520px) {
   .header__link {
