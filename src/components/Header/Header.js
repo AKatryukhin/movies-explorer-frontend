@@ -7,13 +7,12 @@ import icon from '../../images/icon-acc.svg';
 import MenuBurger from '../MenuBurger/MenuBurger';
 import Navigation from '../Navigation/Navigation';
 
-
 function Header() {
   return (
     <>
-    <Route exact path='/'>
+      <Route exact path='/'>
         <header className='header page__header'>
-        <Link to='/'>
+          <Link to='/'>
             <img className='header__logo' src={logo} alt='Логотип' />
           </Link>
           <nav className='header__links'>
@@ -33,16 +32,16 @@ function Header() {
                 <button className='header__signin-button'>Войти</button>
               </NavLink>
             </>
-          </nav> 
-    </header>
+          </nav>
+        </header>
       </Route>
-      <Route path={['/movies', '/saved-movies', '/profile']} >
+      <Route path={['/movies', '/saved-movies', '/profile']}>
         <header className='header page__header header_loggedIn'>
-        <Link to='/'>
+          <Link to='/'>
             <img className='header__logo' src={logo} alt='Логотип' />
           </Link>
-          < MenuBurger />
-          < Navigation />
+          <MenuBurger />
+          <Navigation />
           <nav className='header__links'>
             <>
               <NavLink
@@ -68,8 +67,8 @@ function Header() {
             </button>
           </Link>
         </header>
-        </Route>
-      </>
+      </Route>
+    </>
   );
 }
 
