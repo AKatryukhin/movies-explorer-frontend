@@ -15,7 +15,7 @@ function Header() {
           <Link to='/'>
             <img className='header__logo' src={logo} alt='Логотип' />
           </Link>
-          <nav className='header__links'>
+          <nav className='header__links header__links-start'>
             <>
               <NavLink
                 to='/signup'

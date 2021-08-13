@@ -7,7 +7,7 @@
   min-width: 320px;
   max-width: 1280px;
   background-color: #202020;
-  margin: 0 auto;
+  margin: 0;
   color: #fff;
   
   font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
@@ -64,21 +64,20 @@
   letter-spacing: -0.04em;
 }
 
-/* @media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .page__header {
     padding: 28px 30px 42px;
-    margin: 0 auto;
   }
-} */
 
-/* .page__footer {
-  padding-top: 66px;
-  padding-bottom: 60px;
+
+.page__footer {
+  padding: 79px 30px 20px;
+}
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 320px) {
   .page__footer {
-      margin-top: 48px;
-      margin-bottom: 36px;
+    padding: 79px 10px 10px;
   }
-} */
+  } 
+

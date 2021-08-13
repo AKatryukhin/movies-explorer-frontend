@@ -18,8 +18,8 @@ function Main() {
         <Techs />
         <AboutMe />
         <Portfolio />
-      </main>
-      <Footer /> */}
+      </main> */}
+      <Footer />
     </>
   );
 }
