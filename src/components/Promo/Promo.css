@@ -91,7 +91,6 @@
     margin: 0 0 92px;
     text-align: center;
   }
-  
 }
 
 @media screen and (max-width: 520px) {
@@ -122,5 +121,4 @@
   .promo__knowmore-button {
     margin-bottom: 0;
   }
-
 }

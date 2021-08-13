@@ -9,7 +9,7 @@
   background-color: #202020;
   margin: 0 auto;
   color: #fff;
-  
+
   font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -27,7 +27,6 @@
   padding: 18px 70px 0;
 }
 
-
 .page__footer {
   padding: 79px 70px 20px;
 }
@@ -40,8 +39,8 @@
 
 .section__title-container {
   width: 100%;
-  padding: 10px 0 23px;
-  border-bottom: 1px solid #DADADA;
+  padding: 0 0 23px;
+  border-bottom: 1px solid #dadada;
 }
 
 .section__title {
@@ -68,19 +67,25 @@
   }
 }
 
-  @media screen and (max-width: 520px) {
-    .page__header {
-      padding: 18px 14px 0;
-    }
-
-    .page__footer {
-      padding: 79px 10px 10px;
-    }
-  
-    .section {
-      padding-left: 18px;
-      padding-right: 18px;
-    }
-
+@media screen and (max-width: 520px) {
+  .page__header {
+    padding: 18px 14px 0;
   }
-  
+
+  .page__footer {
+    padding: 79px 10px 10px;
+  }
+
+  .section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .section__title-container {
+    padding: 0 0 28px;
+  }
+
+  .section__title {
+    font-size: 18px;
+  }
+}

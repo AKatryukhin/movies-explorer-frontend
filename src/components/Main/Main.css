@@ -3,20 +3,17 @@
   margin: 0 auto;
   flex-shrink: 0;
   display: grid;
-  grid-row-gap: 100px;
+  grid-row-gap: 110px;
 }
 
-/* @media screen and (max-width: 984px) {
+@media screen and (max-width: 1150px) {
   .content {
-    grid-row-gap: 88px;
+  grid-row-gap: 90px;
   }
 }
 
-
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 520px) {
   .content {
-    grid-row-gap: 64px;
+  grid-row-gap: 70px;
   }
-} */
-
-
+}
