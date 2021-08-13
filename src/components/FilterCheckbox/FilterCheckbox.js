@@ -8,15 +8,18 @@ function FilterCheckbox() {
   }
   return (
     <div className='filter-checkbox'>
-      <input
-        type='checkbox'
-        className='filter-checkbox__input'
-        name='filterCheckbox'
-        id='filterCheckbox'
-        checked={isChecked}
-        onChange={(e) => onChange(e)}
-      />
-      <label className='filter-checkbox__label'>Короткометражки</label>
+      <label className='filter-checkbox__label'>
+        <input
+          type='checkbox'
+          className='filter-checkbox__input'
+          name='filterCheckbox'
+          id='filterCheckbox'
+          checked={isChecked}
+          onChange={(e) => onChange(e)}
+        />
+        <span class='filter-checkbox-visible'></span>
+      </label>
+      <p className='filter__title'>Короткометражки</p>
     </div>
   );
 }
