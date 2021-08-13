@@ -6,6 +6,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import { AppContext } from '../contexts/AppContext';
 
 function App() {
@@ -23,11 +24,11 @@ function App() {
         <div className='page'>
           <Switch>
             <Route path='/signin'>
-          <Login />
-        </Route>
-        <Route path='/signup'>
-          <Register />
-        </Route> 
+              <Login />
+            </Route>
+            <Route path='/signup'>
+              <Register />
+            </Route>
             <Route exact path='/'>
               <Main />
             </Route>
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path='/profile'>
               <Profile />
+            </Route>
+            <Route path='*'>
+              <PageNotFound />
             </Route>
           </Switch>
         </div>
