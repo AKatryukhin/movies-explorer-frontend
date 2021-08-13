@@ -62,3 +62,56 @@
   width: 310px;
   height: 304px;
 }
+
+@media screen and (max-width: 768px) {
+  .promo {
+      min-height: 834px;
+      position: relative;
+      justify-content:center;
+      margin: 0 14px;
+
+  }
+
+  .promo__container{
+      bottom: 0;
+      position:absolute;
+  }
+  
+  .promo__title{
+      width: 60%;
+      font-size: 40px;
+      line-height: 52px;
+  }
+
+}
+
+
+/* @media screen and (max-width: 481px) {
+  .promo {
+      min-height: 546px;
+      position: relative;
+      justify-content: space-between;
+  }
+
+  .promo__container{
+      display: flex;
+      justify-content: space-between;
+      bottom: 0;
+      position: absolute;
+  }
+  
+  .promo__title{
+      width: 100%;
+      font-size: 29px;
+      line-height: 37px;
+  }
+
+  .promo__link{
+      margin: 0 0 0 6px;
+      padding: 5px 15px;
+  }
+  .promo__link:first-child{
+      margin: 0 0 0 0px;
+
+  }
+} */

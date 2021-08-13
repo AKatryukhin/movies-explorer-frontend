@@ -4,10 +4,11 @@ import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
 import logo from '../../images/header-logo.svg';
 import icon from '../../images/icon-acc.svg';
-import { AppContext } from '../contexts/AppContext';
+import MenuBurger from '../MenuBurger/MenuBurger';
+import Navigation from '../Navigation/Navigation';
+
 
 function Header() {
-  const value = React.useContext(AppContext);
   return (
     <>
     <Route exact path='/'>
@@ -40,6 +41,8 @@ function Header() {
         <Link to='/'>
             <img className='header__logo' src={logo} alt='Логотип' />
           </Link>
+          < MenuBurger />
+          < Navigation />
           <nav className='header__links'>
             <>
               <NavLink
@@ -56,11 +59,6 @@ function Header() {
               >
                 Сохранённые фильмы
               </NavLink>
-
-              {/* <input className='menu-burger__toggle' type='checkbox' id='toggle' />
-      <label className='menu-burger' htmlFor='toggle'>
-        <span></span>
-      </label> */}
             </>
           </nav>
           <Link to='/profile' className='header__link header__link-profile'>

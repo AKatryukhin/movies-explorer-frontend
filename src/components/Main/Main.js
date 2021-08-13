@@ -12,14 +12,14 @@ function Main() {
   return (
     <>
       <Header />
-      <main className='content'>
+      {/* <main className='content'>
         <Promo />
         <AboutProject />
         <Techs />
         <AboutMe />
         <Portfolio />
       </main>
-      <Footer />
+      <Footer /> */}
     </>
   );
 }
