@@ -1,15 +1,13 @@
 import React from 'react';
-import unionyes from '../images/Union-yes.png';
-import unionno from '../images/Union-no.png';
 import { AppContext } from '../contexts/AppContext';
-import './InfoTool';
+import './InfoTool.css';
 
-function InfoTooltip({ isOpen, onClose, title, icon }) {
+function InfoTooltip({ isOpen, onClose, title="Что-то пошло не так" }) {
   const value = React.useContext(AppContext);
 
   return (
     <section
-      className={`popup popup_type_infotool ${isOpen ? 'popup_opened' : ''}`}
+      className={`popup 'popup_opened' ${isOpen ? 'popup_opened' : ''}`}
     >
       <div className='popup__container-infotool'>
         <button
@@ -18,11 +16,6 @@ function InfoTooltip({ isOpen, onClose, title, icon }) {
           aria-label='Кнопка для закрытия'
           onClick={onClose}
         ></button>
-        <img
-          src={icon ? unionyes : unionno}
-          className='popup__union-image'
-          alt='Картинка Yes или No'
-        />
         <h2 className='popup__title_type_infotool'>
         {title}
         </h2>
