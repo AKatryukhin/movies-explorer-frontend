@@ -44,3 +44,31 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 1150px) {
+  .portfolio {
+    padding-bottom: 90px;
+  }
+
+  .portfolio__project-link {
+    font-size: 28px;
+    line-height: 1.8;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .portfolio {
+    padding-bottom: 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0 0 40px;
+  }
+
+  .portfolio__project-link {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
