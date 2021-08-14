@@ -61,3 +61,61 @@
   margin: 0;
   text-align: center;
 }
+
+@media screen and (max-width: 1150px) {
+  .techs {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .techs__title-container {
+    margin-bottom: 80px;
+  }
+
+  .techs__subtitle {
+    margin: 0 0 22px;
+  }
+
+  .techs__description {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0 0 83px;
+  }
+
+  .techs__skills {
+    grid-template-columns: repeat(7, 84px);
+  }
+
+}
+
+@media screen and (max-width: 760px) {
+  .techs {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .techs__title-container {
+    margin-bottom: 80px;
+  }
+
+  .techs__subtitle {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 24px;
+  }
+
+  .techs__description {
+    font-size: 11px;
+    margin: 0 0 50px;
+  }
+
+  .techs__skills {
+    grid-template-columns: repeat(2, 84px);
+    grid-template-rows: auto;
+    gap: 10px;
+  }
+
+  .techs__skills-item {
+    font-size: 12px;
+  }
+}

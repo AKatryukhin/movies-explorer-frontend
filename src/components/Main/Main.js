@@ -15,9 +15,9 @@ function Main() {
       <main className='content'>
         <Promo />
         <AboutProject />
-        {/* <Techs /> */}
-         {/* <AboutMe />
-        <Portfolio /> */}
+        <Techs />
+        <AboutMe />
+        {/* <Portfolio /> */}
       </main>
       <Footer />
     </>
