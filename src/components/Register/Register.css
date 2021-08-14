@@ -108,3 +108,39 @@
 .sign__link:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 520px) {
+  .sign {
+    width: calc(100% - 60px);
+    align-items: center;
+    padding: 56px 0 30px;
+  }
+
+  .sign__title {
+    margin: 0 0 80px;
+  }
+
+  .sign__submit {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .sign__question {
+    font-size: 12px;
+  }
+
+  .sign__link-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sign__link {
+    font-size: 14px;
+  }
+
+  .sign__label:last-of-type {
+    margin-bottom: 225px;
+  }
+}

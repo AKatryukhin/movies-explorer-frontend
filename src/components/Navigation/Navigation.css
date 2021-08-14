@@ -92,4 +92,8 @@
       padding: 144px 10px 46px;
       box-sizing: border-box;
   }
+
+  .navigation__link {
+    margin-bottom: 24px;
+  }
 }
