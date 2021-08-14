@@ -30,6 +30,10 @@
   justify-content: space-between;
   padding: 16px 0;
   border-bottom: 1px solid #424242;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.2;
 }
 
 .profile__label:last-of-type {
@@ -41,6 +45,10 @@
   border: none;
   padding: 0;
   text-align: end;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.2;
 }
 
 .profile__buttons {
@@ -68,4 +76,30 @@
 
 .profile__button-logout {
   color: #ee3465;
+}
+
+@media screen and (max-width: 1150px) {
+  .profile {
+    padding-top: 236px;
+    padding-bottom: 270px;
+  }
+
+  .profile__title {
+    margin: 0 0 96px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .profile {
+    width: calc(100% - 60px);
+    padding: 70px 0 40px;
+  }
+
+  .profile__title {
+    margin: 0 0 80px;
+  }
+
+  .profile__button {
+    font-size: 12px;
+  }
 }

@@ -58,15 +58,12 @@
 }
 
 @media screen and (max-width: 1150px) {
-
   .search__content-container {
     padding-bottom: 52px;
   }
-
 }
 
 @media screen and (max-width: 520px) {
-
   .search__content-container {
     padding-bottom: 64px;
   }
@@ -82,5 +79,5 @@
     width: 80px;
     height: 44px;
     margin-right: 6px;
-}
+  }
 }
