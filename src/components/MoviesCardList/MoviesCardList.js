@@ -27,8 +27,8 @@ function MoviesCardList() {
           {savedMovies.map((movie) => (
             <MoviesCard key={movie._id} movie={movie} />
           ))}
-          <div className='movies-cardlist__empty'></div>
-          </section>
+        </section>
+        <div className='movies-cardlist__empty'></div>
       </Route>
     </main>
   );
