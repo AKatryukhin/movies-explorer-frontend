@@ -71,4 +71,77 @@
 .aboutme__photo {
   width: 270px;
   height: 327px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 1150px) {
+  .aboutme__info-container {
+    max-width: 364px;
+  }
+
+  .aboutme__name {
+    font-size: 40px;
+    line-height: 1;
+    margin: 0 0 16px;
+  }
+
+  .aboutme__info {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+  }
+
+  .aboutme__about {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0 0 87px;
+  }
+
+  .aboutme__photo {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .aboutme__content-container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .aboutme__photo {
+    width: 292px;
+    height: 352px;
+    margin-bottom: 40px;
+  }
+
+  .aboutme__info-container {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .aboutme__name {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 20px;
+  }
+
+  .aboutme__info {
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0 0 20px;
+  }
+
+  .aboutme__about {
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0 0 40px;
+  }
+
+  .aboutme__social-link {
+    margin-right: 26px;
+    font-size: 14px;
+  }
 }
