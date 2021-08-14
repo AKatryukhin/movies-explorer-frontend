@@ -17,7 +17,7 @@ function SearchForm({ isSending = true, isDisabled = false }) {
   }
 
   return (
-    <section className='search section'>
+    <section className='search section-movies'>
       <div className='search__content-container'>
         <form
           className='search__form'

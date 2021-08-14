@@ -13,11 +13,9 @@ function Movies() {
   return (
     <>
       <Header />
-      <main className='movies'>
         <SearchForm />
         {value.isLoading && <Preloader />}
         <MoviesCardList />
-      </main>
       <Footer />
     </>
   );
