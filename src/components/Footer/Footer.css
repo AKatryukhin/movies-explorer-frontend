@@ -48,11 +48,17 @@
   font-size: 13px;
   line-height: 1.2;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .footer__link:last-of-type {
   margin: 0;
 }
+
+.footer__link:hover {
+  opacity: .8;
+}
+
 
 @media screen and (max-width: 520px) {
   .footer {

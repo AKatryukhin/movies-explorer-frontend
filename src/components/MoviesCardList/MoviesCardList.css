@@ -41,6 +41,11 @@
   font-size: 12px;
   line-height: 1.2;
   padding: 0;
+  cursor: pointer;
+}
+
+.movies-cardlist__more-button:hover {
+  box-shadow: 0px 0px 10px rgb(216, 216, 226);
 }
 
 .movies-cardlist__empty {
