@@ -14,6 +14,7 @@
 .navigation__menu {
   position: absolute;
   right: 0;
+  width: 40%;
   height: calc(100% - 222px);
   padding: 159px 90px 90px;
   display: flex;
