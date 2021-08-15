@@ -1,0 +1,108 @@
+@keyframes animatedGradient {
+  from {
+    background-size: 100%;
+  }
+
+  to {
+    background-size: 250%;
+  }
+}
+
+.popup-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: all 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup-info_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup-info__container {
+  width: 410px;
+  background: #fff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  padding: 50px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  background: radial-gradient(circle, #072dd6 0%, #07ee7e 100%);
+  animation: animatedGradient 1s infinite ease;
+  animation-direction: alternate;
+  color: transparent;
+}
+
+.popup-info__container_type_error {
+  background: radial-gradient(circle, #494b52 0%, #e0240b 100%);
+}
+
+.popup-info__close {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(../../images/close-button.svg);
+  background-size: 100%;
+  border: none;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translate(200px, 10px) rotate(-45deg);
+}
+
+.popup-info__close:hover {
+  opacity: 0.8;
+}
+
+.popup-info__close:active,
+.popup-info__close:focus {
+  outline: none;
+}
+
+.popup-info__title {
+  max-width: 350px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.2;
+  padding: 5px 5px;
+  margin: 0 auto;
+  text-align: center;
+  color: black;
+  background-color: rgba(64, 102, 104, 0.438);
+}
+
+@media screen and (max-width: 520px) {
+  .popup-info__title {
+    font-size: 18px;
+  }
+
+  .popup-info__container {
+    width: 282px;
+    padding: 0 22px 25px;
+  }
+
+  .popup-info__close {
+    width: 26px;
+    height: 26px;
+    transform: translate(-50%, 10px) rotate(-45deg);
+  }
+
+  .popup-info__container {
+    width: calc(100% - 80px);
+    padding: 50px 18px;
+  }
+}

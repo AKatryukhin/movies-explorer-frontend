@@ -1,0 +1,124 @@
+.promo {
+  background-color: #073042;
+  padding-top: 75px;
+  padding-bottom: 50px;
+}
+
+.promo__content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.promo__title-container {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo__title {
+  color: #fff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1.2;
+  margin: 0 0 36px;
+}
+
+.promo__subtitle {
+  max-width: 310px;
+  color: #fff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.2;
+  opacity: 0.5;
+  margin: 0 0 146px;
+}
+
+.promo__knowmore-button {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 130px;
+  height: 36px;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color: #073042;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 0;
+  margin-bottom: 25px;
+}
+
+.promo__knowmore-button:hover {
+  box-shadow: 0px 0px 10px rgb(216, 216, 226);
+}
+
+.promo__banner {
+  width: 310px;
+  height: 304px;
+}
+
+@media screen and (max-width: 1150px) {
+  .promo {
+    padding-top: 140px;
+  }
+
+  .promo__content-container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .promo__banner {
+    margin-bottom: 48px;
+  }
+
+  .promo__title-container {
+    align-items: center;
+  }
+
+  .promo__title {
+    font-size: 40px;
+    margin: 0 0 22px;
+    text-align: center;
+  }
+
+  .promo__subtitle {
+    margin: 0 0 92px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .promo {
+    padding-top: 70px;
+    padding-bottom: 30px;
+  }
+  .promo__banner {
+    margin-bottom: 44px;
+    width: 210px;
+    height: 206px;
+  }
+  .promo__title {
+    font-size: 30px;
+    letter-spacing: -0.04em;
+    margin: 0 0 24px;
+    text-align: center;
+  }
+
+  .promo__subtitle {
+    margin: 0 0 80px;
+    text-align: center;
+  }
+
+  .promo__title-container {
+    align-items: center;
+  }
+  .promo__knowmore-button {
+    margin-bottom: 0;
+  }
+}
