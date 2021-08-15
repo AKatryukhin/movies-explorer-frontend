@@ -45,6 +45,11 @@
   justify-content: space-between;
 }
 
+.portfolio__project-link-icon {
+  width: 29px;
+  height: 60px;
+}
+
 @media screen and (max-width: 1150px) {
   .portfolio {
     padding-bottom: 90px;
@@ -53,6 +58,11 @@
   .portfolio__project-link {
     font-size: 28px;
     line-height: 1.8;
+  }
+
+  .portfolio__project-link-icon {
+    width: 27px;
+    height: 60px;
   }
 }
 
@@ -70,5 +80,10 @@
   .portfolio__project-link {
     font-size: 18px;
     line-height: 1.5;
+  }
+
+  .portfolio__project-link-icon {
+    width: 18px;
+    height: 28px;
   }
 }
