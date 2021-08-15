@@ -29,7 +29,7 @@ function Portfolio() {
           </Link>
         </li>
         <li className='portfolio__project-li'>
-            <Link to={{ pathname: 'https://akatryukhin.github.io/react-mesto-auth/' }} target='_blank' rel='noopener noreferrer'
+            <Link to={{ pathname: 'https://mesto.front.nomoredomains.monster/' }} target='_blank' rel='noopener noreferrer'
 className='portfolio__project-link'>
             Одностраничное приложение{' '}
             <img
