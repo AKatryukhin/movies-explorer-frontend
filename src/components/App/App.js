@@ -6,7 +6,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import InfoTooltip from '../InfoTool/InfoTool';
+import InfoPopup from '../InfoPopup/InfoPopup';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { AppContext } from '../contexts/AppContext';
 
@@ -42,12 +42,13 @@ function App() {
             <Route path='/profile'>
               <Profile />
             </Route>
-            {/* <Route path='*'>
-              <PageNotFound />
-            </Route> */}
             <Route path='*'>
-              <InfoTooltip />
+              <PageNotFound />
             </Route>
+            {/* для пробного открытия попапа */}
+            {/* <Route path='*'> 
+              <InfoPopup />
+            </Route> */}
           </Switch>
         </div>
       </AppContext.Provider>
