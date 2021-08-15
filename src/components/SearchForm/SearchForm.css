@@ -25,6 +25,7 @@
 
 .search__input {
   width: calc(100% - 100px);
+  color: #fff;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -55,6 +56,10 @@
   padding: 0;
   border: none;
   margin-right: 6px;
+}
+
+.search__submit:hover {
+  box-shadow: 0px 0px 10px rgb(110, 110, 199);
 }
 
 @media screen and (max-width: 1150px) {
