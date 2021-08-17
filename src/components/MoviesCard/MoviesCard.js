@@ -19,14 +19,14 @@ function MoviesCard({ movie, isLiked = true }) {
                 : 'movie__like-button'
             }
             type='button'
-            aria-label='Кнопка для Лайков'
+            aria-label='Кнопка для лайков'
           ></button>
           </Route>
           <Route path='/saved-movies'>
           <button
             className='movie__remove-button'
             type='button'
-            aria-label='Кнопка для Лайков'
+            aria-label='Кнопка для удаления'
           ></button>
             </Route>
         </div>
