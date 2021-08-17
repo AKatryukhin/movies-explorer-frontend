@@ -2,7 +2,7 @@ import React from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/header-logo.svg';
-import useFormAndValidation from '../hooks/useFormAndValidation.js';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 function Register() {
   const { values, handleChange, resetForm, errors, isValid } =

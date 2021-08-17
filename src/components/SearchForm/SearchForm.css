@@ -62,6 +62,10 @@
   box-shadow: 0px 0px 10px rgb(110, 110, 199);
 }
 
+.search__submit_type_disabled {
+  opacity: .6;
+}
+
 @media screen and (max-width: 1150px) {
   .search__content-container {
     padding-bottom: 52px;

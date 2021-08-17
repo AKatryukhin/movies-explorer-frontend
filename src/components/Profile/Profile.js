@@ -1,7 +1,7 @@
 import React from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
-import useFormAndValidation from '../hooks/useFormAndValidation.js';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 function Profile({ logout }) {
   const { values, handleChange, resetForm, errors, isValid } =

@@ -1,17 +1,15 @@
 import React from 'react';
-// import { AppContext } from '../contexts/AppContext';
 import './InfoPopup.css';
 
 function InfoPopup({
-  isOpen = true,
+  isOpen,
   onClose,
-  title = 'Вы успешно зарегистрировались!',
+  title,
+  isError
 }) {
-  // const value = React.useContext(AppContext);
-
   return (
     <section className={`popup-info ${isOpen ? 'popup-info_opened' : ''}`}>
-      <div className='popup-info__container'>
+      <div className={`popup-info__container' ${isError ? 'popup-info__container_type_error' : ''}`}>
         <button
           type='button'
           className='popup-info__close'

@@ -1,6 +1,6 @@
 import React from 'react';
 import './SearchForm.css';
-import useFormAndValidation from '../hooks/useFormAndValidation.js';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
 function SearchForm({ isSending = true, isDisabled = false }) {
@@ -34,16 +34,14 @@ function SearchForm({ isSending = true, isDisabled = false }) {
             name='name'
             placeholder='Фильм'
             required
-            minLength='2'
-            maxLength='30'
             onChange={handleChange}
             value={name || ''}
           />
           <button
-            className='search__submit'
             type='submit'
             aria-label='Кнопка Поиск'
             disabled={isDisabled}
+            className={`search__submit ${!isValid ? 'search__submit_type_disabled' : ''}`}
           >
             Поиск
           </button>

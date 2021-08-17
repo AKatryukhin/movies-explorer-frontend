@@ -9,13 +9,27 @@ import Register from '../Register/Register';
 import InfoPopup from '../InfoPopup/InfoPopup';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { AppContext } from '../contexts/AppContext';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
+  const [infoPopupTitle, setInfoPopupTitle] = useState({
+    title: "Что-то пошло не так! Попробуйте ещё раз.",
+  });
+  const [isError, setIsError] = useState(false);
+
+
+
+  function closeInfoPopup() {
+    setIsInfoPopupOpen(false);
+  }
 
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <AppContext.Provider
         value={{
           loggedIn: loggedIn,
@@ -33,26 +47,34 @@ function App() {
             <Route exact path='/'>
               <Main />
             </Route>
-            <Route path='/movies'>
-              <Movies />
-            </Route>
-            <Route path='/saved-movies'>
-              <SavedMovies />
-            </Route>
-            <Route path='/profile'>
-              <Profile />
-            </Route>
+            <ProtectedRoute
+                exact
+                path='/movies'
+                loggedIn={loggedIn}
+                component={Movies}/>
+            <ProtectedRoute
+                exact
+                path='/saved-movies'
+                loggedIn={loggedIn}
+                component={SavedMovies}/>
+             <ProtectedRoute
+                exact
+                path='/profile'
+                loggedIn={loggedIn}
+                component={Profile}/>
             <Route path='*'>
               <PageNotFound />
             </Route>
-            {/* для пробного открытия попапа */}
-            {/* <Route path='*'> 
-              <InfoPopup />
-            </Route> */}
           </Switch>
+          <InfoPopup
+            isOpen={isInfoPopupOpen}
+            onClose={closeInfoPopup}
+            title={infoPopupTitle.title}
+            isError={isError}
+          />
         </div>
       </AppContext.Provider>
-    </>
+      </CurrentUserContext.Provider>
   );
 }
 
