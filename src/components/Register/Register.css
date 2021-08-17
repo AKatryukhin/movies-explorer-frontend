@@ -85,6 +85,10 @@
   box-shadow: 0px 0px 10px rgb(216, 216, 226);
 }
 
+.sign__submit_type_disabled {
+opacity: .4;
+}
+
 .sign__question {
   font-weight: 500;
   font-size: 14px;

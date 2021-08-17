@@ -36,6 +36,8 @@ function Register() {
             type='text'
             placeholder='Имя'
             required
+            minLength='2'
+            maxLength='38'
             autoComplete='off'
             onChange={handleChange}
             value={name || ''}
@@ -81,7 +83,7 @@ function Register() {
           <span className='sign__input-error'>{errors.password}</span>
         </label>
         <button
-          className='sign__submit'
+          className={isValid ? 'sign__submit' : 'sign__submit sign__submit_type_disabled'}
           type='submit'
           aria-label='Кнопка отправить'
           disabled={!isValid}
@@ -90,7 +92,11 @@ function Register() {
         </button>
         <div className='sign__link-container'>
           <p className='sign__question'>Уже зарегистрированы?</p>
-          <Link className='sign__link' to='/signin'>
+          <Link
+            className='sign__link'
+            to='/signin'
+          >
+            
             Войти
           </Link>
         </div>
