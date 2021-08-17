@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import './MoviesCard.css';
 
 function MoviesCard({ movie, isLiked = true }) {
@@ -10,6 +11,7 @@ function MoviesCard({ movie, isLiked = true }) {
             <h3 className='movie__name'>{movie.name}</h3>
             <p className='movie__lenght'>1ч 47м</p>
           </div>
+          <Route path='/movies'>
           <button
             className={
               isLiked
@@ -19,6 +21,14 @@ function MoviesCard({ movie, isLiked = true }) {
             type='button'
             aria-label='Кнопка для Лайков'
           ></button>
+          </Route>
+          <Route path='/saved-movies'>
+          <button
+            className='movie__remove-button'
+            type='button'
+            aria-label='Кнопка для Лайков'
+          ></button>
+            </Route>
         </div>
       </div>
       <a href='*' target='_blank' rel='noopener noreferrer'>
