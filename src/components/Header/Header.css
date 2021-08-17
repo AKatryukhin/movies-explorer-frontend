@@ -111,6 +111,10 @@
   box-shadow: 0px 0px 10px rgb(216, 216, 226);
 }
 
+.header__profile-button_type_loggedin {
+  background-color: #3ddc84;
+}
+
 @media screen and (max-width: 768px) {
   .header__links {
     display: none;
