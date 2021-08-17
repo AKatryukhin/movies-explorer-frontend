@@ -11,7 +11,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import { AppContext } from '../contexts/AppContext';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   return (

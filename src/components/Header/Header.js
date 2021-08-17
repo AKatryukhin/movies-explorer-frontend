@@ -9,7 +9,6 @@ import Navigation from '../Navigation/Navigation';
 import { AppContext } from '../contexts/AppContext';
 
 function Header() {
-
   const value = React.useContext(AppContext);
 
   return (
@@ -19,37 +18,41 @@ function Header() {
           <Link to='/'>
             <img className='header__logo' src={logo} alt='Логотип' />
           </Link>
-          <MenuBurger />
-          <Navigation />
           {value.loggedIn ? (
             <>
-            <nav className='header__links'>
-              <>
-                <NavLink
-                  to='/movies'
-                  className='header__link-films'
-                  activeClassName='.header__link-films_active'
-                >
-                  Фильмы
-                </NavLink>
-                <NavLink
-                  to='/saved-movies'
-                  className='header__link-films'
-                  activeClassName='header__link-films_active'
-                >
-                  Сохранённые фильмы
-                </NavLink>
-              </>
-            </nav>
-            <Link to='/profile' className='header__link header__link-profile'>
-            <button className='header__profile-button header__profile-button_type_loggedin'>
-              <img className='header__icon' src={icon} alt='Иконка профиля' />
-              Аккаунт
-            </button>
+              <MenuBurger />
+              <Navigation />
+              <nav className='header__links'>
+                <>
+                  <NavLink
+                    to='/movies'
+                    className='header__link-films'
+                    activeClassName='.header__link-films_active'
+                  >
+                    Фильмы
+                  </NavLink>
+                  <NavLink
+                    to='/saved-movies'
+                    className='header__link-films'
+                    activeClassName='header__link-films_active'
+                  >
+                    Сохранённые фильмы
+                  </NavLink>
+                </>
+              </nav>
+              <Link to='/profile' className='header__link header__link-profile'>
+                <button className='header__profile-button header__profile-button_type_loggedin'>
+                  <img
+                    className='header__icon'
+                    src={icon}
+                    alt='Иконка профиля'
+                  />
+                  Аккаунт
+                </button>
               </Link>
-              </>
-          ) :
-            (<nav className='header__links header__links-start'>
+            </>
+          ) : (
+            <nav className='header__links header__links-start'>
               <>
                 <NavLink
                   to='/signup'
@@ -66,7 +69,8 @@ function Header() {
                   <button className='header__signin-button'>Войти</button>
                 </NavLink>
               </>
-            </nav>)}
+            </nav>
+          )}
         </header>
       </Route>
       <Route path={['/movies', '/saved-movies', '/profile']}>
