@@ -3,7 +3,7 @@ import './SearchForm.css';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
-function SearchForm({ isSending = true, isDisabled = false }) {
+function SearchForm({ isSending }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name } = values;
@@ -22,10 +22,10 @@ function SearchForm({ isSending = true, isDisabled = false }) {
         <form
           className='search__form'
           onSubmit={handleSubmit}
-          name='search__form'
+          name='search_form'
           title='Поиск'
-          isValid={isValid}
-          isDisabled={!isValid || isSending}
+          noValidate
+          disabled={!isValid || isSending}
         >
           <input
             type='text'
@@ -40,7 +40,7 @@ function SearchForm({ isSending = true, isDisabled = false }) {
           <button
             type='submit'
             aria-label='Кнопка Поиск'
-            disabled={isDisabled}
+            disabled={!isValid}
             className={`search__submit ${!isValid ? 'search__submit_type_disabled' : ''}`}
           >
             Поиск

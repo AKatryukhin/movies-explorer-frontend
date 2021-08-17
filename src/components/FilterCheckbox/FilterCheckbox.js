@@ -17,7 +17,7 @@ function FilterCheckbox() {
           checked={isChecked}
           onChange={(e) => onChange(e)}
         />
-        <span class='filter-checkbox-visible'></span>
+        <span className='filter-checkbox-visible'></span>
       </label>
       <p className='filter__title'>Короткометражки</p>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -11,17 +11,43 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import { AppContext } from '../contexts/AppContext';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import * as main from '../../utils/MainApi';
+import * as mov from '../../utils/MoviesApi';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [movies, setMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [infoPopupTitle, setInfoPopupTitle] = useState({
-    title: "Что-то пошло не так! Попробуйте ещё раз.",
+    title: 'Что-то пошло не так! Попробуйте ещё раз.',
   });
   const [isError, setIsError] = useState(false);
+  const [isMovieLoadError, setIsMovieLoadError] = React.useState();
+  const [isMovieSending, setIsMovieSending] = React.useState(false);
 
+  useEffect(() => {
+    if (loggedIn) {
+      // main
+      //   .getProfileInfo()
+      //   .then((userData) => {
+      //     setCurrentUser(userData);
+      //   })
+      //   .catch((err) => console.log(err));
+      // setIsLoading(true);
+      // setIsMovieLoadError();
+      mov
+        .getMoviesCardlist()
+        .then((moviesData) => {
+          // setMovies(moviesData.movies);
+          setMovies(moviesData);
+          console.log(movies)
+        })
+        .catch((err) => setIsMovieLoadError(err))
+        .finally(() => setIsLoading(false));
+    }
+  }, [loggedIn]);
 
 
   function closeInfoPopup() {
@@ -48,20 +74,24 @@ function App() {
               <Main />
             </Route>
             <ProtectedRoute
-                exact
-                path='/movies'
-                loggedIn={loggedIn}
-                component={Movies}/>
+              exact
+              path='/movies'
+              loggedIn={loggedIn}
+              component={Movies}
+              isSending={ isMovieSending }
+            />
             <ProtectedRoute
-                exact
-                path='/saved-movies'
-                loggedIn={loggedIn}
-                component={SavedMovies}/>
-             <ProtectedRoute
-                exact
-                path='/profile'
-                loggedIn={loggedIn}
-                component={Profile}/>
+              exact
+              path='/saved-movies'
+              loggedIn={loggedIn}
+              component={SavedMovies}
+            />
+            <ProtectedRoute
+              exact
+              path='/profile'
+              loggedIn={loggedIn}
+              component={Profile}
+            />
             <Route path='*'>
               <PageNotFound />
             </Route>
@@ -74,7 +104,7 @@ function App() {
           />
         </div>
       </AppContext.Provider>
-      </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
