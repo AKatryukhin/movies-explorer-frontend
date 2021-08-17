@@ -29,14 +29,14 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      // main
-      //   .getProfileInfo()
-      //   .then((userData) => {
-      //     setCurrentUser(userData);
-      //   })
-      //   .catch((err) => console.log(err));
-      // setIsLoading(true);
-      // setIsMovieLoadError();
+      main
+        .getProfileInfo()
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
+        .catch((err) => console.log(err));
+      setIsLoading(true);
+      setIsMovieLoadError();
       mov
         .getMoviesCardlist()
         .then((moviesData) => {
