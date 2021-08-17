@@ -8,7 +8,11 @@ function Navigation() {
     <div className='navigation'>
       <nav className='navigation__menu'>
         <ul className='navigation__links'>
-          <NavLink to='/' className='navigation__link'>
+          <NavLink
+            to='/'
+            className='navigation__link'
+            activeClassName='navigation__link_active'
+          >
             Главная
           </NavLink>
           <NavLink
