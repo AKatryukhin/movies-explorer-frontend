@@ -38,6 +38,8 @@ function Profile({ logout }) {
               type='text'
               placeholder='Имя'
               required
+              minLength='2'
+              maxLength='38'
               value={name || ''}
               onChange={handleChange}
             />
@@ -68,7 +70,10 @@ function Profile({ logout }) {
             onClick={handleSubmit}
             disabled={!isValid}
           >
-            Редактировать
+            {isValid
+                ? 'Сохранить'
+                : 'Редактировать'
+            }
           </button>
           <button
             type='button'
