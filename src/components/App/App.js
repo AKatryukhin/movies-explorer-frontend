@@ -40,9 +40,9 @@ function App() {
       mov
         .getMoviesCardlist()
         .then((moviesData) => {
-          // setMovies(moviesData.movies);
           setMovies(moviesData);
-          console.log(moviesData)
+          localStorage.setItem('movies', JSON.stringify(moviesData));
+          console.log(JSON.parse(localStorage.getItem('movies')));
         })
         .catch((err) => setIsMovieLoadError(err))
         .finally(() => setIsLoading(false));
@@ -78,7 +78,8 @@ function App() {
               path='/movies'
               loggedIn={loggedIn}
               component={Movies}
-              isSending={ isMovieSending }
+              isSending={isMovieSending}
+              movies={movies}
             />
             <ProtectedRoute
               exact

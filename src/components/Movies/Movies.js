@@ -7,7 +7,7 @@ import Preloader from '../Preloader/Preloader';
 import { AppContext } from '../contexts/AppContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function Movies() {
+function Movies( {movies} ) {
   const value = React.useContext(AppContext);
 
   return (
@@ -15,7 +15,9 @@ function Movies() {
       <Header />
         <SearchForm />
         {value.isLoading && <Preloader />}
-        <MoviesCardList />
+      <MoviesCardList
+      movies={movies}
+      />
       <Footer />
     </>
   );

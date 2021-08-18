@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCardList.css';
-import { movies, savedMovies } from '../../utils/constants.js';
+import { savedMovies } from '../../utils/constants.js';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
-function MoviesCardList() {
+function MoviesCardList( {movies} ) {
   return (
     <main className='movies'>
       <Route path='/movies'>
