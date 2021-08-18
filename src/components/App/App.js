@@ -33,7 +33,7 @@ function App() {
     setIsInfoPopupOpen(true);;
   }
 
-  useEffect(() => {
+  function getMovieslist () {
     if (loggedIn && isSearch) {
       main
         .getProfileInfo()
@@ -65,7 +65,7 @@ function App() {
           setIsSearch(false);
         });
     }
-  }, [loggedIn, isSearch]);
+  };
 
   function handleSearch() {
     setIsSearch(true);
@@ -123,6 +123,7 @@ function App() {
               isLoading={isLoading}
               isSearch={handleSearch}
               movies={movies}
+              getMovies={getMovieslist}
             />
             <ProtectedRoute
               exact

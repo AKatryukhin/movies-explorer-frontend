@@ -7,7 +7,7 @@ import Preloader from '../Preloader/Preloader';
 import { AppContext } from '../../contexts/AppContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function Movies( { movies, isSearch, isLoading } ) {
+function Movies({ movies, isSearch, isLoading, getMovies }) {
   const value = React.useContext(AppContext);
 
   return (
@@ -16,12 +16,17 @@ function Movies( { movies, isSearch, isLoading } ) {
       <SearchForm
         isSearch={isSearch}
         isLoading={isLoading}
+        getMovies={getMovies}
       />
-        {value.isLoading && <Preloader />}
-      <MoviesCardList
-      movies={movies}
-      />
-      <Footer />
+      {value.isLoading && <Preloader />}
+      {movies.length !== 0 ? (
+        <>
+          <MoviesCardList movies={movies} />
+          <Footer />
+        </>
+      ) : (
+        <Footer />
+      )}
     </>
   );
 }
