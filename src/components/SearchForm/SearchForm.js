@@ -3,18 +3,22 @@ import './SearchForm.css';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
-function SearchForm({ isSending }) {
+function SearchForm({ isLoading , isSearch }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name } = values;
 
+  function handleSearch() {
+    isSearch();
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    isValid &&
-      console.log('Ok', () => {
-        resetForm();
-      });
-  }
+    isValid && !isLoading &&
+    handleSearch();
+    resetForm();
+}
+
 
   return (
     <section className='search section-movies'>
@@ -25,7 +29,7 @@ function SearchForm({ isSending }) {
           name='search_form'
           title='Поиск'
           noValidate
-          disabled={!isValid || isSending}
+          disabled={!isValid || isLoading}
         >
           <input
             type='text'
@@ -34,6 +38,8 @@ function SearchForm({ isSending }) {
             name='name'
             placeholder='Фильм'
             required
+            minLength='1'
+            maxLength='60'
             onChange={handleChange}
             value={name || ''}
           />

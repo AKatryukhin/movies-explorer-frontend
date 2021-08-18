@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCardList.css';
-import { savedMovies } from '../../utils/constants.js';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
 function MoviesCardList( {movies} ) {
@@ -24,7 +23,7 @@ function MoviesCardList( {movies} ) {
       </Route>
       <Route path='/saved-movies'>
       <section className='movies-cardlist section-movies movies-cardlist_type_saved'>
-          {savedMovies.map((movie) => (
+          {movies.map((movie) => (
             <MoviesCard key={movie._id} movie={movie} />
           ))}
         </section>

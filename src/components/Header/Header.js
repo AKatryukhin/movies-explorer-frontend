@@ -6,7 +6,7 @@ import logo from '../../images/header-logo.svg';
 import icon from '../../images/icon-acc.svg';
 import MenuBurger from '../MenuBurger/MenuBurger';
 import Navigation from '../Navigation/Navigation';
-import { AppContext } from '../contexts/AppContext';
+import { AppContext } from '../../contexts/AppContext';
 
 function Header() {
   const value = React.useContext(AppContext);

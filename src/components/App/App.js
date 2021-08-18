@@ -8,27 +8,33 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import InfoPopup from '../InfoPopup/InfoPopup';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { AppContext } from '../contexts/AppContext';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { AppContext } from '../../contexts/AppContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import * as main from '../../utils/MainApi';
 import * as mov from '../../utils/MoviesApi';
+import { ESC_KEYCODE } from '../../utils/constants';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [infoPopupTitle, setInfoPopupTitle] = useState({
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
   });
   const [isError, setIsError] = useState(false);
   const [isMovieLoadError, setIsMovieLoadError] = React.useState();
-  const [isMovieSending, setIsMovieSending] = React.useState(false);
+  // const [isMovieSending, setIsMovieSending] = React.useState(false);
+
+  function handleInfoPopupClick() {
+    setIsInfoPopupOpen(true);;
+  }
 
   useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn && isSearch) {
       main
         .getProfileInfo()
         .then((userData) => {
@@ -40,19 +46,54 @@ function App() {
       mov
         .getMoviesCardlist()
         .then((moviesData) => {
+          setIsSearch(false);
           localStorage.setItem('movies', JSON.stringify(moviesData));
           setMovies(JSON.parse(localStorage.getItem('movies')));
           console.log(JSON.parse(localStorage.getItem('movies')));
         })
-        .catch((err) => setIsMovieLoadError(err))
-        .finally(() => setIsLoading(false));
+        .catch((err) => {
+          setIsMovieLoadError(err);
+          handleInfoPopupClick();
+          setIsError(true);
+          setInfoPopupTitle({
+            title:
+              'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+          setIsSearch(false);
+        });
     }
-  }, [loggedIn]);
+  }, [loggedIn, isSearch]);
 
+  function handleSearch() {
+    setIsSearch(true);
+  }
 
   function closeInfoPopup() {
     setIsInfoPopupOpen(false);
   }
+
+  useEffect(() => {
+    //функция закрытия попапа по Escape
+    function handleEscClose(evt) {
+      evt.key === ESC_KEYCODE && closeInfoPopup();
+    }
+
+    //функция закрытия попапа по оверлей
+    function handleOverlayClose(evt) {
+      evt.target.classList.contains('popup-info_opened') && closeInfoPopup();
+    }
+
+    window.addEventListener('keydown', handleEscClose);
+    window.addEventListener('click', handleOverlayClose);
+
+    return () => {
+      window.removeEventListener('click', handleOverlayClose);
+      window.removeEventListener('keydown', handleEscClose);
+    };
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -60,6 +101,7 @@ function App() {
         value={{
           loggedIn: loggedIn,
           isLoading: isLoading,
+          isSearch: isSearch,
         }}
       >
         <div className='page'>
@@ -78,7 +120,8 @@ function App() {
               path='/movies'
               loggedIn={loggedIn}
               component={Movies}
-              isSending={isMovieSending}
+              isLoading={isLoading}
+              isSearch={handleSearch}
               movies={movies}
             />
             <ProtectedRoute
