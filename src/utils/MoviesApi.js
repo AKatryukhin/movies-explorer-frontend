@@ -9,10 +9,9 @@ const handleResponse = (res) => {
 
 
 export const getMoviesCardlist = () => {
-  return fetch(`${BEATFILMS_URL}/beatfilm-movies`, {
-    credentials: 'include',
+  return fetch(`${BEATFILMS_URL}`, {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
     },
   })
   .then(handleResponse);

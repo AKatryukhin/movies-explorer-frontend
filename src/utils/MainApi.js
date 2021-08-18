@@ -95,3 +95,65 @@ export const changeLikeCardStatus = (id, isLiked) => {
   })
   .then(handleResponse);
 };
+
+export const updateProfile = ({ name, email }) => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${BASE_URL}/users/me`, {
+      method: "PATCH",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ email: email, name: name }),
+  }).then(handleResponse);
+};
+
+export const createMovie = (data) => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${BASE_URL}/movies`, {
+      method: "POST",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+          country: data.country,
+          director: data.director,
+          duration: data.duration,
+          year: data.year,
+          description: data.description,
+          image: data.image,
+          trailer: data.trailer,
+          thumbnail: data.thumbnail,
+          movieId: data.movieId,
+          nameRU: data.nameRU,
+          nameEN: data.nameEN,
+      }),
+  }).then(handleResponse);
+};
+
+export const deleteMovie = (movieId) => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${BASE_URL}/movies/${movieId}`, {
+      method: "DELETE",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+      },
+  }).then(handleResponse);
+};
+
+export const getUserMovies = () => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${BASE_URL}/movies`, {
+      method: "GET",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+      },
+  }).then(handleResponse);
+};

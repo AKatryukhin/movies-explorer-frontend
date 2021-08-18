@@ -42,7 +42,7 @@ function App() {
         .then((moviesData) => {
           // setMovies(moviesData.movies);
           setMovies(moviesData);
-          console.log(movies)
+          console.log(moviesData)
         })
         .catch((err) => setIsMovieLoadError(err))
         .finally(() => setIsLoading(false));

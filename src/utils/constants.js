@@ -12,7 +12,9 @@ import movie11 from '../images/films/11.png';
 import movie12 from '../images/films/12.png';
 
 export const BASE_URL = 'https://api.movies-search.nomoredomains.club';
-export const BEATFILMS_URL = 'https://api.nomoreparties.co';
+
+// export const BEATFILMS_URL = 'https://api.nomoreparties.co';
+export const BEATFILMS_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 export const movies = [
   {
