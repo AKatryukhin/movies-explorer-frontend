@@ -3,20 +3,15 @@ import './SearchForm.css';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
-function SearchForm({ isLoading , isSearch, getMovies }) {
+function SearchForm({ isLoading , getMovies }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name } = values;
-
-  function handleSearch() {
-    isSearch();
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
     isValid && !isLoading &&
       getMovies();
-    handleSearch();
     resetForm();
 }
 

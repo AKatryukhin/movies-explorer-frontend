@@ -20,7 +20,6 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSearch, setIsSearch] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [infoPopupTitle, setInfoPopupTitle] = useState({
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
@@ -34,7 +33,7 @@ function App() {
   }
 
   function getMovieslist () {
-    if (loggedIn && isSearch) {
+    if (loggedIn) {
       main
         .getProfileInfo()
         .then((userData) => {
@@ -46,7 +45,6 @@ function App() {
       mov
         .getMoviesCardlist()
         .then((moviesData) => {
-          setIsSearch(false);
           localStorage.setItem('movies', JSON.stringify(moviesData));
           setMovies(JSON.parse(localStorage.getItem('movies')));
           console.log(JSON.parse(localStorage.getItem('movies')));
@@ -62,14 +60,9 @@ function App() {
         })
         .finally(() => {
           setIsLoading(false);
-          setIsSearch(false);
         });
     }
   };
-
-  function handleSearch() {
-    setIsSearch(true);
-  }
 
   function closeInfoPopup() {
     setIsInfoPopupOpen(false);
@@ -101,7 +94,6 @@ function App() {
         value={{
           loggedIn: loggedIn,
           isLoading: isLoading,
-          isSearch: isSearch,
         }}
       >
         <div className='page'>
@@ -121,7 +113,7 @@ function App() {
               loggedIn={loggedIn}
               component={Movies}
               isLoading={isLoading}
-              isSearch={handleSearch}
+              // isSearch={handleSearch}
               movies={movies}
               getMovies={getMovieslist}
             />

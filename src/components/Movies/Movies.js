@@ -13,22 +13,19 @@ function Movies({ movies, isSearch, isLoading, getMovies }) {
   return (
     <>
       <Header />
-      <SearchForm
-        isSearch={isSearch}
-        isLoading={isLoading}
-        getMovies={getMovies}
-      />
-      {value.isLoading && <Preloader />}
-      {movies.length !== 0 ? (
-        <>
-          <MoviesCardList movies={movies} />
-          <Footer />
-        </>
-      ) : (
-        <Footer />
-      )}
+      <main className='movies'>
+        <SearchForm
+          isSearch={isSearch}
+          isLoading={isLoading}
+          getMovies={getMovies}
+        />
+        {value.isLoading && <Preloader />}
+        {movies.length !== 0 && <MoviesCardList movies={movies} />}
+      </main>
+      <Footer />
     </>
-  );
+  )
 }
 
+  
 export default Movies;
