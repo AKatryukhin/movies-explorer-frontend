@@ -40,8 +40,8 @@ function App() {
       mov
         .getMoviesCardlist()
         .then((moviesData) => {
-          setMovies(moviesData);
           localStorage.setItem('movies', JSON.stringify(moviesData));
+          setMovies(JSON.parse(localStorage.getItem('movies')));
           console.log(JSON.parse(localStorage.getItem('movies')));
         })
         .catch((err) => setIsMovieLoadError(err))
