@@ -29,40 +29,69 @@ function App() {
   // const [isMovieSending, setIsMovieSending] = React.useState(false);
 
   function handleInfoPopupClick() {
-    setIsInfoPopupOpen(true);;
+    setIsInfoPopupOpen(true);
   }
 
-  function getMovieslist () {
+  function openErrorPopup(title) {
+    handleInfoPopupClick();
+    setIsError(true);
+    setInfoPopupTitle({ title });
+  }
+
+  function openSuccessPopup(title) {
+    handleInfoPopupClick();
+    setIsError(false);
+    setInfoPopupTitle({ title });
+  }
+
+  function getMovieslist() {
     if (loggedIn) {
-      main
-        .getProfileInfo()
-        .then((userData) => {
-          setCurrentUser(userData);
-        })
-        .catch((err) => console.log(err));
       setIsLoading(true);
-      setIsMovieLoadError();
       mov
         .getMoviesCardlist()
         .then((moviesData) => {
           localStorage.setItem('movies', JSON.stringify(moviesData));
-          setMovies(JSON.parse(localStorage.getItem('movies')));
-          console.log(JSON.parse(localStorage.getItem('movies')));
         })
         .catch((err) => {
           setIsMovieLoadError(err);
-          handleInfoPopupClick();
-          setIsError(true);
-          setInfoPopupTitle({
-            title:
-              'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-          });
+          openErrorPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
         })
         .finally(() => {
           setIsLoading(false);
         });
     }
-  };
+  }
+
+
+  function searchMovies(name) {
+    const MoviesList = JSON.parse(localStorage.getItem('movies'));
+    console.log(name)
+    if (!name) {
+      openErrorPopup('Нужно ввести ключевое слово');
+      return;
+    } 
+      getMovieslist();
+      const list = MoviesList.filter((movie) => {
+        const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+        return (
+          movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+          movie.description.toLowerCase().includes(name.toLowerCase()) ||
+          nameEN.toLowerCase().includes(name.toLowerCase())
+        );
+      });
+      setMovies(list);
+      list.length === 0 && setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
+      console.log(list)
+      return list;
+    }
+  
+
+    function filterShortMovies(movies) {
+      const shortMovies = movies.filter(
+          (movie) => movie.duration <= 40
+      );
+      return shortMovies;
+  }
 
   function closeInfoPopup() {
     setIsInfoPopupOpen(false);
@@ -115,7 +144,7 @@ function App() {
               isLoading={isLoading}
               // isSearch={handleSearch}
               movies={movies}
-              getMovies={getMovieslist}
+              getMovies={searchMovies}
             />
             <ProtectedRoute
               exact

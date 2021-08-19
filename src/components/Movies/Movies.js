@@ -12,8 +12,8 @@ function Movies({ movies, isSearch, isLoading, getMovies }) {
 
   return (
     <>
-      <Header />
       <main className='movies'>
+        <Header />
         <SearchForm
           isSearch={isSearch}
           isLoading={isLoading}
@@ -21,11 +21,10 @@ function Movies({ movies, isSearch, isLoading, getMovies }) {
         />
         {value.isLoading && <Preloader />}
         {movies.length !== 0 && <MoviesCardList movies={movies} />}
+        <Footer />
       </main>
-      <Footer />
     </>
-  )
+  );
 }
 
-  
 export default Movies;

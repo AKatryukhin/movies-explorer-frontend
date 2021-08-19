@@ -3,7 +3,7 @@ import './SearchForm.css';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
-function SearchForm({ isLoading , getMovies }) {
+function SearchForm({ isLoading, getMovies }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name } = values;
@@ -11,10 +11,9 @@ function SearchForm({ isLoading , getMovies }) {
   function handleSubmit(e) {
     e.preventDefault();
     isValid && !isLoading &&
-      getMovies();
+      getMovies(name);
     resetForm();
-}
-
+  }
 
   return (
     <section className='search section-movies'>
@@ -34,7 +33,6 @@ function SearchForm({ isLoading , getMovies }) {
             name='name'
             placeholder='Фильм'
             required
-            minLength='1'
             maxLength='60'
             onChange={handleChange}
             value={name || ''}
@@ -43,7 +41,9 @@ function SearchForm({ isLoading , getMovies }) {
             type='submit'
             aria-label='Кнопка Поиск'
             disabled={!isValid}
-            className={`search__submit ${!isValid ? 'search__submit_type_disabled' : ''}`}
+            className={`search__submit ${
+              !isValid ? 'search__submit_type_disabled' : ''
+            }`}
           >
             Поиск
           </button>

@@ -3,7 +3,10 @@ import { Route } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
-function MoviesCardList( {movies} ) {
+function MoviesCardList({ movies }) {
+  
+
+
   return (
     <main className='movies'>
       <Route path='/movies'>
