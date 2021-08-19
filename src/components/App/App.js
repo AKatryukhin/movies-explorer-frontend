@@ -65,7 +65,6 @@ function App() {
 
   function searchMovies(name) {
     const MoviesList = JSON.parse(localStorage.getItem('movies'));
-    console.log(name)
     if (!name) {
       openErrorPopup('Нужно ввести ключевое слово');
       return;
@@ -81,7 +80,6 @@ function App() {
       });
       setMovies(list);
       list.length === 0 && setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
-      console.log(list)
       return list;
     }
   
