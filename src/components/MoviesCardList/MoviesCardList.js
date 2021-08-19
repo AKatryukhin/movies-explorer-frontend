@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
 function MoviesCardList({ movies }) {
   
+  console.log(movies)
+  const [count, setCount] = useState(12);
+
+  function increment() {
+    setCount(count + 3);
+  };
 
   //   function handleResize() {
 //     const windowSize = window.innerWidth;
@@ -37,14 +43,22 @@ function MoviesCardList({ movies }) {
     <main className='movies'>
       <Route path='/movies'>
         <section className='movies-cardlist section-movies'>
-          {movies.map((movie) => (
-            <MoviesCard key={movie._id} movie={movie} />
+          {movies.length > 12 &&
+            movies.slice(0, count).map((movie) => (
+           
+              <MoviesCard key={movie._id} movie={movie} movies={movies} />
+            ))}
+          {movies.length <= 12 &&
+            movies.map((movie) => (
+           
+            <MoviesCard key={movie._id} movie={movie} movies={movies}/>
           ))}
         </section>
         <div className='movies-cardlist__more-button-container'>
         <button
           className='movies-cardlist__more-button'
-          aria-label='Показать еще'
+            aria-label='Показать еще'
+            onClick={ increment }
         >
           Ещё
         </button>
