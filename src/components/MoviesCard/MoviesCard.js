@@ -2,8 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCard.css';
 
-function MoviesCard({ movie, movies, isLiked = true }) {
-  console.log(movies.length)
+function MoviesCard({ movie, isLiked = true }) {
+
   return (
     <article className='movie'>
       <div className='movie__info-container'>
