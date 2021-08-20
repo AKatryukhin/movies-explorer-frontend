@@ -1,6 +1,5 @@
 import { BASE_URL } from './constants';
 
-
 const handleResponse = (res) => {
   if (!res.ok) {
     return Promise.reject(`Error: ${res.status}`);
@@ -15,21 +14,19 @@ export const register = ({ email, password }) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email, password }
-      )})
-  .then(handleResponse);
+    body: JSON.stringify({ email, password }),
+  }).then(handleResponse);
 };
 
-export const authorize = ({ email, password })  => {
+export const authorize = ({ email, password }) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     credentials: 'include',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email, password })
-  })
-  .then(handleResponse);
+    body: JSON.stringify({ email, password }),
+  }).then(handleResponse);
 };
 
 export const getProfileInfo = () => {
@@ -38,10 +35,10 @@ export const getProfileInfo = () => {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-    }
+    },
   })
-  .then(handleResponse)
-  .then(data => data);
+    .then(handleResponse)
+    .then((data) => data);
 };
 
 export const setProfileInfo = ({ name, about }) => {
@@ -55,8 +52,7 @@ export const setProfileInfo = ({ name, about }) => {
       name: name,
       about: about,
     }),
-  })
-  .then(handleResponse);
+  }).then(handleResponse);
 };
 
 export const addCard = ({ name, link }) => {
@@ -70,8 +66,7 @@ export const addCard = ({ name, link }) => {
       name: name,
       link: link,
     }),
-  })
-  .then(handleResponse);
+  }).then(handleResponse);
 };
 
 export const removeCard = (id) => {
@@ -81,8 +76,7 @@ export const removeCard = (id) => {
     headers: {
       'Content-Type': 'application/json',
     },
-  })
-  .then(handleResponse);
+  }).then(handleResponse);
 };
 
 export const changeLikeCardStatus = (id, isLiked) => {
@@ -92,68 +86,69 @@ export const changeLikeCardStatus = (id, isLiked) => {
     headers: {
       'Content-Type': 'application/json',
     },
-  })
-  .then(handleResponse);
+  }).then(handleResponse);
 };
 
 export const updateProfile = ({ name, email }) => {
-  const token = localStorage.getItem("jwt");
+  const token = localStorage.getItem('jwt');
   return fetch(`${BASE_URL}/users/me`, {
-      method: "PATCH",
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ email: email, name: name }),
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ email: email, name: name }),
   }).then(handleResponse);
 };
 
 export const createMovie = (data) => {
-  const token = localStorage.getItem("jwt");
+  // const token = localStorage.getItem("jwt");
   return fetch(`${BASE_URL}/movies`, {
-      method: "POST",
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-          country: data.country,
-          director: data.director,
-          duration: data.duration,
-          year: data.year,
-          description: data.description,
-          image: data.image,
-          trailer: data.trailer,
-          thumbnail: data.thumbnail,
-          movieId: data.movieId,
-          nameRU: data.nameRU,
-          nameEN: data.nameEN,
-      }),
+    method: 'POST',
+    // credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      // Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      country: data.country,
+      director: data.director,
+      duration: data.duration,
+      year: data.year,
+      description: data.description,
+      image: data.image,
+      trailer: data.trailerLink,
+      // thumbnail: data.thumbnail,
+      movieId: data.id,
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
+    }),
   }).then(handleResponse);
 };
 
 export const deleteMovie = (movieId) => {
-  const token = localStorage.getItem("jwt");
+  // const token = localStorage.getItem("jwt");
   return fetch(`${BASE_URL}/movies/${movieId}`, {
-      method: "DELETE",
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-      },
+    method: 'DELETE',
+    // credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      // Authorization: `Bearer ${token}`,
+    },
   }).then(handleResponse);
 };
 
 export const getUserMovies = () => {
-  const token = localStorage.getItem("jwt");
+  // const token = localStorage.getItem('jwt');
   return fetch(`${BASE_URL}/movies`, {
-      method: "GET",
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-      },
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      // Authorization: `Bearer ${token}`,
+    },
   }).then(handleResponse);
 };

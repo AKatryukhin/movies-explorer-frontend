@@ -25,7 +25,8 @@ function App() {
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
   });
   const [isError, setIsError] = useState(false);
-  const [isMovieLoadError, setIsMovieLoadError] = React.useState();
+  const [isMovieLoadError, setIsMovieLoadError] = useState();
+  const[isLiked, setIsLiked] = useState(false);
   // const [isMovieSending, setIsMovieSending] = React.useState(false);
 
   function handleInfoPopupClick() {
@@ -115,6 +116,47 @@ function App() {
     };
   }, []);
 
+  function handleMovieLike(movie) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    // const isLiked = savedMovies.some((i) => i === currentUser._id);
+    // Отправляем запросы в API и получаем обновлённые данные карточки
+    main
+      .createMovie(movie)
+      // .getUserMovies()
+      
+      .then((moviesData) => {
+        localStorage.setItem('savedMovies', JSON.stringify(moviesData));
+        setIsLiked(true);
+      }
+    )
+      // .changeLikeCardStatus(card._id, isLiked)
+      // .then((newCardSomeLike) => {
+      //   setCards((state) =>
+      //     state.map((c) => (c._id === card._id ? newCardSomeLike : c))
+      //   );
+      // })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleMovieDelete(movie) {
+    main
+      .deleteMovie(movie.id)
+        .getUserMovies()
+        .then((moviesData) => {
+          localStorage.setItem('savedMovies', JSON.stringify(moviesData));
+        })
+          //   () => {
+          // setCards((state) => state.filter((c) => c._id !== cardForDelete._id));
+          // setIsDeleteCardPopupOpen(false);
+          //   }
+        // )
+        .catch((err) => {
+          console.log(err);
+        });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <AppContext.Provider
@@ -143,12 +185,16 @@ function App() {
               // isSearch={handleSearch}
               movies={movies}
               getMovies={searchMovies}
+              onMovieLike={handleMovieLike}
+              onMovieDelete={handleMovieDelete}
+              isLiked={isLiked}
             />
             <ProtectedRoute
               exact
               path='/saved-movies'
               loggedIn={loggedIn}
               component={SavedMovies}
+              onMovieDelete={handleMovieDelete}
             />
             <ProtectedRoute
               exact

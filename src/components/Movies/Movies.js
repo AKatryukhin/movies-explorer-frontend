@@ -7,7 +7,15 @@ import Preloader from '../Preloader/Preloader';
 import { AppContext } from '../../contexts/AppContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function Movies({ movies, isSearch, isLoading, getMovies }) {
+function Movies({
+  movies,
+  isSearch,
+  isLoading,
+  getMovies,
+  onMovieLike,
+  onMovieDelete,
+  isLiked,
+}) {
   const value = React.useContext(AppContext);
 
   return (
@@ -20,7 +28,14 @@ function Movies({ movies, isSearch, isLoading, getMovies }) {
           getMovies={getMovies}
         />
         {value.isLoading && <Preloader />}
-        {movies.length !== 0 && <MoviesCardList movies={movies} />}
+        {movies.length !== 0 && (
+          <MoviesCardList
+            movies={movies}
+            onMovieLike={onMovieLike}
+            onMovieDelete={onMovieDelete}
+            isLiked={isLiked}
+          />
+        )}
         <Footer />
       </main>
     </>

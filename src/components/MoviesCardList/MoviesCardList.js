@@ -4,7 +4,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import useWindowSize from '../../hooks/useWindowSize';
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({ movies, onMovieLike, onMovieDelete, isLiked }) {
   const size = useWindowSize();
   const [count, setCount] = useState(0);
   const [value, setValue] = useState(0);
@@ -30,7 +30,7 @@ function MoviesCardList({ movies }) {
     }
     getSize();
   }, [size]);
-  
+
   return (
     <main className='movies'>
       <Route path='/movies'>
@@ -39,11 +39,25 @@ function MoviesCardList({ movies }) {
             movies
               .slice(0, count)
               .map((movie) => (
-                <MoviesCard key={movie._id} movie={movie} movies={movies} />
+                <MoviesCard
+                  key={movie._id}
+                  movie={movie}
+                  movies={movies}
+                  onMovieLike={onMovieLike}
+                  onMovieDelete={onMovieDelete}
+                  isLiked={isLiked}
+                />
               ))}
           {movies.length <= count &&
             movies.map((movie) => (
-              <MoviesCard key={movie._id} movie={movie} movies={movies} />
+              <MoviesCard
+                key={movie._id}
+                movie={movie}
+                movies={movies}
+                onMovieLike={onMovieLike}
+                onMovieDelete={onMovieDelete}
+                isLiked={isLiked}
+              />
             ))}
         </section>
         <div
