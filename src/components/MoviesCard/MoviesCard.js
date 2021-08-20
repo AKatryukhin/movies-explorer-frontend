@@ -3,14 +3,21 @@ import { Route } from 'react-router-dom';
 import './MoviesCard.css';
 
 function MoviesCard({ movie, isLiked = true }) {
-
+  console.log(movie)
+  
+  const converterDuration = (data) => {
+    const hours = Math.floor(data / 60);
+    const minutes = data % 60;
+    return `${hours ? hours + 'ч' : ''} ${minutes}м`;
+  };
+  
   return (
     <article className='movie'>
       <div className='movie__info-container'>
         <div className='movie__header-container'>
           <div className='movie__info'>
-            <h3 className='movie__name'>{movie.name}</h3>
-            <p className='movie__lenght'>1ч 47м</p>
+            <h3 className='movie__name'>{movie.nameRU}</h3>
+            <p className='movie__lenght'>{converterDuration(movie.duration)}</p>
           </div>
           <Route path='/movies'>
           <button
@@ -32,8 +39,8 @@ function MoviesCard({ movie, isLiked = true }) {
             </Route>
         </div>
       </div>
-      <a href='*' target='_blank' rel='noopener noreferrer'>
-        <img className='movie__image' src={movie.link} alt={movie.name} />
+      <a href={movie.trailerLink} target='_blank' rel='noopener noreferrer'>
+        <img className='movie__image' src={`https://api.nomoreparties.co${movie.image.url}`} alt={movie.name} />
       </a>
     </article>
   );
