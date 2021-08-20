@@ -8,9 +8,11 @@ function MoviesCardList({ movies }) {
   const size = useWindowSize();
   const [count, setCount] = useState(0);
   const [value, setValue] = useState(0);
+
   function increment() {
     setCount(count + value);
   }
+
   useEffect(() => {
     function getSize() {
       if (size >= 1280) {
@@ -28,7 +30,7 @@ function MoviesCardList({ movies }) {
     }
     getSize();
   }, [size]);
-
+  
   return (
     <main className='movies'>
       <Route path='/movies'>
@@ -44,7 +46,13 @@ function MoviesCardList({ movies }) {
               <MoviesCard key={movie._id} movie={movie} movies={movies} />
             ))}
         </section>
-        <div className='movies-cardlist__more-button-container'>
+        <div
+          className={
+            count >= movies.length
+              ? 'movies-cardlist__more-button-container_type_none'
+              : 'movies-cardlist__more-button-container'
+          }
+        >
           <button
             className='movies-cardlist__more-button'
             aria-label='Показать еще'

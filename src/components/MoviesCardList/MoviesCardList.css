@@ -28,6 +28,10 @@
   align-items: center;
 }
 
+.movies-cardlist__more-button-container_type_none {
+  display: none;
+}
+
 .movies-cardlist__more-button {
   width: 320px;
   height: 36px;
