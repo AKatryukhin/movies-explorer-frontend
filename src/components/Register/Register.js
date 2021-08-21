@@ -3,8 +3,9 @@ import './Register.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/header-logo.svg';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-
-function Register() {
+import { REG_NAME } from '../../utils/constants';
+ 
+function Register({ handleRegister }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name, email, password } = values;
@@ -12,9 +13,9 @@ function Register() {
   function handleSubmit(e) {
     e.preventDefault();
     isValid &&
-      console.log('Ok', () => {
-        resetForm();
-      });
+    handleRegister({ email, password }, () => {
+      resetForm();
+    });
   }
   return (
     <section className='sign'>
@@ -36,6 +37,7 @@ function Register() {
             type='text'
             placeholder='Имя'
             required
+            // pattern= '/[\wа-я\sё\-]/gi'
             minLength='2'
             maxLength='38'
             autoComplete='off'

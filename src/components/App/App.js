@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -16,6 +16,7 @@ import * as mov from '../../utils/MoviesApi';
 import { ESC_KEYCODE } from '../../utils/constants';
 
 function App() {
+  const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
@@ -26,7 +27,12 @@ function App() {
   });
   const [isError, setIsError] = useState(false);
   const [isMovieLoadError, setIsMovieLoadError] = useState();
-  const[isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   // const [isMovieSending, setIsMovieSending] = React.useState(false);
 
   function handleInfoPopupClick() {
@@ -44,6 +50,60 @@ function App() {
     setIsError(false);
     setInfoPopupTitle({ title });
   }
+
+  const handleRegister = ({ name, email, password }, onSuccess) => {
+    main
+      .register({ name, email, password })
+      
+      .then((res) => {
+        setUserData({
+          name: res.name,
+          email: res.email
+
+        });
+        // setIsRegist(true);
+        openSuccessPopup('Вы успешно зарегистрировались!');
+        onSuccess();
+        main.authorize({ email, password })
+        .then((res) => {
+          setUserData({
+            email: res.email
+           });
+          setLoggedIn(true);
+          onSuccess();
+          history.push('/movies');
+        })
+        .catch((err) => {
+          console.log(err);
+          openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+        });
+        history.push('/movies');
+      })
+      .catch((err) => {
+        console.log(err);
+        // setIsRegist(false);
+        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+      });
+  };
+
+  const handleLogin = ({ email, password }, onSuccess) => {
+    main
+      .authorize({ email, password })
+      .then((res) => {
+        setUserData({
+          email: res.email
+         });
+        setLoggedIn(true);
+        onSuccess();
+        history.push('/movies');
+      })
+      .catch((err) => {
+        console.log(err);
+        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+      });
+  };
+
+
 
   function getMovieslist() {
     if (loggedIn) {
@@ -168,10 +228,10 @@ function App() {
         <div className='page'>
           <Switch>
             <Route path='/signin'>
-              <Login />
+              <Login handleLogin={handleLogin}/>
             </Route>
             <Route path='/signup'>
-              <Register />
+              <Register handleRegister={handleRegister}/>
             </Route>
             <Route exact path='/'>
               <Main />

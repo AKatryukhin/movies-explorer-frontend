@@ -4,17 +4,20 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/header-logo.svg';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Login() {
+function Login({ handleLogin }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { email, password } = values;
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!email || !password) {
+      return;
+    }
     isValid &&
-      console.log('Ok', () => {
-        resetForm();
-      });
+    handleLogin({ email, password }, () => {
+      resetForm();
+    });
   }
   return (
     <section className='sign'>

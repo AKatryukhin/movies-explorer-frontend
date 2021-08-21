@@ -7,14 +7,14 @@ const handleResponse = (res) => {
   return res.json();
 };
 
-export const register = ({ email, password }) => {
+export const register = ({ name, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ name, email, password }),
   }).then(handleResponse);
 };
 
@@ -106,7 +106,7 @@ export const createMovie = (data) => {
   // const token = localStorage.getItem("jwt");
   return fetch(`${BASE_URL}/movies`, {
     method: 'POST',
-    // credentials: 'include',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export const createMovie = (data) => {
       description: data.description,
       image: data.image,
       trailer: data.trailerLink,
-      // thumbnail: data.thumbnail,
+      thumbnail: data.image.formats.thumbnail.url,
       movieId: data.id,
       nameRU: data.nameRU,
       nameEN: data.nameEN,
