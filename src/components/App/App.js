@@ -19,6 +19,7 @@ function App() {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
@@ -27,13 +28,15 @@ function App() {
   });
   const [isError, setIsError] = useState(false);
   const [isMovieLoadError, setIsMovieLoadError] = useState();
-  const [isLiked, setIsLiked] = useState(false);
   const [userData, setUserData] = useState({
     name: '',
     email: '',
     password: '',
   });
-  // const [isMovieSending, setIsMovieSending] = React.useState(false);
+
+  function checkLikeStatus(movie) {
+    return savedMovies.some((i) => i._id === movie._id);
+  }
 
   function handleInfoPopupClick() {
     setIsInfoPopupOpen(true);
@@ -51,32 +54,40 @@ function App() {
     setInfoPopupTitle({ title });
   }
 
+  useEffect(() => {
+    if (loggedIn) {
+      const lastMoviesList = localStorage.getItem('movies');
+      !movies && setMovies(lastMoviesList);
+    }
+  }, [loggedIn, movies]);
+
   const handleRegister = ({ name, email, password }, onSuccess) => {
     main
       .register({ name, email, password })
-      
+
       .then((res) => {
         setUserData({
           name: res.name,
-          email: res.email
-
+          email: res.email,
         });
-        // setIsRegist(true);
+        setCurrentUser(res);
         openSuccessPopup('Вы успешно зарегистрировались!');
         onSuccess();
-        main.authorize({ email, password })
-        .then((res) => {
-          setUserData({
-            email: res.email
-           });
-          setLoggedIn(true);
-          onSuccess();
-          history.push('/movies');
-        })
-        .catch((err) => {
-          console.log(err);
-          openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
-        });
+        main
+          .authorize({ email, password })
+          .then((res) => {
+            setUserData({
+              email: res.email,
+            });
+            setLoggedIn(true);
+            setCurrentUser(res);
+            onSuccess();
+            history.push('/movies');
+          })
+          .catch((err) => {
+            console.log(err);
+            openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+          });
         history.push('/movies');
       })
       .catch((err) => {
@@ -91,9 +102,10 @@ function App() {
       .authorize({ email, password })
       .then((res) => {
         setUserData({
-          email: res.email
-         });
+          email: res.email,
+        });
         setLoggedIn(true);
+        setCurrentUser(res);
         onSuccess();
         history.push('/movies');
       })
@@ -102,8 +114,6 @@ function App() {
         openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
       });
   };
-
-
 
   function getMovieslist() {
     if (loggedIn) {
@@ -115,7 +125,9 @@ function App() {
         })
         .catch((err) => {
           setIsMovieLoadError(err);
-          openErrorPopup('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+          openErrorPopup(
+            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+          );
         })
         .finally(() => {
           setIsLoading(false);
@@ -123,33 +135,30 @@ function App() {
     }
   }
 
-
   function searchMovies(name) {
     const MoviesList = JSON.parse(localStorage.getItem('movies'));
     if (!name) {
       openErrorPopup('Нужно ввести ключевое слово');
       return;
-    } 
-      getMovieslist();
-      const list = MoviesList.filter((movie) => {
-        const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
-        return (
-          movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
-          movie.description.toLowerCase().includes(name.toLowerCase()) ||
-          nameEN.toLowerCase().includes(name.toLowerCase())
-        );
-      });
-      setMovies(list);
-      list.length === 0 && setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
-      return list;
     }
-  
-
-    function filterShortMovies(movies) {
-      const shortMovies = movies.filter(
-          (movie) => movie.duration <= 40
+    getMovieslist();
+    const list = MoviesList.filter((movie) => {
+      const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+      return (
+        movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+        movie.description.toLowerCase().includes(name.toLowerCase()) ||
+        nameEN.toLowerCase().includes(name.toLowerCase())
       );
-      return shortMovies;
+    });
+    setMovies(list);
+    list.length === 0 &&
+      setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
+    return list;
+  }
+
+  function filterShortMovies(movies) {
+    const shortMovies = movies.filter((movie) => movie.duration <= 40);
+    return shortMovies;
   }
 
   function closeInfoPopup() {
@@ -176,26 +185,56 @@ function App() {
     };
   }, []);
 
-  function handleMovieLike(movie) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    // const isLiked = savedMovies.some((i) => i === currentUser._id);
-    // Отправляем запросы в API и получаем обновлённые данные карточки
+  // function handleDeleteSavedMovie(movie) {
+  //   mainApi.movieDelete(movie.movieId)
+  //     .then(() => {
+  //       setSavedMovies((movies) => movies.filter((film) => film.movieId !== movie.movieId))
+  //       updateToSaveMovies(movie.movieId)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+  // function handlesavedMovie(movie) {
+  //   const id = movie.id || movie.movieId;
+  //   const isLiked = savedMovies.some(item => item.movieId === id && item.owner === currentUser.id);
+  //   mainApi.changeSaveMovieStatus(movie, isLiked)
+  //     .then((newMovie) => {
+  //       handleSavedMovies()
+  //       setMovies((films) =>
+  //         films.map((film) => (
+  //           film.id === movie.movieId ? newMovie : film))
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+
+  function handleSavedMovie(movie) {
     main
-      .createMovie(movie)
+      .createMovie({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailer: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      })
       // .getUserMovies()
-      
-      .then((moviesData) => {
-        localStorage.setItem('savedMovies', JSON.stringify(moviesData));
-        setIsLiked(true);
-      }
-    )
-      // .changeLikeCardStatus(card._id, isLiked)
-      // .then((newCardSomeLike) => {
-      //   setCards((state) =>
-      //     state.map((c) => (c._id === card._id ? newCardSomeLike : c))
-      //   );
-      // })
+      .then((res) => {
+        localStorage.setItem('savedMovies', JSON.stringify(res));
+        setSavedMovies([res.movie, ...savedMovies]);
+      })
       .catch((err) => {
+        console.log(movie);
         console.log(err);
       });
   }
@@ -203,24 +242,79 @@ function App() {
   function handleMovieDelete(movie) {
     main
       .deleteMovie(movie.id)
-        .getUserMovies()
-        .then((moviesData) => {
-          localStorage.setItem('savedMovies', JSON.stringify(moviesData));
-        })
-          //   () => {
-          // setCards((state) => state.filter((c) => c._id !== cardForDelete._id));
-          // setIsDeleteCardPopupOpen(false);
-          //   }
-        // )
-        .catch((err) => {
-          console.log(err);
-        });
+      .getUserMovies()
+      .then((moviesData) => {
+        localStorage.setItem('savedMovies', JSON.stringify(moviesData));
+      })
+      //   () => {
+      // setCards((state) => state.filter((c) => c._id !== cardForDelete._id));
+      // setIsDeleteCardPopupOpen(false);
+      //   }
+      // )
+      .catch((err) => {
+        console.log(err);
+      });
   }
+
+  // function handleUpdateUser(userData) {
+  //     updateProfile(userData)
+  //         .then((res) => {
+  //             if (res) {
+  //                 setCurrentUser({
+  //                     ...currentUser,
+  //                     name: res.newName,
+  //                     email: res.newEmail,
+  //                 });
+  //                 showResponseMessageTimer(SUCCSESS_UPDATE_MESSAGE);
+  //             }
+  //         })
+  //         .catch((err) => {
+  //             showResponseMessageTimer(SERVER_ERROR_MESSAGE);
+  //             console.log(err);
+  //         });
+  // }
+
+  // function handleLogOut() {
+  //     localStorage.removeItem("jwt");
+  //     localStorage.removeItem("movies");
+  //     localStorage.removeItem("searchResult");
+  //     setCurrentUser({ name: "", email: "" });
+  //     setAllmovies([]);
+  //     setSearchMoviesResult([]);
+  //     setMoviesSearchResponse([]);
+  //     setSavedMovies([]);
+  //     setLoggedIn(false);
+  //     history.push("/");
+  // }
+
+
+  // function addMovie(movie) {
+  //     createMovie(movie)
+  //         .then((res) => {
+  //             const newSavedMovie = res.newMovie;
+  //             setSavedMovies([...savedMovies, newSavedMovie]);
+  //             console.log(res.message);
+  //         })
+  //         .catch((err) => console.log(err));
+  // }
+
+  // function removeMovies(movie) {
+  //     const movieId = savedMovies.find(
+  //         (item) => item.movieId === movie.movieId
+  //     )._id;
+  //     deleteMovie(movieId)
+  //         .then((res) => {
+  //             getFavoriteMovies();
+  //             console.log(res.message);
+  //         })
+  //         .catch((err) => console.log(err));
+  // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <AppContext.Provider
         value={{
+          userData: userData,
           loggedIn: loggedIn,
           isLoading: isLoading,
         }}
@@ -228,10 +322,10 @@ function App() {
         <div className='page'>
           <Switch>
             <Route path='/signin'>
-              <Login handleLogin={handleLogin}/>
+              <Login handleLogin={handleLogin} />
             </Route>
             <Route path='/signup'>
-              <Register handleRegister={handleRegister}/>
+              <Register handleRegister={handleRegister} />
             </Route>
             <Route exact path='/'>
               <Main />
@@ -245,9 +339,9 @@ function App() {
               // isSearch={handleSearch}
               movies={movies}
               getMovies={searchMovies}
-              onMovieLike={handleMovieLike}
+              onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
-              isLiked={isLiked}
+              isLiked={checkLikeStatus}
             />
             <ProtectedRoute
               exact

@@ -57,7 +57,7 @@ function Login({ handleLogin }) {
             className='sign__input'
             id='password'
             name='password'
-            autocomplete='off'
+            autoComplete='off'
             required
             minLength='6'
             maxLength='20'

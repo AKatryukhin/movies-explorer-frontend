@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCard.css';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function MoviesCard({ movie, onMovieLike, onMovieDelete, isLiked }) {
-  console.log(movie);
+  const currentUser = React.useContext(CurrentUserContext);
 
   const converterDuration = (data) => {
     const hours = Math.floor(data / 60);
