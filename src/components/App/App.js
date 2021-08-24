@@ -52,13 +52,12 @@ function App() {
     setInfoPopupTitle({ title });
   }
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     const lastSearchList = localStorage.getItem('lastSearchList');
-  //     lastSearchList && setMovies(lastSearchList);
-
-  //   }
-  // }, [loggedIn]);
+  useEffect(() => {
+    if (loggedIn) {
+      const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
+      lastSearchList && setMovies(lastSearchList);
+    }
+  }, [loggedIn]);
 
 
 
