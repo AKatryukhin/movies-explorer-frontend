@@ -4,7 +4,13 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import useWindowSize from '../../hooks/useWindowSize';
 
-function MoviesCardList({ movies, onMovieLike, onMovieDelete, checkLikeStatus }) {
+function MoviesCardList({
+  movies,
+  onMovieLike,
+  onMovieDelete,
+  checkLikeStatus,
+  // toggleLike,
+}) {
   const size = useWindowSize();
   const [count, setCount] = useState(0);
   const [value, setValue] = useState(0);
@@ -38,26 +44,21 @@ function MoviesCardList({ movies, onMovieLike, onMovieDelete, checkLikeStatus })
           {movies.length > count &&
             movies
               .slice(0, count)
-            .map((movie) => (
+              .map((movie) => (
                 <MoviesCard
-            key={movie.id}
-            movie={movie}
-            movies={movies}
-            onMovieLike={onMovieLike}
-            onMovieDelete={onMovieDelete}
-            isLiked={checkLikeStatus}
+                  key={movie.id}
+                  movie={movie}
+                  onMovieLike={onMovieLike}
+                  onMovieDelete={onMovieDelete}
                 />
               ))}
           {movies.length <= count &&
             movies.map((movie) => (
-
               <MoviesCard
                 key={movie.id}
                 movie={movie}
-                movies={movies}
                 onMovieLike={onMovieLike}
                 onMovieDelete={onMovieDelete}
-                isLiked={checkLikeStatus}
               />
             ))}
         </section>

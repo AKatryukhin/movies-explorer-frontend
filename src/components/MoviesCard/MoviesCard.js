@@ -2,10 +2,17 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCard.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { AppContext } from '../../contexts/AppContext';
 
-function MoviesCard({ movie, onMovieLike, onMovieDelete, isLiked }) {
+function MoviesCard({
+  movie,
+  onMovieLike,
+  onMovieDelete,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
-
+  const value = React.useContext(AppContext);
+  const isLiked = value.savedMoviesList.some(i => i.movieId === movie.id);
+  // && i.owner === currentUser.id
   const converterDuration = (data) => {
     const hours = Math.floor(data / 60);
     const minutes = data % 60;
@@ -14,6 +21,7 @@ function MoviesCard({ movie, onMovieLike, onMovieDelete, isLiked }) {
 
   function handleLikeClick() {
     onMovieLike(movie);
+
   }
 
   function handleDeleteClick() {

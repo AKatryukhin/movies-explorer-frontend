@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -22,6 +22,7 @@ function App() {
   const [savedMoviesList, setSavedMoviesList] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [infoPopupTitle, setInfoPopupTitle] = useState({
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
@@ -34,9 +35,6 @@ function App() {
     password: '',
   });
 
-  function checkLikeStatus(movie) {
-    return savedMoviesList.some((i) => i._id === movie._id);
-  }
 
   function handleInfoPopupClick() {
     setIsInfoPopupOpen(true);
@@ -54,12 +52,15 @@ function App() {
     setInfoPopupTitle({ title });
   }
 
-  useEffect(() => {
-    if (loggedIn) {
-      const lastMoviesList = localStorage.getItem('movies');
-      !movies && setMovies(lastMoviesList);
-    }
-  }, [loggedIn, movies]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     const lastSearchList = localStorage.getItem('lastSearchList');
+  //     lastSearchList && setMovies(lastSearchList);
+
+  //   }
+  // }, [loggedIn]);
+
+
 
   const handleRegister = ({ name, email, password }, onSuccess) => {
     main
@@ -142,7 +143,7 @@ function App() {
       return;
     }
     getMovieslist();
-    const list = MoviesList.filter((movie) => {
+    const lastSearchList = MoviesList.filter((movie) => {
       const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
       return (
         movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
@@ -150,11 +151,13 @@ function App() {
         nameEN.toLowerCase().includes(name.toLowerCase())
       );
     });
-    setMovies(list);
-    list.length === 0 &&
+    setMovies(lastSearchList);
+    localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
+    lastSearchList.length === 0 &&
       setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
-    return list;
+    return lastSearchList;
   }
+
 
   function filterShortMovies(movies) {
     const shortMovies = movies.filter((movie) => movie.duration <= 40);
@@ -212,7 +215,10 @@ function App() {
   //     });
   // }
 
+  
+
   function handleSavedMovie(movie) {
+    
     main
       .createMovie({
         country: movie.country,
@@ -233,7 +239,6 @@ function App() {
           'savedMoviesList',
           JSON.stringify(savedMoviesList)
         );
-        console.log(savedMoviesList);
       })
       .catch((err) => {
         console.log(err);
@@ -241,36 +246,18 @@ function App() {
   }
 
   function handleMovieDelete(movie) {
-    console.log(movie);
-    console.log(savedMoviesList);
     const movieForDelete = savedMoviesList.find((i) => i.movieId === movie.id);
-    console.log(movieForDelete);
-    main.getUserMovies()
-      .then((res) => {
-        console.log(res)
         main
           .deleteMovie(movieForDelete._id)
           .then((res) => {
-            // setSavedMovies((state) => state.filter((c) => c.id !== movie.id));
-            // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-            console.log(res);
+            setSavedMoviesList((state) => state.filter((c) => c.movieId !== movie.id));
+            localStorage.setItem('savedMoviesList', JSON.stringify(savedMoviesList));
           })
           .catch((err) => {
             console.log(err);
           });
-      })
   }
-  // function removeMovies(movie) {
-  //     const movieId = savedMovies.find(
-  //         (item) => item.movieId === movie.movieId
-  //     )._id;
-  //     deleteMovie(movieId)
-  //         .then((res) => {
-  //             getFavoriteMovies();
-  //             console.log(res.message);
-  //         })
-  //         .catch((err) => console.log(err));
-  // }
+ 
 
   // function handleUpdateUser(userData) {
   //     updateProfile(userData)
@@ -303,15 +290,6 @@ function App() {
   //     history.push("/");
   // }
 
-  // function addMovie(movie) {
-  //     createMovie(movie)
-  //         .then((res) => {
-  //             const newSavedMovie = res.newMovie;
-  //             setSavedMovies([...savedMovies, newSavedMovie]);
-  //             console.log(res.message);
-  //         })
-  //         .catch((err) => console.log(err));
-  // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -320,6 +298,8 @@ function App() {
           userData: userData,
           loggedIn: loggedIn,
           isLoading: isLoading,
+          savedMoviesList: savedMoviesList,
+          movies: movies
         }}
       >
         <div className='page'>
@@ -344,7 +324,6 @@ function App() {
               getMovies={searchMovies}
               onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
-              checkLikeStatus={checkLikeStatus}
             />
             <ProtectedRoute
               exact
