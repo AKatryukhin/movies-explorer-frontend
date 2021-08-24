@@ -37,7 +37,6 @@ function Register({ handleRegister }) {
             type='text'
             placeholder='Имя'
             required
-            // pattern= '/[\wа-я\sё\-]/gi'
             minLength='2'
             maxLength='38'
             autoComplete='off'

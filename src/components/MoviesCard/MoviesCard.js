@@ -11,8 +11,7 @@ function MoviesCard({
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   const value = React.useContext(AppContext);
-  const isLiked = value.savedMoviesList.some(i => i.movieId === movie.id);
-  // && i.owner === currentUser.id
+  const isLiked = value.savedMovies.some(i => i.movieId === movie.id);
   const converterDuration = (data) => {
     const hours = Math.floor(data / 60);
     const minutes = data % 60;

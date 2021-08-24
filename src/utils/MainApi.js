@@ -7,6 +7,19 @@ const handleResponse = (res) => {
   return res.json();
 };
 
+export const logout = ({ email }) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: email,
+    }),
+  }).then(handleResponse);
+};
+
 export const register = ({ name, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
@@ -55,39 +68,9 @@ export const authorize = ({ email, password }) => {
 //   }).then(handleResponse);
 // };
 
-// export const addCard = ({ name, link }) => {
-//   return fetch(`${BASE_URL}/cards`, {
-//     method: 'POST',
-//     credentials: 'include',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       name: name,
-//       link: link,
-//     }),
-//   }).then(handleResponse);
-// };
 
-// export const removeCard = (id) => {
-//   return fetch(`${BASE_URL}/cards/${id}`, {
-//     method: 'DELETE',
-//     credentials: 'include',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   }).then(handleResponse);
-// };
 
-// export const changeLikeCardStatus = (id, isLiked) => {
-//   return fetch(`${BASE_URL}/cards/${id}/likes`, {
-//     method: isLiked ? 'DELETE' : 'PUT',
-//     credentials: 'include',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   }).then(handleResponse);
-// };
+
 
 // export const updateProfile = ({ name, email }) => {
 //   const token = localStorage.getItem('jwt');
