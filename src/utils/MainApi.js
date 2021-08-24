@@ -137,27 +137,24 @@ export const createMovie = (
   }).then(handleResponse);
 };
 
-export const deleteMovie = (movieId) => {
-  // const token = localStorage.getItem("jwt");
-  return fetch(`${BASE_URL}/movies/${movieId}`, {
+export const deleteMovie = (_id) => {
+  return fetch(`${BASE_URL}/movies/${_id}`, {
     method: 'DELETE',
-    // credentials: 'include',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${token}`,
     },
   }).then(handleResponse);
 };
 
 export const getUserMovies = () => {
-  // const token = localStorage.getItem('jwt');
   return fetch(`${BASE_URL}/movies`, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${token}`,
     },
   }).then(handleResponse);
 };

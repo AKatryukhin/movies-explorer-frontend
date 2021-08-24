@@ -19,7 +19,7 @@ function App() {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMoviesList, setSavedMoviesList] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
@@ -35,7 +35,7 @@ function App() {
   });
 
   function checkLikeStatus(movie) {
-    return savedMovies.some((i) => i._id === movie._id);
+    return savedMoviesList.some((i) => i._id === movie._id);
   }
 
   function handleInfoPopupClick() {
@@ -212,7 +212,6 @@ function App() {
   //     });
   // }
 
-
   function handleSavedMovie(movie) {
     main
       .createMovie({
@@ -228,33 +227,50 @@ function App() {
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
       })
-      // .getUserMovies()
       .then((res) => {
-        localStorage.setItem('savedMovies', JSON.stringify(res));
-        setSavedMovies([res.movie, ...savedMovies]);
+        setSavedMoviesList([res.movie, ...savedMoviesList]);
+        localStorage.setItem(
+          'savedMoviesList',
+          JSON.stringify(savedMoviesList)
+        );
+        console.log(savedMoviesList);
       })
       .catch((err) => {
-        console.log(movie);
         console.log(err);
       });
   }
 
   function handleMovieDelete(movie) {
-    main
-      .deleteMovie(movie.id)
-      .getUserMovies()
-      .then((moviesData) => {
-        localStorage.setItem('savedMovies', JSON.stringify(moviesData));
+    console.log(movie);
+    console.log(savedMoviesList);
+    const movieForDelete = savedMoviesList.find((i) => i.movieId === movie.id);
+    console.log(movieForDelete);
+    main.getUserMovies()
+      .then((res) => {
+        console.log(res)
+        main
+          .deleteMovie(movieForDelete._id)
+          .then((res) => {
+            // setSavedMovies((state) => state.filter((c) => c.id !== movie.id));
+            // localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
-      //   () => {
-      // setCards((state) => state.filter((c) => c._id !== cardForDelete._id));
-      // setIsDeleteCardPopupOpen(false);
-      //   }
-      // )
-      .catch((err) => {
-        console.log(err);
-      });
   }
+  // function removeMovies(movie) {
+  //     const movieId = savedMovies.find(
+  //         (item) => item.movieId === movie.movieId
+  //     )._id;
+  //     deleteMovie(movieId)
+  //         .then((res) => {
+  //             getFavoriteMovies();
+  //             console.log(res.message);
+  //         })
+  //         .catch((err) => console.log(err));
+  // }
 
   // function handleUpdateUser(userData) {
   //     updateProfile(userData)
@@ -287,24 +303,11 @@ function App() {
   //     history.push("/");
   // }
 
-
   // function addMovie(movie) {
   //     createMovie(movie)
   //         .then((res) => {
   //             const newSavedMovie = res.newMovie;
   //             setSavedMovies([...savedMovies, newSavedMovie]);
-  //             console.log(res.message);
-  //         })
-  //         .catch((err) => console.log(err));
-  // }
-
-  // function removeMovies(movie) {
-  //     const movieId = savedMovies.find(
-  //         (item) => item.movieId === movie.movieId
-  //     )._id;
-  //     deleteMovie(movieId)
-  //         .then((res) => {
-  //             getFavoriteMovies();
   //             console.log(res.message);
   //         })
   //         .catch((err) => console.log(err));
@@ -341,7 +344,7 @@ function App() {
               getMovies={searchMovies}
               onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
-              isLiked={checkLikeStatus}
+              checkLikeStatus={checkLikeStatus}
             />
             <ProtectedRoute
               exact

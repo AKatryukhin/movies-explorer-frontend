@@ -4,7 +4,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import useWindowSize from '../../hooks/useWindowSize';
 
-function MoviesCardList({ movies, onMovieLike, onMovieDelete, isLiked }) {
+function MoviesCardList({ movies, onMovieLike, onMovieDelete, checkLikeStatus }) {
   const size = useWindowSize();
   const [count, setCount] = useState(0);
   const [value, setValue] = useState(0);
@@ -38,25 +38,26 @@ function MoviesCardList({ movies, onMovieLike, onMovieDelete, isLiked }) {
           {movies.length > count &&
             movies
               .slice(0, count)
-              .map((movie) => (
+            .map((movie) => (
                 <MoviesCard
-                  key={movie._id}
-                  movie={movie}
-                  movies={movies}
-                  onMovieLike={onMovieLike}
-                  onMovieDelete={onMovieDelete}
-                  isLiked={isLiked}
+            key={movie.id}
+            movie={movie}
+            movies={movies}
+            onMovieLike={onMovieLike}
+            onMovieDelete={onMovieDelete}
+            isLiked={checkLikeStatus}
                 />
               ))}
           {movies.length <= count &&
             movies.map((movie) => (
+
               <MoviesCard
-                key={movie._id}
+                key={movie.id}
                 movie={movie}
                 movies={movies}
                 onMovieLike={onMovieLike}
                 onMovieDelete={onMovieDelete}
-                isLiked={isLiked}
+                isLiked={checkLikeStatus}
               />
             ))}
         </section>
@@ -79,7 +80,11 @@ function MoviesCardList({ movies, onMovieLike, onMovieDelete, isLiked }) {
       <Route path='/saved-movies'>
         <section className='movies-cardlist section-movies movies-cardlist_type_saved'>
           {movies.map((movie) => (
-            <MoviesCard key={movie._id} movie={movie} />
+            <MoviesCard
+              key={movie.id}
+              movie={movie}
+              onMovieDelete={onMovieDelete}
+            />
           ))}
         </section>
         <div className='movies-cardlist__empty'></div>
