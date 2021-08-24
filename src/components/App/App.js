@@ -22,7 +22,6 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [infoPopupTitle, setInfoPopupTitle] = useState({
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
@@ -64,7 +63,13 @@ function App() {
     }
   }, [loggedIn]);
 
-  const handleRegister = ({ name, email, password }, onSuccess) => {
+  function checkLikeStatus(movie) {
+    if (movie) {
+      return savedMovies.some(i => i.movieId === movie.id);
+    }
+  }
+
+    const handleRegister = ({ name, email, password }, onSuccess) => {
     main
       .register({ name, email, password })
 
@@ -117,6 +122,7 @@ function App() {
         openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
       });
   };
+
 
   function getMovieslist() {
     if (loggedIn) {
@@ -305,6 +311,7 @@ function App() {
               getMovies={searchMovies}
               onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
+              checkLikeStatus={checkLikeStatus}
             />
             <ProtectedRoute
               exact

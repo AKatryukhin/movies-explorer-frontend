@@ -2,16 +2,17 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCard.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { AppContext } from '../../contexts/AppContext';
 
 function MoviesCard({
   movie,
   onMovieLike,
   onMovieDelete,
+  checkLikeStatus
 }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const value = React.useContext(AppContext);
-  const isLiked = value.savedMovies.some(i => i.movieId === movie.id);
+
+  const isLiked = checkLikeStatus(movie);
+  
   const converterDuration = (data) => {
     const hours = Math.floor(data / 60);
     const minutes = data % 60;

@@ -9,7 +9,6 @@ function MoviesCardList({
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
-  // toggleLike,
 }) {
   const size = useWindowSize();
   const [count, setCount] = useState(0);
@@ -50,6 +49,7 @@ function MoviesCardList({
                   movie={movie}
                   onMovieLike={onMovieLike}
                   onMovieDelete={onMovieDelete}
+                  checkLikeStatus={checkLikeStatus}
                 />
               ))}
           {movies.length <= count &&
