@@ -3,34 +3,39 @@ import { Route } from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import useWindowSize from '../../hooks/useWindowSize';
+import { AppContext } from '../../contexts/AppContext';
 
 function MoviesCardList({
-  movies,
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
 }) {
+  const value = React.useContext(AppContext);
+  const movies = value.movies;
+  const savedMovies = value.savedMovies;
+console.log(value.savedMovies)
+
   const size = useWindowSize();
   const [count, setCount] = useState(0);
-  const [value, setValue] = useState(0);
+  const [cards, setCards] = useState(0);
 
   function increment() {
-    setCount(count + value);
+    setCount(count + cards);
   }
 
   useEffect(() => {
     function getSize() {
       if (size >= 1280) {
         setCount(12);
-        setValue(3);
+        setCards(3);
       }
       if (size < 1280 && size > 767) {
         setCount(8);
-        setValue(2);
+        setCards(2);
       }
       if (size <= 767) {
         setCount(5);
-        setValue(2);
+        setCards(2);
       }
     }
     getSize();
@@ -59,6 +64,7 @@ function MoviesCardList({
                 movie={movie}
                 onMovieLike={onMovieLike}
                 onMovieDelete={onMovieDelete}
+                checkLikeStatus={checkLikeStatus}
               />
             ))}
         </section>
@@ -80,13 +86,26 @@ function MoviesCardList({
       </Route>
       <Route path='/saved-movies'>
         <section className='movies-cardlist section-movies movies-cardlist_type_saved'>
-          {movies.map((movie) => (
-            <MoviesCard
-              key={movie.id}
-              movie={movie}
-              onMovieDelete={onMovieDelete}
-            />
-          ))}
+        {savedMovies.length > count &&
+            savedMovies
+              .slice(0, count)
+              .map((movie) => (
+                <MoviesCard
+                  key={movie.id}
+                  movie={movie}
+                  onMovieDelete={onMovieDelete}
+                  checkLikeStatus={checkLikeStatus}
+                />
+              ))}
+          {savedMovies.length <= count &&
+            savedMovies.map((movie) => (
+              <MoviesCard
+                key={movie.id}
+                movie={movie}
+                onMovieDelete={onMovieDelete}
+                checkLikeStatus={checkLikeStatus}
+              />
+            ))}
         </section>
         <div className='movies-cardlist__empty'></div>
       </Route>

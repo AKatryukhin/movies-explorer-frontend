@@ -8,7 +8,6 @@ import { AppContext } from '../../contexts/AppContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies({
-  movies,
   isSearch,
   isLoading,
   getMovies,
@@ -28,9 +27,8 @@ function Movies({
           getMovies={getMovies}
         />
         {value.isLoading && <Preloader />}
-        {movies.length !== 0 && (
+        {value.movies.length !== 0 && (
           <MoviesCardList
-            movies={movies}
             onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
             checkLikeStatus={checkLikeStatus}

@@ -49,25 +49,18 @@ function App() {
     setIsError(false);
     setInfoPopupTitle({ title });
   }
-
   useEffect(() => {
     if (loggedIn) {
-      main
-        .getProfileInfo()
-        .then((currentUserData) => {
+      Promise.all([main.getProfileInfo(), main.getUserMovies()])
+        .then(([currentUserData, currentSavedMovies]) => {
           setCurrentUser(currentUserData);
-        })
-        .catch((err) => console.log(err));
-      main
-        .getUserMovies()
-        .then((currentSavedMovies) => {
           setSavedMovies(currentSavedMovies.movies);
+          const lastSearchList = JSON.parse(
+            localStorage.getItem('lastSearchList')
+          );
+          lastSearchList && setMovies(lastSearchList);
         })
         .catch((err) => console.log(err));
-      
-      const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
-
-      lastSearchList && setMovies(lastSearchList);
     }
   }, [loggedIn]);
 
@@ -284,7 +277,7 @@ function App() {
   //     setLoggedIn(false);
   //     history.push("/");
   // }
-
+  console.log(savedMovies);
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <AppContext.Provider
@@ -314,7 +307,6 @@ function App() {
               component={Movies}
               isLoading={isLoading}
               // isSearch={handleSearch}
-              movies={movies}
               getMovies={searchMovies}
               onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
@@ -323,9 +315,12 @@ function App() {
             <ProtectedRoute
               exact
               path='/saved-movies'
-              loggedIn={loggedIn}
               component={SavedMovies}
+              loggedIn={loggedIn}
+              getMovies={searchMovies}
+              // onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
+              // checkLikeStatus={checkLikeStatus}
             />
             <ProtectedRoute
               exact

@@ -3,16 +3,12 @@ import { Route } from 'react-router-dom';
 import './MoviesCard.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function MoviesCard({
-  movie,
-  onMovieLike,
-  onMovieDelete,
-  checkLikeStatus
-}) {
+function MoviesCard({ movie, onMovieLike, onMovieDelete, checkLikeStatus }) {
   const currentUser = React.useContext(CurrentUserContext);
+  console.log(movie);
 
   const isLiked = checkLikeStatus(movie);
-  
+
   const converterDuration = (data) => {
     const hours = Math.floor(data / 60);
     const minutes = data % 60;
@@ -21,7 +17,6 @@ function MoviesCard({
 
   function handleLikeClick() {
     onMovieLike(movie);
-
   }
 
   function handleDeleteClick() {
@@ -59,11 +54,16 @@ function MoviesCard({
         </div>
       </div>
       <a href={movie.trailerLink} target='_blank' rel='noopener noreferrer'>
-        <img
-          className='movie__image'
-          src={`https://api.nomoreparties.co${movie.image.url}`}
-          alt={movie.name}
-        />
+        <Route path='/movies'>
+          <img
+            className='movie__image'
+            src={`https://api.nomoreparties.co${movie.image.url}`}
+            alt={movie.name}
+          />
+        </Route>
+        <Route path='/saved-movies'>
+          <img className='movie__image' src={movie.image} alt={movie.name} />
+        </Route>
       </a>
     </article>
   );
