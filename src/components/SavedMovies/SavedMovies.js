@@ -11,12 +11,18 @@ function SavedMovies(
   isSearch,
   isLoading,
   getMovies,
-  onMovieLike
+  savedMovieDelete,
+  // savedMovies
 ) {
   const value = React.useContext(AppContext);
-  function checkLike() {
-    console.log('ok');
+  function checkLike(movie) {
+    return movie;
   }
+
+  // function onMovieDelete (movie) {
+  //   console.log(movie)
+  // }
+
 
   return (
     <>
@@ -27,11 +33,12 @@ function SavedMovies(
           isLoading={isLoading}
           getMovies={getMovies}
         />
-        {value.isLoading && <Preloader />}
+        {/* {isLoading && <Preloader />} */}
         {value.savedMovies.length !== 0 && (
           <MoviesCardList
-          // onMovieDelete={onMovieDelete}
-          checkLikeStatus={checkLike}
+          // onMovieDelete={onSaveMovieDelete}
+            checkLikeStatus={checkLike}
+            savedMovieDelete={savedMovieDelete}
           />
         )}
       </main>

@@ -9,12 +9,13 @@ function MoviesCardList({
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
-  // saveMovieDelete
+  savedMovieDelete,
+  // movies,
+  // savedMovies
 }) {
   const value = React.useContext(AppContext);
   const movies = value.movies;
   const savedMovies = value.savedMovies;
-console.log(value.savedMovies)
 
   const size = useWindowSize();
   const [count, setCount] = useState(0);
@@ -96,6 +97,7 @@ console.log(value.savedMovies)
                   movie={movie}
                   onMovieDelete={onMovieDelete}
                   checkLikeStatus={checkLikeStatus}
+                  savedMovieDelete={savedMovieDelete}
                 />
               ))}
           {savedMovies.length <= count &&
@@ -105,6 +107,7 @@ console.log(value.savedMovies)
                 movie={movie}
                 onMovieDelete={onMovieDelete}
                 checkLikeStatus={checkLikeStatus}
+                savedMovieDelete={savedMovieDelete}
               />
             ))}
         </section>

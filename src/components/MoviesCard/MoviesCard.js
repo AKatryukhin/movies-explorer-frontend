@@ -8,9 +8,9 @@ function MoviesCard({
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
+  savedMovieDelete
 }) {
   const currentUser = React.useContext(CurrentUserContext);
-  console.log(movie);
 
   const isLiked = checkLikeStatus(movie);
 
@@ -28,9 +28,10 @@ function MoviesCard({
     onMovieDelete(movie);
   }
 
-  // function handleSaveMovieDeleteClick() {
-  //   saveMovieDelete(movie);
-  // }
+  function handleSavedMovieDelete() {
+    savedMovieDelete(movie);
+  }
+
 
   return (
     <article className='movie'>
@@ -57,7 +58,7 @@ function MoviesCard({
               className='movie__remove-button'
               type='button'
               aria-label='Кнопка для удаления'
-              onClick={handleLikeClick}
+              onClick={handleSavedMovieDelete}
             ></button>
           </Route>
         </div>

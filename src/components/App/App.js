@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -55,14 +55,20 @@ function App() {
         .then(([currentUserData, currentSavedMovies]) => {
           setCurrentUser(currentUserData);
           setSavedMovies(currentSavedMovies.movies);
-          const lastSearchList = JSON.parse(
-            localStorage.getItem('lastSearchList')
-          );
-          lastSearchList && setMovies(lastSearchList);
         })
         .catch((err) => console.log(err));
+       
     }
   }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      const lastSearchList = JSON.parse(
+        localStorage.getItem('lastSearchList')
+      );
+      lastSearchList && setMovies(lastSearchList);
+    }}, [loggedIn]);
+
 
   function checkLikeStatus(movie) {
     if (movie) {
@@ -221,35 +227,27 @@ function App() {
   }
 
   function handleMovieDelete(movie) {
-    const movieForDelete = savedMovies.find((i) =>
-      i.movieId === movie.id
-    );
+    const movieForDelete = savedMovies.find((i) => i.movieId === movie.id);
     main
       .deleteMovie(movieForDelete._id)
       .then((res) => {
-        setSavedMovies((state) =>
-          state.filter((i) =>
-            i.movieId !== movie.id
-          )
-        );
+        setSavedMovies((state) => state.filter((i) => i.movieId !== movie.id));
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-
-  // function handleSaveMovieDelete(movie) {
-  //   const movieForDelete = savedMovies.find((i) => i.movieId === movie.movieId);
-  //   main
-  //     .deleteMovie(movieForDelete._id)
-  //     .then((res) => {
-  //       setSavedMovies((state) => state.filter((i) => i.movieId !== movie.id));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
+  function handleSavedMovieDelete(movie) {
+    main
+      .deleteMovie(movie._id)
+      .then((res) => {
+        setSavedMovies((state) => state.filter((i) => i._id !== movie._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   // function handleUpdateUser(userData) {
   //     updateProfile(userData)
@@ -296,7 +294,20 @@ function App() {
   //     setLoggedIn(false);
   //     history.push("/");
   // }
-  console.log(savedMovies);
+  console.log(movies)
+  console.log(savedMovies)
+
+
+  function checkLikeStatus(movie) {
+    if (movie) {
+      return savedMovies.some(
+        (i) => i.movieId === movie.id && i.owner === currentUser._id
+      );
+    }
+  }
+
+
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <AppContext.Provider
@@ -330,15 +341,18 @@ function App() {
               onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
               checkLikeStatus={checkLikeStatus}
+              savedMovieDelete={handleSavedMovieDelete}
+              movies={movies}
             />
             <ProtectedRoute
               exact
               path='/saved-movies'
               component={SavedMovies}
+              isLoading={isLoading}
+              movies={movies}
               loggedIn={loggedIn}
-              getMovies={searchMovies}
-              // onMovieLike={handleSavedMovieDelete}
-              onMovieDelete={handleMovieDelete}
+              savedMovies={savedMovies}
+              savedMovieDelete={handleSavedMovieDelete}
             />
             <ProtectedRoute
               exact
