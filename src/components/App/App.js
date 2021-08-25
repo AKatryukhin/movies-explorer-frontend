@@ -284,13 +284,10 @@ function App() {
       });
   }
   // function handleLogOut() {
-  //     localStorage.removeItem("jwt");
   //     localStorage.removeItem("movies");
-  //     localStorage.removeItem("searchResult");
+  //     localStorage.removeItem("lastSearchList");
   //     setCurrentUser({ name: "", email: "" });
-  //     setAllmovies([]);
-  //     setSearchMoviesResult([]);
-  //     setMoviesSearchResponse([]);
+  //     setMovies([]);
   //     setSavedMovies([]);
   //     setLoggedIn(false);
   //     history.push("/");
