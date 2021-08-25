@@ -67,13 +67,14 @@ function App() {
         localStorage.getItem('savedMoviesList')
       );
       savedMoviesList && setSavedMovies(savedMoviesList);
+      console.log(currentUser);
+      console.log(savedMovies);
     }
   }, [loggedIn]);
 
   function checkLikeStatus(movie) {
     if (movie) {
       console.log(currentUser);
-      console.log(savedMovies);
       return savedMovies.some(
         (i) => i.movieId === movie.id && i.owner === currentUser._id
       );
@@ -219,8 +220,9 @@ function App() {
         nameEN: movie.nameEN,
       })
       .then((res) => {
-        setSavedMovies([res.movie, ...savedMovies]);
-        localStorage.setItem('savedMoviesList', JSON.stringify(savedMovies));
+        const NewSavedMovies = [res.movie, ...savedMovies]
+        setSavedMovies(NewSavedMovies);
+        localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
       })
       .catch((err) => {
         console.log(err);
@@ -232,8 +234,9 @@ function App() {
     main
       .deleteMovie(movieForDelete._id)
       .then((res) => {
-        setSavedMovies((state) => state.filter((c) => c.movieId !== movie.id));
-        localStorage.setItem('savedMoviesList', JSON.stringify(savedMovies));
+        const NewSavedMovies = savedMovies.filter((i) => i.movieId !== movie.id);
+        setSavedMovies(NewSavedMovies);
+        localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
       })
       .catch((err) => {
         console.log(err);
