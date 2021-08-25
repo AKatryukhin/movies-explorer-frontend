@@ -11,11 +11,11 @@ function SavedMovies(
   isSearch,
   isLoading,
   getMovies,
-  onMovieDelete
+  onMovieLike
 ) {
   const value = React.useContext(AppContext);
   function checkLike() {
-    console.log('ok')
+    console.log('ok');
   }
 
   return (
@@ -30,8 +30,8 @@ function SavedMovies(
         {value.isLoading && <Preloader />}
         {value.savedMovies.length !== 0 && (
           <MoviesCardList
-            onMovieDelete={onMovieDelete}
-            checkLikeStatus={checkLike}
+          // onMovieDelete={onMovieDelete}
+          checkLikeStatus={checkLike}
           />
         )}
       </main>

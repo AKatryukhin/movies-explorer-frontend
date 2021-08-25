@@ -14,6 +14,7 @@ function Movies({
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
+  saveMovieDelete
 }) {
   const value = React.useContext(AppContext);
 
@@ -32,6 +33,7 @@ function Movies({
             onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
             checkLikeStatus={checkLikeStatus}
+            saveMovieDelete={saveMovieDelete}
           />
         )}
         <Footer />

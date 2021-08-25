@@ -9,6 +9,7 @@ function MoviesCardList({
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
+  // saveMovieDelete
 }) {
   const value = React.useContext(AppContext);
   const movies = value.movies;

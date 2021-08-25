@@ -221,16 +221,35 @@ function App() {
   }
 
   function handleMovieDelete(movie) {
-    const movieForDelete = savedMovies.find((i) => i.movieId === movie.id);
+    const movieForDelete = savedMovies.find((i) =>
+      i.movieId === movie.id
+    );
     main
       .deleteMovie(movieForDelete._id)
       .then((res) => {
-        setSavedMovies((state) => state.filter((i) => i.movieId !== movie.id));
+        setSavedMovies((state) =>
+          state.filter((i) =>
+            i.movieId !== movie.id
+          )
+        );
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
+
+  // function handleSaveMovieDelete(movie) {
+  //   const movieForDelete = savedMovies.find((i) => i.movieId === movie.movieId);
+  //   main
+  //     .deleteMovie(movieForDelete._id)
+  //     .then((res) => {
+  //       setSavedMovies((state) => state.filter((i) => i.movieId !== movie.id));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   // function handleUpdateUser(userData) {
   //     updateProfile(userData)
@@ -318,9 +337,8 @@ function App() {
               component={SavedMovies}
               loggedIn={loggedIn}
               getMovies={searchMovies}
-              // onMovieLike={handleSavedMovie}
+              // onMovieLike={handleSavedMovieDelete}
               onMovieDelete={handleMovieDelete}
-              // checkLikeStatus={checkLikeStatus}
             />
             <ProtectedRoute
               exact
