@@ -52,27 +52,35 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
+      main
+        .getProfileInfo()
+        .then((currentUserData) => {
+          setCurrentUser(currentUserData);
+        })
+        .catch((err) => console.log(err));
+
       const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
 
       lastSearchList && setMovies(lastSearchList);
 
-      // const savedMoviesList = JSON.parse(
-      //   localStorage.getItem('savedMoviesList')
-      // );
-      // savedMoviesList && setSavedMovies(savedMoviesList);
+      const savedMoviesList = JSON.parse(
+        localStorage.getItem('savedMoviesList')
+      );
+      savedMoviesList && setSavedMovies(savedMoviesList);
     }
   }, [loggedIn]);
 
   function checkLikeStatus(movie) {
     if (movie) {
-      console.log(currentUser)
-      console.log(savedMovies)
-      return savedMovies.some(i => i.movieId === movie.id && i.owner === currentUser._id);
-      
+      console.log(currentUser);
+      console.log(savedMovies);
+      return savedMovies.some(
+        (i) => i.movieId === movie.id && i.owner === currentUser._id
+      );
     }
   }
 
-    const handleRegister = ({ name, email, password }, onSuccess) => {
+  const handleRegister = ({ name, email, password }, onSuccess) => {
     main
       .register({ name, email, password })
 
@@ -123,7 +131,6 @@ function App() {
         openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
       });
   };
-
 
   function getMovieslist() {
     if (loggedIn) {

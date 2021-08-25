@@ -42,17 +42,17 @@ export const authorize = ({ email, password }) => {
   }).then(handleResponse);
 };
 
-// export const getProfileInfo = () => {
-//   return fetch(`${BASE_URL}/users/me`, {
-//     method: 'GET',
-//     credentials: 'include',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then(handleResponse)
-//     .then((data) => data);
-// };
+export const getProfileInfo = () => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(handleResponse)
+    .then((data) => data);
+};
 
 // export const setProfileInfo = ({ name, about }) => {
 //   return fetch(`${BASE_URL}/users/me`, {
