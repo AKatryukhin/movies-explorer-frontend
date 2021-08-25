@@ -58,23 +58,21 @@ function App() {
           setCurrentUser(currentUserData);
         })
         .catch((err) => console.log(err));
-
+      main
+        .getUserMovies()
+        .then((currentSavedMovies) => {
+          setSavedMovies(currentSavedMovies.movies);
+        })
+        .catch((err) => console.log(err));
+      
       const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
 
       lastSearchList && setMovies(lastSearchList);
-
-      const savedMoviesList = JSON.parse(
-        localStorage.getItem('savedMoviesList')
-      );
-      savedMoviesList && setSavedMovies(savedMoviesList);
-      console.log(currentUser);
-      console.log(savedMovies);
     }
   }, [loggedIn]);
 
   function checkLikeStatus(movie) {
     if (movie) {
-      console.log(currentUser);
       return savedMovies.some(
         (i) => i.movieId === movie.id && i.owner === currentUser._id
       );
@@ -220,7 +218,7 @@ function App() {
         nameEN: movie.nameEN,
       })
       .then((res) => {
-        const NewSavedMovies = [res.movie, ...savedMovies]
+        const NewSavedMovies = [res.movie, ...savedMovies];
         setSavedMovies(NewSavedMovies);
         localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
       })
@@ -234,9 +232,7 @@ function App() {
     main
       .deleteMovie(movieForDelete._id)
       .then((res) => {
-        const NewSavedMovies = savedMovies.filter((i) => i.movieId !== movie.id);
-        setSavedMovies(NewSavedMovies);
-        localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
+        setSavedMovies((state) => state.filter((i) => i.movieId !== movie.id));
       })
       .catch((err) => {
         console.log(err);
