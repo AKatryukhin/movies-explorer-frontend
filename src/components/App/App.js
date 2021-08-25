@@ -65,7 +65,10 @@ function App() {
 
   function checkLikeStatus(movie) {
     if (movie) {
-      return savedMovies.some(i => i.movieId === movie.id);
+      console.log(currentUser)
+      console.log(savedMovies)
+      return savedMovies.some(i => i.movieId === movie.id && i.owner === currentUser._id);
+      
     }
   }
 
@@ -88,7 +91,6 @@ function App() {
               email: res.email,
             });
             setLoggedIn(true);
-            setCurrentUser(res);
             onSuccess();
             history.push('/movies');
           })
@@ -113,7 +115,6 @@ function App() {
           email: res.email,
         });
         setLoggedIn(true);
-        setCurrentUser(res);
         onSuccess();
         history.push('/movies');
       })
