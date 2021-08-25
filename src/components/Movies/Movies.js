@@ -4,7 +4,6 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
-import { AppContext } from '../../contexts/AppContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies({
@@ -14,11 +13,7 @@ function Movies({
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
-  savedMovieDelete,
-  movies,
-  savedMovies
 }) {
-  const value = React.useContext(AppContext);
 
   return (
     <>
@@ -30,15 +25,11 @@ function Movies({
           getMovies={getMovies}
         />
         {isLoading && <Preloader />}
-        {movies.length !== 0 && (
           <MoviesCardList
             onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
             checkLikeStatus={checkLikeStatus}
-            savedMovieDelete={savedMovieDelete}
-            savedMovies={savedMovies}
           />
-        )}
         <Footer />
       </main>
     </>

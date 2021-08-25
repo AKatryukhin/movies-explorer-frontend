@@ -249,6 +249,7 @@ function App() {
       });
   }
 
+
   // function handleUpdateUser(userData) {
   //     updateProfile(userData)
   //         .then((res) => {
@@ -294,19 +295,6 @@ function App() {
   //     setLoggedIn(false);
   //     history.push("/");
   // }
-  console.log(movies)
-  console.log(savedMovies)
-
-
-  function checkLikeStatus(movie) {
-    if (movie) {
-      return savedMovies.some(
-        (i) => i.movieId === movie.id && i.owner === currentUser._id
-      );
-    }
-  }
-
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -341,18 +329,15 @@ function App() {
               onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
               checkLikeStatus={checkLikeStatus}
-              savedMovieDelete={handleSavedMovieDelete}
-              movies={movies}
             />
             <ProtectedRoute
               exact
               path='/saved-movies'
               component={SavedMovies}
               isLoading={isLoading}
-              movies={movies}
               loggedIn={loggedIn}
-              savedMovies={savedMovies}
-              savedMovieDelete={handleSavedMovieDelete}
+              onMovieDelete={handleSavedMovieDelete}
+              checkLikeStatus={checkLikeStatus}
             />
             <ProtectedRoute
               exact

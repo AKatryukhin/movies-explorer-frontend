@@ -7,22 +7,14 @@ import { AppContext } from '../../contexts/AppContext';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-function SavedMovies(
+function SavedMovies({
   isSearch,
   isLoading,
   getMovies,
-  savedMovieDelete,
-  // savedMovies
-) {
+  checkLikeStatus,
+  onMovieDelete
+}) {
   const value = React.useContext(AppContext);
-  function checkLike(movie) {
-    return movie;
-  }
-
-  // function onMovieDelete (movie) {
-  //   console.log(movie)
-  // }
-
 
   return (
     <>
@@ -33,14 +25,11 @@ function SavedMovies(
           isLoading={isLoading}
           getMovies={getMovies}
         />
-        {/* {isLoading && <Preloader />} */}
-        {value.savedMovies.length !== 0 && (
+        {/* {isLoading && <Preloader />}   */}
           <MoviesCardList
-          // onMovieDelete={onSaveMovieDelete}
-            checkLikeStatus={checkLike}
-            savedMovieDelete={savedMovieDelete}
+            checkLikeStatus={checkLikeStatus}
+            onMovieDelete={onMovieDelete}
           />
-        )}
       </main>
       <Footer />
     </>

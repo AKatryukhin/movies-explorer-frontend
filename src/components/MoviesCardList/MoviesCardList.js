@@ -9,9 +9,6 @@ function MoviesCardList({
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
-  savedMovieDelete,
-  // movies,
-  // savedMovies
 }) {
   const value = React.useContext(AppContext);
   const movies = value.movies;
@@ -97,7 +94,6 @@ function MoviesCardList({
                   movie={movie}
                   onMovieDelete={onMovieDelete}
                   checkLikeStatus={checkLikeStatus}
-                  savedMovieDelete={savedMovieDelete}
                 />
               ))}
           {savedMovies.length <= count &&
@@ -107,7 +103,6 @@ function MoviesCardList({
                 movie={movie}
                 onMovieDelete={onMovieDelete}
                 checkLikeStatus={checkLikeStatus}
-                savedMovieDelete={savedMovieDelete}
               />
             ))}
         </section>

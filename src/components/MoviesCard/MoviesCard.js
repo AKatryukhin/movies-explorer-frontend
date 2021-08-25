@@ -1,16 +1,15 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCard.css';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function MoviesCard({
   movie,
   onMovieLike,
   onMovieDelete,
-  checkLikeStatus,
-  savedMovieDelete
+  checkLikeStatus
 }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  // const currentUser = React.useContext(CurrentUserContext);
 
   const isLiked = checkLikeStatus(movie);
 
@@ -27,11 +26,6 @@ function MoviesCard({
   function handleDeleteClick() {
     onMovieDelete(movie);
   }
-
-  function handleSavedMovieDelete() {
-    savedMovieDelete(movie);
-  }
-
 
   return (
     <article className='movie'>
@@ -58,7 +52,7 @@ function MoviesCard({
               className='movie__remove-button'
               type='button'
               aria-label='Кнопка для удаления'
-              onClick={handleSavedMovieDelete}
+              onClick={handleDeleteClick}
             ></button>
           </Route>
         </div>
