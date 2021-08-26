@@ -5,11 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard.js';
 import useWindowSize from '../../hooks/useWindowSize';
 import { AppContext } from '../../contexts/AppContext';
 
-function MoviesCardList({
-  onMovieLike,
-  onMovieDelete,
-  checkLikeStatus,
-}) {
+function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
   const value = React.useContext(AppContext);
   const movies = value.movies;
   const savedMovies = value.savedMovies;
@@ -85,12 +81,12 @@ function MoviesCardList({
       </Route>
       <Route path='/saved-movies'>
         <section className='movies-cardlist section-movies movies-cardlist_type_saved'>
-        {savedMovies.length > count &&
+          {savedMovies.length > count &&
             savedMovies
               .slice(0, count)
               .map((movie) => (
                 <MoviesCard
-                  key={movie.id}
+                  key={movie.movieId}
                   movie={movie}
                   onMovieDelete={onMovieDelete}
                   checkLikeStatus={checkLikeStatus}
@@ -99,7 +95,7 @@ function MoviesCardList({
           {savedMovies.length <= count &&
             savedMovies.map((movie) => (
               <MoviesCard
-                key={movie.id}
+              key={movie.movieId}
                 movie={movie}
                 onMovieDelete={onMovieDelete}
                 checkLikeStatus={checkLikeStatus}
