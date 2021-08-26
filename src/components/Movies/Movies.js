@@ -31,7 +31,7 @@ function Movies({
           setIsShortMovies={setIsShortMovies}
         />
         {isLoading && <Preloader />}
-        {movies &&
+        {movies && 
           <MoviesCardList
             onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}

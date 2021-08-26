@@ -53,20 +53,29 @@ function App() {
   }
 
   useEffect(() => {
-      Promise.all([main.getProfileInfo(), main.getUserMovies()])
-        .then(([currentUserData, currentSavedMovies]) => {
-          setCurrentUser(currentUserData);
-          setSavedMovies(currentSavedMovies.movies);
-          localStorage.setItem('savedMoviesList', JSON.stringify(currentSavedMovies.movies));
-          setLoggedIn(true);
-        })
-        .catch((err) => console.log(err));
+    main
+      .getProfileInfo()
+      .then((currentUserData) => {
+        setCurrentUser(currentUserData);
+        setLoggedIn(true);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     if (loggedIn) {
       const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
       lastSearchList && setMovies(lastSearchList);
+      main
+        .getUserMovies()
+        .then((currentSavedMovies) => {
+          setSavedMovies(currentSavedMovies.movies);
+          localStorage.setItem(
+            'savedMoviesList',
+            JSON.stringify(currentSavedMovies.movies)
+          );
+        })
+        .catch((err) => console.log(err));
     }
   }, [loggedIn]);
 
@@ -153,19 +162,19 @@ function App() {
     getMovieslist();
     setTimeout(() => setIsLoading(false), 1200);
     const MoviesList = JSON.parse(localStorage.getItem('movies'));
-      const lastSearchList = MoviesList.filter((movie) => {
-        const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
-        return (
-          movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
-          movie.description.toLowerCase().includes(name.toLowerCase()) ||
-          nameEN.toLowerCase().includes(name.toLowerCase())
-        );
-      });
-      setMovies(lastSearchList);
-      localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
-      lastSearchList.length === 0 &&
-        setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
-      return lastSearchList;
+    const lastSearchList = MoviesList.filter((movie) => {
+      const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+      return (
+        movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+        movie.description.toLowerCase().includes(name.toLowerCase()) ||
+        nameEN.toLowerCase().includes(name.toLowerCase())
+      );
+    });
+    setMovies(lastSearchList);
+    localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
+    lastSearchList.length === 0 &&
+      setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
+    return lastSearchList;
   }
 
   function searchSavedMovies(name) {

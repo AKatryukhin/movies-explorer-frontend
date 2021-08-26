@@ -30,7 +30,7 @@ function SavedMovies({
           setIsShortMovies={setIsShortMovies}
         />
         {isLoading && <Preloader />}  
-        {savedMovies &&
+        {savedMovies && movies &&
           <MoviesCardList
             checkLikeStatus={checkLikeStatus}
             onMovieDelete={onMovieDelete}
