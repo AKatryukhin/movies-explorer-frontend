@@ -137,30 +137,11 @@ function App() {
       });
   };
 
-  function getMovieslist() {
-    if (loggedIn) {
-      setIsLoading(true);
-      mov
-        .getMoviesCardlist()
-        .then((moviesData) => {
-          localStorage.setItem('movies', JSON.stringify(moviesData));
-        })
-        .catch((err) => {
-          setIsMovieLoadError(err);
-          openErrorPopup(
-            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-          );
-        });
-    }
-  }
-
   function searchMovies(name) {
     if (!name) {
       openErrorPopup('Нужно ввести ключевое слово');
       return;
     }
-    getMovieslist();
-    setTimeout(() => setIsLoading(false), 1200);
     const MoviesList = JSON.parse(localStorage.getItem('movies'));
     const lastSearchList = MoviesList.filter((movie) => {
       const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
@@ -175,6 +156,27 @@ function App() {
     lastSearchList.length === 0 &&
       setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
     return lastSearchList;
+  }
+
+  function getMovieslist(name) {
+    if (loggedIn) {
+      setIsLoading(true);
+      mov
+        .getMoviesCardlist()
+        .then((moviesData) => {
+          localStorage.setItem('movies', JSON.stringify(moviesData));
+          searchMovies(name);
+        })
+        .catch((err) => {
+          setIsMovieLoadError(err);
+          openErrorPopup(
+            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+          );
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   }
 
   function searchSavedMovies(name) {
@@ -369,7 +371,7 @@ function App() {
               component={Movies}
               isLoading={isLoading}
               setIsShortMovies={handleToggleShortMovies}
-              getMovies={searchMovies}
+              getMovies={getMovieslist}
               onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
               checkLikeStatus={checkLikeStatus}
