@@ -20,7 +20,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isShortSasvedMovies, setIsShortSasvedMovies] = useState(false);
@@ -93,11 +93,11 @@ function App() {
         main
           .authorize({ email, password })
           .then((res) => {
+            setCurrentUser(res);
             setUserData({
               email: res.email,
             });
             setLoggedIn(true);
-            onSuccess();
             history.push('/movies');
           })
           .catch((err) => {
@@ -116,9 +116,10 @@ function App() {
     main
       .authorize({ email, password })
       .then((res) => {
-        setUserData({
-          email: res.email,
-        });
+        setCurrentUser(res);
+        // setUserData({
+        //   email: res.email,
+        // });
         setLoggedIn(true);
         onSuccess();
         history.push('/movies');
@@ -167,25 +168,27 @@ function App() {
   }
 
   function searchMovies(name) {
-    getMovieslist();
-    const MoviesList = JSON.parse(localStorage.getItem('movies'));
     if (!name) {
       openErrorPopup('Нужно ввести ключевое слово');
       return;
     }
-    const lastSearchList = MoviesList.filter((movie) => {
-      const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
-      return (
-        movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
-        movie.description.toLowerCase().includes(name.toLowerCase()) ||
-        nameEN.toLowerCase().includes(name.toLowerCase())
-      );
-    });
-    setMovies(lastSearchList);
-    localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
-    lastSearchList.length === 0 &&
-      setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
-    return lastSearchList;
+    getMovieslist();
+    const MoviesList = JSON.parse(localStorage.getItem('movies'));
+    if (MoviesList) {
+      const lastSearchList = MoviesList.filter((movie) => {
+        const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+        return (
+          movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+          movie.description.toLowerCase().includes(name.toLowerCase()) ||
+          nameEN.toLowerCase().includes(name.toLowerCase())
+        );
+      });
+      setMovies(lastSearchList);
+      localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
+      lastSearchList.length === 0 &&
+        setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
+      return lastSearchList;
+    }
   }
 
   function closeInfoPopup() {

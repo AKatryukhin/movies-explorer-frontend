@@ -102,7 +102,9 @@ function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
               />
             ))}
         </section>
-        <div className='movies-cardlist__empty'></div>
+        {savedMovies.length !== 0 &&
+          <div className='movies-cardlist__empty'></div>
+        }
       </Route>
     </main>
   );

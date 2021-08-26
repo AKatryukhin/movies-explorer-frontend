@@ -18,6 +18,7 @@ function Movies({
 }) {
   const value = React.useContext(AppContext);
   const movies = value.movies;
+  const savedMovies = value.savedMovies;
 
   return (
     <>
