@@ -2,13 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCard.css';
 
-function MoviesCard({
-  movie,
-  onMovieLike,
-  onMovieDelete,
-  checkLikeStatus
-}) {
-
+function MoviesCard({ movie, onMovieLike, onMovieDelete, checkLikeStatus }) {
   const isLiked = checkLikeStatus(movie);
 
   const converterDuration = (data) => {

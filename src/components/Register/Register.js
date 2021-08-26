@@ -3,8 +3,7 @@ import './Register.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/header-logo.svg';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-import { REG_NAME } from '../../utils/constants';
- 
+
 function Register({ handleRegister }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
@@ -13,9 +12,9 @@ function Register({ handleRegister }) {
   function handleSubmit(e) {
     e.preventDefault();
     isValid &&
-    handleRegister({ name, email, password }, () => {
-      resetForm();
-    });
+      handleRegister({ name, email, password }, () => {
+        resetForm();
+      });
   }
   return (
     <section className='sign'>
@@ -84,7 +83,9 @@ function Register({ handleRegister }) {
           <span className='sign__input-error'>{errors.password}</span>
         </label>
         <button
-          className={isValid ? 'sign__submit' : 'sign__submit sign__submit_type_disabled'}
+          className={
+            isValid ? 'sign__submit' : 'sign__submit sign__submit_type_disabled'
+          }
           type='submit'
           aria-label='Кнопка отправить'
           disabled={!isValid}
@@ -93,11 +94,7 @@ function Register({ handleRegister }) {
         </button>
         <div className='sign__link-container'>
           <p className='sign__question'>Уже зарегистрированы?</p>
-          <Link
-            className='sign__link'
-            to='/signin'
-          >
-            
+          <Link className='sign__link' to='/signin'>
             Войти
           </Link>
         </div>

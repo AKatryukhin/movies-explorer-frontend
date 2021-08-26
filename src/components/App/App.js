@@ -29,7 +29,6 @@ function App() {
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
   });
   const [isError, setIsError] = useState(false);
-  const [isMovieLoadError, setIsMovieLoadError] = useState();
   const [userData, setUserData] = useState({
     name: '',
     email: '',
@@ -168,7 +167,6 @@ function App() {
           searchMovies(name);
         })
         .catch((err) => {
-          setIsMovieLoadError(err);
           openErrorPopup(
             'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
           );

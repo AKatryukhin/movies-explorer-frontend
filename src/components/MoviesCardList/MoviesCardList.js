@@ -95,16 +95,16 @@ function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
           {savedMovies.length <= count &&
             savedMovies.map((movie) => (
               <MoviesCard
-              key={movie.movieId}
+                key={movie.movieId}
                 movie={movie}
                 onMovieDelete={onMovieDelete}
                 checkLikeStatus={checkLikeStatus}
               />
             ))}
         </section>
-        {savedMovies.length !== 0 &&
+        {savedMovies.length !== 0 && (
           <div className='movies-cardlist__empty'></div>
-        }
+        )}
       </Route>
     </main>
   );
