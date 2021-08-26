@@ -16,6 +16,7 @@ function SavedMovies({
   setIsShortMovies
 }) {
   const value = React.useContext(AppContext);
+  const savedMovies = value.savedMovies;
 
   return (
     <>
@@ -27,11 +28,13 @@ function SavedMovies({
           getMovies={getMovies}
           setIsShortMovies={setIsShortMovies}
         />
-        {/* {isLoading && <Preloader />}   */}
+        {isLoading && <Preloader />}  
+        {savedMovies &&
           <MoviesCardList
             checkLikeStatus={checkLikeStatus}
             onMovieDelete={onMovieDelete}
           />
+        }
       </main>
       <Footer />
     </>

@@ -167,12 +167,12 @@ function App() {
   }
 
   function searchMovies(name) {
+    getMovieslist();
     const MoviesList = JSON.parse(localStorage.getItem('movies'));
     if (!name) {
       openErrorPopup('Нужно ввести ключевое слово');
       return;
     }
-    getMovieslist();
     const lastSearchList = MoviesList.filter((movie) => {
       const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
       return (

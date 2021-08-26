@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { AppContext } from '../../contexts/AppContext';
 
 function Movies({
   isSearch,
@@ -15,6 +16,8 @@ function Movies({
   checkLikeStatus,
   setIsShortMovies
 }) {
+  const value = React.useContext(AppContext);
+  const movies = value.movies;
 
   return (
     <>
@@ -27,11 +30,13 @@ function Movies({
           setIsShortMovies={setIsShortMovies}
         />
         {isLoading && <Preloader />}
+        {movies &&
           <MoviesCardList
             onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
-          checkLikeStatus={checkLikeStatus}
+            checkLikeStatus={checkLikeStatus}
           />
+        }
         <Footer />
       </main>
     </>
