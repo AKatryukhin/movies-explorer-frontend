@@ -267,7 +267,6 @@ function App() {
       .deleteMovie(movie._id)
       .then((res) => {
         const NewSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
-        // setSavedMovies((state) => state.filter((i) => i._id !== movie._id));
         setSavedMovies(NewSavedMovies);
         localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
       })
