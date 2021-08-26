@@ -83,6 +83,10 @@
   padding: 5px 10px;
 }
 
+.profile__button_type_disable {
+  opacity: .6;
+}
+
 .profile__button:last-of-type {
   margin: 0;
 }

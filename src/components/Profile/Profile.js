@@ -2,8 +2,11 @@ import React from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ logout }) {
+function Profile({ logout, onUpdateUser }) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name, email } = values;
@@ -11,9 +14,15 @@ function Profile({ logout }) {
   function handleSubmit(e) {
     e.preventDefault();
     isValid &&
-      console.log('Ok', () => {
-        resetForm();
-      });
+      onUpdateUser(
+        {
+          name: name,
+          email: email,
+        },
+        () => {
+          resetForm();
+        }
+      );
   }
 
   function handleLogout() {
@@ -23,7 +32,7 @@ function Profile({ logout }) {
     <>
       <Header />
       <section className='profile'>
-        <h2 className='profile__title'>Привет, Александр!</h2>
+        <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
         <form
           className='profile__form'
           onSubmit={handleSubmit}
@@ -36,7 +45,7 @@ function Profile({ logout }) {
               className='profile__input'
               name='name'
               type='text'
-              placeholder='Имя'
+              placeholder={currentUser.name}
               required
               minLength='2'
               maxLength='38'
@@ -46,12 +55,12 @@ function Profile({ logout }) {
           </label>
           <span className='profile__input-error'>{errors.name}</span>
           <label className='profile__label'>
-            Почта
+            Email
             <input
               className='profile__input'
               name='email'
               type='email'
-              placeholder='Email'
+              placeholder={currentUser.email}
               required
               value={email || ''}
               onChange={handleChange}
@@ -70,10 +79,7 @@ function Profile({ logout }) {
             onClick={handleSubmit}
             disabled={!isValid}
           >
-            {isValid
-                ? 'Сохранить'
-                : 'Редактировать'
-            }
+            Редактировать
           </button>
           <button
             type='button'

@@ -54,36 +54,21 @@ export const getProfileInfo = () => {
     .then((data) => data);
 };
 
-// export const setProfileInfo = ({ name, about }) => {
-//   return fetch(`${BASE_URL}/users/me`, {
-//     method: 'PATCH',
-//     credentials: 'include',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       name: name,
-//       about: about,
-//     }),
-//   }).then(handleResponse);
-// };
+export const setProfileInfo = ({ name, email }) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+    }),
+  }).then(handleResponse);
+};
 
 
-
-
-
-// export const updateProfile = ({ name, email }) => {
-//   const token = localStorage.getItem('jwt');
-//   return fetch(`${BASE_URL}/users/me`, {
-//     method: 'PATCH',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${token}`,
-//     },
-//     body: JSON.stringify({ email: email, name: name }),
-//   }).then(handleResponse);
-// };
 
 export const createMovie = (
   country,

@@ -108,7 +108,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        // setIsRegist(false);
         openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
       });
   };
@@ -166,7 +165,6 @@ function App() {
     });
     setSavedMovies(searchSavedMoviesList);
   }
-
 
   function searchMovies(name) {
     const MoviesList = JSON.parse(localStorage.getItem('movies'));
@@ -274,9 +272,7 @@ function App() {
   }
 
   function handleToggleShortMovies() {
-    !isShortMovies
-      ? setIsShortMovies(true)
-      : setIsShortMovies(false);
+    !isShortMovies ? setIsShortMovies(true) : setIsShortMovies(false);
   }
 
   useEffect(() => {
@@ -293,23 +289,28 @@ function App() {
       : setSavedMovies(savedMoviesList);
   }, [isShortSasvedMovies]);
 
-  // function handleUpdateUser(userData) {
-  //     updateProfile(userData)
-  //         .then((res) => {
-  //             if (res) {
-  //                 setCurrentUser({
-  //                     ...currentUser,
-  //                     name: res.newName,
-  //                     email: res.newEmail,
-  //                 });
-  //                 showResponseMessageTimer(SUCCSESS_UPDATE_MESSAGE);
-  //             }
-  //         })
-  //         .catch((err) => {
-  //             showResponseMessageTimer(SERVER_ERROR_MESSAGE);
-  //             console.log(err);
-  //         });
-  // }
+  function handleUpdateProfile({ name, email }) {
+    setIsLoading(true);
+    main
+      .setProfileInfo({ name, email })
+      .then((res) => {
+        if (res) {
+          setCurrentUser({
+            ...currentUser,
+            name: res.name,
+            email: res.email,
+          });
+          openSuccessPopup('Данные успешно обновлены!');
+        }
+      })
+      .catch((err) => {
+        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
 
   function handleSignOut() {
     main
@@ -388,6 +389,7 @@ function App() {
               loggedIn={loggedIn}
               logout={handleSignOut}
               component={Profile}
+              onUpdateUser={handleUpdateProfile}
             />
             <Route path='*'>
               <PageNotFound />
