@@ -9,18 +9,6 @@ export const ESC_KEYCODE = 'Escape';
 export const REG_NAME = /[\wа-я\sё\-]/gi;
 export const REG_PASSWORD = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/gi;
 
-// {
-//   country: countryValue,
-//   director: item.director,
-//   duration: item.duration,
-//   year: item.year,
-//   description: item.description,
-//   image: imageURL,
-//   trailer: item.trailerLink,
-//   thumbnail: thumbnailURL,
-//   movieId: item.id,
-//   nameRU: item.nameRU,
-//   nameEN: noAdaptedName,
-// }
+
 
 

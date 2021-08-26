@@ -117,11 +117,9 @@ function App() {
       .authorize({ email, password })
       .then((res) => {
         setCurrentUser(res);
-        // setUserData({
-        //   email: res.email,
-        // });
         setLoggedIn(true);
         onSuccess();
+        openSuccessPopup('С возвращением!');
         history.push('/movies');
       })
       .catch((err) => {

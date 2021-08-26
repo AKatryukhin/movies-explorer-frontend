@@ -81,7 +81,7 @@ function Profile({ logout, onUpdateUser }) {
             onClick={handleSubmit}
             disabled={!isValid}
           >
-            Редактировать
+            {isValid ? 'Сохранить' : 'Редактировать'}
           </button>
           <button
             type='button'
