@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -22,6 +22,8 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isShortMovies, setIsShortMovies] = useState(false);
+  const [isShortSasvedMovies, setIsShortSasvedMovies] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [infoPopupTitle, setInfoPopupTitle] = useState({
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
@@ -49,6 +51,7 @@ function App() {
     setIsError(false);
     setInfoPopupTitle({ title });
   }
+
   useEffect(() => {
     if (loggedIn) {
       Promise.all([main.getProfileInfo(), main.getUserMovies()])
@@ -57,18 +60,15 @@ function App() {
           setSavedMovies(currentSavedMovies.movies);
         })
         .catch((err) => console.log(err));
-       
     }
   }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn) {
-      const lastSearchList = JSON.parse(
-        localStorage.getItem('lastSearchList')
-      );
+      const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
       lastSearchList && setMovies(lastSearchList);
-    }}, [loggedIn]);
-
+    }
+  }, [loggedIn]);
 
   function checkLikeStatus(movie) {
     if (movie) {
@@ -172,11 +172,6 @@ function App() {
     return lastSearchList;
   }
 
-  function filterShortMovies(movies) {
-    const shortMovies = movies.filter((movie) => movie.duration <= 40);
-    return shortMovies;
-  }
-
   function closeInfoPopup() {
     setIsInfoPopupOpen(false);
   }
@@ -231,7 +226,12 @@ function App() {
     main
       .deleteMovie(movieForDelete._id)
       .then((res) => {
-        setSavedMovies((state) => state.filter((i) => i.movieId !== movie.id));
+        const NewSavedMovies = savedMovies.filter(
+          (i) => i.movieId !== movie.id
+        );
+        // setSavedMovies((state) => state.filter((i) => i.movieId !== movie.id));
+        setSavedMovies(NewSavedMovies);
+        localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
       })
       .catch((err) => {
         console.log(err);
@@ -249,6 +249,31 @@ function App() {
       });
   }
 
+  function handleToggleShortSavedMovies() {
+    !isShortSasvedMovies
+      ? setIsShortSasvedMovies(true)
+      : setIsShortSasvedMovies(false);
+  }
+
+  function handleToggleShortMovies() {
+    !isShortMovies
+      ? setIsShortMovies(true)
+      : setIsShortMovies(false);
+  }
+
+  useEffect(() => {
+    const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
+    isShortMovies
+      ? setMovies((state) => state.filter((i) => i.duration <= 40))
+      : setMovies(lastSearchList);
+  }, [isShortMovies]);
+
+  useEffect(() => {
+    const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
+    isShortSasvedMovies
+      ? setSavedMovies((state) => state.filter((i) => i.duration <= 40))
+      : setSavedMovies(savedMoviesList);
+  }, [isShortSasvedMovies]);
 
   // function handleUpdateUser(userData) {
   //     updateProfile(userData)
@@ -283,6 +308,7 @@ function App() {
         console.log(err);
       });
   }
+
   // function handleLogOut() {
   //     localStorage.removeItem("movies");
   //     localStorage.removeItem("lastSearchList");
@@ -321,6 +347,7 @@ function App() {
               loggedIn={loggedIn}
               component={Movies}
               isLoading={isLoading}
+              setIsShortMovies={handleToggleShortMovies}
               // isSearch={handleSearch}
               getMovies={searchMovies}
               onMovieLike={handleSavedMovie}
@@ -335,6 +362,7 @@ function App() {
               loggedIn={loggedIn}
               onMovieDelete={handleSavedMovieDelete}
               checkLikeStatus={checkLikeStatus}
+              setIsShortMovies={handleToggleShortSavedMovies}
             />
             <ProtectedRoute
               exact

@@ -13,6 +13,7 @@ function Movies({
   onMovieLike,
   onMovieDelete,
   checkLikeStatus,
+  setIsShortMovies
 }) {
 
   return (
@@ -23,12 +24,13 @@ function Movies({
           isSearch={isSearch}
           isLoading={isLoading}
           getMovies={getMovies}
+          setIsShortMovies={setIsShortMovies}
         />
         {isLoading && <Preloader />}
           <MoviesCardList
             onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
-            checkLikeStatus={checkLikeStatus}
+          checkLikeStatus={checkLikeStatus}
           />
         <Footer />
       </main>

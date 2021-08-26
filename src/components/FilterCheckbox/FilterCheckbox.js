@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox({ setIsShortMovies }) {
   const [isChecked, setChecked] = useState(false);
   function onChange(event) {
     setChecked(event.target.checked);
+    setIsShortMovies();
   }
   return (
     <div className='filter-checkbox'>

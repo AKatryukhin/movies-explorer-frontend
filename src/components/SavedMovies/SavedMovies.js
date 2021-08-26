@@ -12,7 +12,8 @@ function SavedMovies({
   isLoading,
   getMovies,
   checkLikeStatus,
-  onMovieDelete
+  onMovieDelete,
+  setIsShortMovies
 }) {
   const value = React.useContext(AppContext);
 
@@ -24,6 +25,7 @@ function SavedMovies({
           isSearch={isSearch}
           isLoading={isLoading}
           getMovies={getMovies}
+          setIsShortMovies={setIsShortMovies}
         />
         {/* {isLoading && <Preloader />}   */}
           <MoviesCardList

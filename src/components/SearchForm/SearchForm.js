@@ -3,7 +3,11 @@ import './SearchForm.css';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
-function SearchForm({ isLoading, getMovies }) {
+function SearchForm({
+  isLoading,
+  getMovies,
+  setIsShortMovies
+}) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name } = values;
@@ -50,7 +54,9 @@ function SearchForm({ isLoading, getMovies }) {
         </form>
         <span className='search__input-error'>{errors.email}</span>
 
-        <FilterCheckbox />
+        <FilterCheckbox
+          setIsShortMovies={setIsShortMovies}
+        />
       </div>
     </section>
   );
