@@ -57,10 +57,11 @@ function App() {
         .then(([currentUserData, currentSavedMovies]) => {
           setCurrentUser(currentUserData);
           setSavedMovies(currentSavedMovies.movies);
+          localStorage.setItem('savedMoviesList', JSON.stringify(currentSavedMovies.movies));
           setLoggedIn(true);
         })
         .catch((err) => console.log(err));
-  }, [loggedIn]);
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -140,28 +141,8 @@ function App() {
           openErrorPopup(
             'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
           );
-        })
-        .finally(() => {
-          setIsLoading(false);
         });
     }
-  }
-
-  function searchSavedMovies(name) {
-    const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
-    if (!name) {
-      openErrorPopup('Нужно ввести ключевое слово');
-      return;
-    }
-    const searchSavedMoviesList = savedMoviesList.filter((movie) => {
-      const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
-      return (
-        movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
-        movie.description.toLowerCase().includes(name.toLowerCase()) ||
-        nameEN.toLowerCase().includes(name.toLowerCase())
-      );
-    });
-    setSavedMovies(searchSavedMoviesList);
   }
 
   function searchMovies(name) {
@@ -170,8 +151,8 @@ function App() {
       return;
     }
     getMovieslist();
+    setTimeout(() => setIsLoading(false), 1200);
     const MoviesList = JSON.parse(localStorage.getItem('movies'));
-    if (MoviesList) {
       const lastSearchList = MoviesList.filter((movie) => {
         const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
         return (
@@ -185,6 +166,25 @@ function App() {
       lastSearchList.length === 0 &&
         setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
       return lastSearchList;
+  }
+
+  function searchSavedMovies(name) {
+    const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
+    if (!name) {
+      openErrorPopup('Нужно ввести ключевое слово');
+      return;
+    }
+    if (savedMoviesList) {
+      const searchSavedMoviesList = savedMoviesList.filter((movie) => {
+        const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+        return (
+          movie.owner === currentUser._id ||
+          movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+          movie.description.toLowerCase().includes(name.toLowerCase()) ||
+          nameEN.toLowerCase().includes(name.toLowerCase())
+        );
+      });
+      setSavedMovies(searchSavedMoviesList);
     }
   }
 
@@ -245,7 +245,6 @@ function App() {
         const NewSavedMovies = savedMovies.filter(
           (i) => i.movieId !== movie.id
         );
-        // setSavedMovies((state) => state.filter((i) => i.movieId !== movie.id));
         setSavedMovies(NewSavedMovies);
         localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
       })
@@ -258,7 +257,10 @@ function App() {
     main
       .deleteMovie(movie._id)
       .then((res) => {
-        setSavedMovies((state) => state.filter((i) => i._id !== movie._id));
+        const NewSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
+        // setSavedMovies((state) => state.filter((i) => i._id !== movie._id));
+        setSavedMovies(NewSavedMovies);
+        localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
       })
       .catch((err) => {
         console.log(err);

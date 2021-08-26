@@ -2,8 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 import icon from '../../images/icon-acc.svg';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Navigation() {
+
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <div className='navigation'>
       <nav className='navigation__menu'>

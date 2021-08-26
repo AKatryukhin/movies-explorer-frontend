@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCard.css';
-// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function MoviesCard({
   movie,
@@ -9,7 +8,6 @@ function MoviesCard({
   onMovieDelete,
   checkLikeStatus
 }) {
-  // const currentUser = React.useContext(CurrentUserContext);
 
   const isLiked = checkLikeStatus(movie);
 
