@@ -150,6 +150,24 @@ function App() {
     }
   }
 
+  function searchSavedMovies(name) {
+    const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
+    if (!name) {
+      openErrorPopup('Нужно ввести ключевое слово');
+      return;
+    }
+    const searchSavedMoviesList = savedMoviesList.filter((movie) => {
+      const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+      return (
+        movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+        movie.description.toLowerCase().includes(name.toLowerCase()) ||
+        nameEN.toLowerCase().includes(name.toLowerCase())
+      );
+    });
+    setSavedMovies(searchSavedMoviesList);
+  }
+
+
   function searchMovies(name) {
     const MoviesList = JSON.parse(localStorage.getItem('movies'));
     if (!name) {
@@ -348,7 +366,6 @@ function App() {
               component={Movies}
               isLoading={isLoading}
               setIsShortMovies={handleToggleShortMovies}
-              // isSearch={handleSearch}
               getMovies={searchMovies}
               onMovieLike={handleSavedMovie}
               onMovieDelete={handleMovieDelete}
@@ -363,6 +380,7 @@ function App() {
               onMovieDelete={handleSavedMovieDelete}
               checkLikeStatus={checkLikeStatus}
               setIsShortMovies={handleToggleShortSavedMovies}
+              getMovies={searchSavedMovies}
             />
             <ProtectedRoute
               exact
