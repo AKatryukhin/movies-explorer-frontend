@@ -8,7 +8,7 @@ const handleResponse = (res) => {
 };
 
 export const logout = ({ email }) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${BASE_URL}/signout`, {
     method: 'POST',
     credentials: 'include',
     headers: {

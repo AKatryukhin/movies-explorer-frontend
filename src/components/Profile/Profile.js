@@ -26,7 +26,9 @@ function Profile({ logout, onUpdateUser }) {
   }
 
   function handleLogout() {
-    logout();
+    logout({
+      email: currentUser.email,
+    });
   }
   return (
     <>

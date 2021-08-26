@@ -312,31 +312,22 @@ function App() {
       });
   }
 
-  function handleSignOut() {
+  function handleSignOut(email) {
     main
-      .logout()
+      .logout(email)
       .then(() => {
-        history.push('/signin');
-        setUserData({
-          name: '',
-          email: '',
-        });
         setLoggedIn(false);
+        setCurrentUser({ name: '', email: '' });
+        localStorage.removeItem('movies');
+        localStorage.removeItem('lastSearchList');
+        setMovies([]);
+        setSavedMovies([]);
+        history.push('/');
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
-  // function handleLogOut() {
-  //     localStorage.removeItem("movies");
-  //     localStorage.removeItem("lastSearchList");
-  //     setCurrentUser({ name: "", email: "" });
-  //     setMovies([]);
-  //     setSavedMovies([]);
-  //     setLoggedIn(false);
-  //     history.push("/");
-  // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
