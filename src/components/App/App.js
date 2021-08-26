@@ -53,14 +53,13 @@ function App() {
   }
 
   useEffect(() => {
-    if (loggedIn) {
       Promise.all([main.getProfileInfo(), main.getUserMovies()])
         .then(([currentUserData, currentSavedMovies]) => {
           setCurrentUser(currentUserData);
           setSavedMovies(currentSavedMovies.movies);
+          setLoggedIn(true);
         })
         .catch((err) => console.log(err));
-    }
   }, [loggedIn]);
 
   useEffect(() => {
