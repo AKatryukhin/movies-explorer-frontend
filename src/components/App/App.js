@@ -13,7 +13,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import * as main from '../../utils/MainApi';
 import * as mov from '../../utils/MoviesApi';
-import { ESC_KEYCODE } from '../../utils/constants';
+import { ESC_KEYCODE, SHORT_MOVIES } from '../../utils/constants';
 
 function App() {
   const history = useHistory();
@@ -287,14 +287,14 @@ function App() {
   useEffect(() => {
     const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
     isShortMovies
-      ? setMovies((state) => state.filter((i) => i.duration <= 40))
+      ? setMovies((state) => state.filter((i) => i.duration <= SHORT_MOVIES))
       : setMovies(lastSearchList);
   }, [isShortMovies]);
 
   useEffect(() => {
     const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
     isShortSasvedMovies
-      ? setSavedMovies((state) => state.filter((i) => i.duration <= 40))
+      ? setSavedMovies((state) => state.filter((i) => i.duration <= SHORT_MOVIES))
       : setSavedMovies(savedMoviesList);
   }, [isShortSasvedMovies]);
 
