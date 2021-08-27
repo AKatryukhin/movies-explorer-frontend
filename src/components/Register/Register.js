@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/header-logo.svg';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Register({ handleRegister }) {
+function Register({ handleRegister, isSending }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name, email, password } = values;
@@ -41,6 +41,7 @@ function Register({ handleRegister }) {
             autoComplete='off'
             onChange={handleChange}
             value={name || ''}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.name}</span>
         </label>
@@ -60,6 +61,7 @@ function Register({ handleRegister }) {
             autoComplete='on'
             onChange={handleChange}
             value={email || ''}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.email}</span>
         </label>
@@ -79,6 +81,7 @@ function Register({ handleRegister }) {
             title='Пожалуйста, укажите по крайней мере 1 заглавный символ, 1 строчный символ и 1 число.'
             value={password || ''}
             onChange={handleChange}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.password}</span>
         </label>
@@ -88,7 +91,7 @@ function Register({ handleRegister }) {
           }
           type='submit'
           aria-label='Кнопка отправить'
-          disabled={!isValid}
+          disabled={!isValid || isSending}
         >
           Зарегистрироваться
         </button>

@@ -5,7 +5,7 @@ import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Preloader from '../Preloader/Preloader';
 
-function Profile({ logout, onUpdateUser, isLoading }) {
+function Profile({ logout, onUpdateUser, isLoading, isSending }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const { values, handleChange, resetForm, errors, isValid } =
@@ -58,6 +58,7 @@ function Profile({ logout, onUpdateUser, isLoading }) {
                 maxLength='38'
                 value={name || ''}
                 onChange={handleChange}
+                disabled={isSending}
               />
             </label>
             <span className='profile__input-error'>{errors.name}</span>
@@ -71,6 +72,7 @@ function Profile({ logout, onUpdateUser, isLoading }) {
                 required
                 value={email || ''}
                 onChange={handleChange}
+                disabled={isSending}
               />
             </label>
             <span className='profile__input-error'>{errors.email}</span>
@@ -85,7 +87,7 @@ function Profile({ logout, onUpdateUser, isLoading }) {
                 : 'profile__button profile__button_type_disable'
             }
             onClick={handleSubmit}
-            disabled={!isValid}
+            disabled={!isValid || isSending}
           >
             {isValid ? 'Сохранить' : 'Редактировать'}
           </button>

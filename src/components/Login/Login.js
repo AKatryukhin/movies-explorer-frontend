@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/header-logo.svg';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Login({ handleLogin }) {
+function Login({ handleLogin, isSending }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { email, password } = values;
@@ -47,6 +47,7 @@ function Login({ handleLogin }) {
             autoComplete='on'
             onChange={handleChange}
             value={email || ''}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.email}</span>
         </label>
@@ -66,6 +67,7 @@ function Login({ handleLogin }) {
             title='Пожалуйста, укажите по крайней мере 1 заглавный символ, 1 строчный символ и 1 число.'
             value={password || ''}
             onChange={handleChange}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.password}</span>
         </label>
@@ -76,7 +78,8 @@ function Login({ handleLogin }) {
           }
           type='submit'
           aria-label='Кнопка отправить'
-          disabled={!isValid}
+          disabled={!isValid || isSending}
+          
         >
           Войти
         </button>

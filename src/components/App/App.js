@@ -22,6 +22,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [isShortSasvedMovies, setIsShortSasvedMovies] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
@@ -69,7 +70,6 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-
   function checkLikeStatus(movie) {
     if (movie) {
       return savedMovies.some(
@@ -79,6 +79,7 @@ function App() {
   }
 
   const handleRegister = ({ name, email, password }, onSuccess) => {
+    setIsSending(true);
     main
       .register({ name, email, password })
 
@@ -109,10 +110,14 @@ function App() {
       .catch((err) => {
         console.log(err);
         openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+      })
+      .finally(() => {
+        setIsSending(false);
       });
   };
 
   const handleLogin = ({ email, password }, onSuccess) => {
+    setIsSending(true);
     main
       .authorize({ email, password })
       .then((res) => {
@@ -125,6 +130,9 @@ function App() {
       .catch((err) => {
         console.log(err);
         openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+      })
+      .finally(() => {
+        setIsSending(false);
       });
   };
 
@@ -292,6 +300,7 @@ function App() {
 
   function handleUpdateProfile({ name, email }) {
     setIsLoading(true);
+    setIsSending(true);
     main
       .setProfileInfo({ name, email })
       .then((res) => {
@@ -310,6 +319,7 @@ function App() {
       })
       .finally(() => {
         setIsLoading(false);
+        setIsSending(false);
       });
   }
 
@@ -346,14 +356,17 @@ function App() {
               {loggedIn ? (
                 <Redirect to='/' />
               ) : (
-                <Login handleLogin={handleLogin} />
+                <Login handleLogin={handleLogin} isSending={isSending} />
               )}
             </Route>
             <Route path='/signup'>
               {loggedIn ? (
                 <Redirect to='/' />
               ) : (
-                <Register handleRegister={handleRegister} />
+                <Register
+                  handleRegister={handleRegister}
+                  isSending={isSending}
+                />
               )}
             </Route>
             <Route exact path='/'>
@@ -387,6 +400,7 @@ function App() {
               component={Profile}
               onUpdateUser={handleUpdateProfile}
               isLoading={isLoading}
+              isSending={isSending}
             />
             <Route path='*'>
               <PageNotFound />
