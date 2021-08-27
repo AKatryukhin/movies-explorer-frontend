@@ -23,10 +23,10 @@ function AboutMe() {
             Express, Node.js, MongoDB.
           </p>
           <ul className='aboutme__social-links'>
-            <Link to='/' className='aboutme__social-link'>
+            <Link to={{ pathname: 'https://ru-ru.facebook.com/' }} target='_blank' rel='noopener noreferrer' className='aboutme__social-link'>
               Facebook
             </Link>
-            <Link to='/' className='aboutme__social-link'>
+            <Link to={{ pathname: 'https://github.com/' }}  target='_blank' rel='noopener noreferrer' className='aboutme__social-link'>
               Github
             </Link>
           </ul>
