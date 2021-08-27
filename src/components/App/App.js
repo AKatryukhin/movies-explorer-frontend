@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -51,7 +51,7 @@ function App() {
     setInfoPopupTitle({ title });
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     main
       .getProfileInfo()
       .then((currentUserData) => {
@@ -342,7 +342,6 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <AppContext.Provider
         value={{
-          userData: userData,
           loggedIn: loggedIn,
           isLoading: isLoading,
           savedMovies: savedMovies,
@@ -352,16 +351,23 @@ function App() {
         <div className='page'>
           <Switch>
             <Route path='/signin'>
-              <Login handleLogin={handleLogin} />
+              {loggedIn ? (
+                <Redirect to='/' />
+              ) : (
+                <Login handleLogin={handleLogin} />
+              )}
             </Route>
             <Route path='/signup'>
-              <Register handleRegister={handleRegister} />
+              {loggedIn ? (
+                <Redirect to='/' />
+              ) : (
+                <Register handleRegister={handleRegister} />
+              )}
             </Route>
             <Route exact path='/'>
               <Main />
             </Route>
             <ProtectedRoute
-              exact
               path='/movies'
               loggedIn={loggedIn}
               component={Movies}
@@ -373,7 +379,6 @@ function App() {
               checkLikeStatus={checkLikeStatus}
             />
             <ProtectedRoute
-              exact
               path='/saved-movies'
               component={SavedMovies}
               isLoading={isLoading}
@@ -384,7 +389,6 @@ function App() {
               getMovies={searchSavedMovies}
             />
             <ProtectedRoute
-              exact
               path='/profile'
               loggedIn={loggedIn}
               logout={handleSignOut}
