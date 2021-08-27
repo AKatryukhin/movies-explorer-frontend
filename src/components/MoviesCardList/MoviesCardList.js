@@ -9,7 +9,6 @@ function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
   const value = React.useContext(AppContext);
   const movies = value.movies;
   const savedMovies = value.savedMovies;
-
   const size = useWindowSize();
   const [count, setCount] = useState(0);
   const [cards, setCards] = useState(0);
@@ -38,6 +37,7 @@ function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
 
   return (
     <main className='movies'>
+     {movies &&
       <Route path='/movies'>
         <section className='movies-cardlist section-movies'>
           {movies.length > count &&
@@ -79,6 +79,7 @@ function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
           </button>
         </div>
       </Route>
+        }
       <Route path='/saved-movies'>
         <section className='movies-cardlist section-movies movies-cardlist_type_saved'>
           {savedMovies.length > count &&

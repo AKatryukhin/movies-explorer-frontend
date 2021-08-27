@@ -71,7 +71,9 @@ function Login({ handleLogin }) {
         </label>
         <div className='sign__empty'></div>
         <button
-          className='sign__submit'
+          className={
+            isValid ? 'sign__submit' : 'sign__submit sign__submit_type_disabled'
+          }
           type='submit'
           aria-label='Кнопка отправить'
           disabled={!isValid}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -51,32 +51,24 @@ function App() {
     setInfoPopupTitle({ title });
   }
 
-  useLayoutEffect(() => {
-    main
-      .getProfileInfo()
-      .then((currentUserData) => {
+  useEffect(() => {
+    Promise.all([main.getProfileInfo(), main.getUserMovies()])
+      .then(([currentUserData, currentSavedMovies]) => {
         setCurrentUser(currentUserData);
         setLoggedIn(true);
+        const lastSearchList = JSON.parse(
+          localStorage.getItem('lastSearchList')
+        );
+        lastSearchList && setMovies(lastSearchList);
+        setSavedMovies(currentSavedMovies.movies);
+        localStorage.setItem(
+          'savedMoviesList',
+          JSON.stringify(currentSavedMovies.movies)
+        );
       })
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      const lastSearchList = JSON.parse(localStorage.getItem('lastSearchList'));
-      lastSearchList && setMovies(lastSearchList);
-      main
-        .getUserMovies()
-        .then((currentSavedMovies) => {
-          setSavedMovies(currentSavedMovies.movies);
-          localStorage.setItem(
-            'savedMoviesList',
-            JSON.stringify(currentSavedMovies.movies)
-          );
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
 
   function checkLikeStatus(movie) {
     if (movie) {

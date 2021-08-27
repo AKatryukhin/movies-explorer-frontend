@@ -13,30 +13,29 @@ function SavedMovies({
   getMovies,
   checkLikeStatus,
   onMovieDelete,
-  setIsShortMovies
+  setIsShortMovies,
 }) {
   const value = React.useContext(AppContext);
-  const movies = value.movies;
   const savedMovies = value.savedMovies;
 
   return (
     <>
       <Header />
       <main className='movies'>
-      <SearchForm
+        <SearchForm
           isSearch={isSearch}
           isLoading={isLoading}
           getMovies={getMovies}
           setIsShortMovies={setIsShortMovies}
         />
-        {isLoading && <Preloader />}  
-        {savedMovies && movies &&
+        {isLoading && <Preloader />}
+        {savedMovies && (
           <MoviesCardList
             checkLikeStatus={checkLikeStatus}
             onMovieDelete={onMovieDelete}
           />
-        }
-         <Footer />
+        )}
+        <Footer />
       </main>
     </>
   );
