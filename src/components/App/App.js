@@ -187,7 +187,6 @@ function App() {
       const searchSavedMoviesList = savedMoviesList.filter((movie) => {
         const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
         return (
-          movie.owner === currentUser._id ||
           movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
           movie.description.toLowerCase().includes(name.toLowerCase()) ||
           nameEN.toLowerCase().includes(name.toLowerCase())
