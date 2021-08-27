@@ -3,8 +3,9 @@ import './Profile.css';
 import Header from '../Header/Header';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import Preloader from '../Preloader/Preloader';
 
-function Profile({ logout, onUpdateUser }) {
+function Profile({ logout, onUpdateUser, isLoading }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const { values, handleChange, resetForm, errors, isValid } =
@@ -33,43 +34,48 @@ function Profile({ logout, onUpdateUser }) {
   return (
     <>
       <Header />
+
       <section className='profile'>
         <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
-        <form
-          className='profile__form'
-          onSubmit={handleSubmit}
-          name='profile__form'
-          noValidate
-        >
-          <label className='profile__label'>
-            Имя
-            <input
-              className='profile__input'
-              name='name'
-              type='text'
-              placeholder={currentUser.name}
-              required
-              minLength='2'
-              maxLength='38'
-              value={name || ''}
-              onChange={handleChange}
-            />
-          </label>
-          <span className='profile__input-error'>{errors.name}</span>
-          <label className='profile__label'>
-            Email
-            <input
-              className='profile__input'
-              name='email'
-              type='email'
-              placeholder={currentUser.email}
-              required
-              value={email || ''}
-              onChange={handleChange}
-            />
-          </label>
-          <span className='profile__input-error'>{errors.email}</span>
-        </form>
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <form
+            className='profile__form'
+            onSubmit={handleSubmit}
+            name='profile__form'
+            noValidate
+          >
+            <label className='profile__label'>
+              Имя
+              <input
+                className='profile__input'
+                name='name'
+                type='text'
+                placeholder={currentUser.name}
+                required
+                minLength='2'
+                maxLength='38'
+                value={name || ''}
+                onChange={handleChange}
+              />
+            </label>
+            <span className='profile__input-error'>{errors.name}</span>
+            <label className='profile__label'>
+              Email
+              <input
+                className='profile__input'
+                name='email'
+                type='email'
+                placeholder={currentUser.email}
+                required
+                value={email || ''}
+                onChange={handleChange}
+              />
+            </label>
+            <span className='profile__input-error'>{errors.email}</span>
+          </form>
+        )}
         <ul className='profile__buttons'>
           <button
             type='submit'

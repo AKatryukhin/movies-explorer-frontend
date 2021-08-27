@@ -386,6 +386,7 @@ function App() {
               logout={handleSignOut}
               component={Profile}
               onUpdateUser={handleUpdateProfile}
+              isLoading={isLoading}
             />
             <Route path='*'>
               <PageNotFound />
