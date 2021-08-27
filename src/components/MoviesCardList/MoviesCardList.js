@@ -79,13 +79,23 @@ function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
           </button>
         </div>
       </Route>
-        }
-      <Route path='/saved-movies'>
-        <section className='movies-cardlist section-movies movies-cardlist_type_saved'>
-          {savedMovies.length > count &&
-            savedMovies
-              .slice(0, count)
-              .map((movie) => (
+      }
+      {savedMovies.length > 0 &&
+        <Route path='/saved-movies'>
+          <section className='movies-cardlist section-movies movies-cardlist_type_saved'>
+            {savedMovies.length > count &&
+              savedMovies
+                .slice(0, count)
+                .map((movie) => (
+                  <MoviesCard
+                    key={movie.movieId}
+                    movie={movie}
+                    onMovieDelete={onMovieDelete}
+                    checkLikeStatus={checkLikeStatus}
+                  />
+                ))}
+            {savedMovies.length <= count &&
+              savedMovies.map((movie) => (
                 <MoviesCard
                   key={movie.movieId}
                   movie={movie}
@@ -93,20 +103,12 @@ function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
                   checkLikeStatus={checkLikeStatus}
                 />
               ))}
-          {savedMovies.length <= count &&
-            savedMovies.map((movie) => (
-              <MoviesCard
-                key={movie.movieId}
-                movie={movie}
-                onMovieDelete={onMovieDelete}
-                checkLikeStatus={checkLikeStatus}
-              />
-            ))}
-        </section>
-        {savedMovies.length !== 0 && (
-          <div className='movies-cardlist__empty'></div>
-        )}
-      </Route>
+          </section>
+          {savedMovies && (
+            <div className='movies-cardlist__empty'></div>
+          )}
+        </Route>
+      }
     </main>
   );
 }
