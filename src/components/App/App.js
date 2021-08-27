@@ -331,6 +331,7 @@ function App() {
         setCurrentUser({ name: '', email: '' });
         localStorage.removeItem('movies');
         localStorage.removeItem('lastSearchList');
+        localStorage.removeItem('savedMoviesList');
         setMovies([]);
         setSavedMovies([]);
         history.push('/');
