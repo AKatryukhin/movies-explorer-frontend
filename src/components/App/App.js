@@ -219,11 +219,12 @@ function App() {
       window.removeEventListener('keydown', handleEscClose);
     };
   }, []);
-
   function handleSavedMovie(movie) {
+    const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+    const country = movie.country ? movie.country : 'Неизвестно';
     main
       .createMovie({
-        country: movie.country,
+        country: country,
         director: movie.director,
         duration: movie.duration,
         year: movie.year,
@@ -233,7 +234,7 @@ function App() {
         thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
         movieId: movie.id,
         nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
+        nameEN: nameEN,
       })
       .then((res) => {
         const NewSavedMovies = [res.movie, ...savedMovies];
@@ -294,7 +295,9 @@ function App() {
   useEffect(() => {
     const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
     isShortSasvedMovies
-      ? setSavedMovies((state) => state.filter((i) => i.duration <= SHORT_MOVIES))
+      ? setSavedMovies((state) =>
+          state.filter((i) => i.duration <= SHORT_MOVIES)
+        )
       : setSavedMovies(savedMoviesList);
   }, [isShortSasvedMovies]);
 
