@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox({ setIsShortMovies }) {
   const [isChecked, setChecked] = useState(false);
   function onChange(event) {
     setChecked(event.target.checked);
+    setIsShortMovies();
   }
   return (
     <div className='filter-checkbox'>
@@ -17,7 +18,7 @@ function FilterCheckbox() {
           checked={isChecked}
           onChange={(e) => onChange(e)}
         />
-        <span class='filter-checkbox-visible'></span>
+        <span className='filter-checkbox-visible'></span>
       </label>
       <p className='filter__title'>Короткометражки</p>
     </div>

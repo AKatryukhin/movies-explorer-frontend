@@ -2,9 +2,9 @@ import React from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/header-logo.svg';
-import useFormAndValidation from '../hooks/useFormAndValidation.js';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Register() {
+function Register({ handleRegister, isSending }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name, email, password } = values;
@@ -12,7 +12,7 @@ function Register() {
   function handleSubmit(e) {
     e.preventDefault();
     isValid &&
-      console.log('Ok', () => {
+      handleRegister({ name, email, password }, () => {
         resetForm();
       });
   }
@@ -36,9 +36,12 @@ function Register() {
             type='text'
             placeholder='Имя'
             required
+            minLength='2'
+            maxLength='38'
             autoComplete='off'
             onChange={handleChange}
             value={name || ''}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.name}</span>
         </label>
@@ -58,6 +61,7 @@ function Register() {
             autoComplete='on'
             onChange={handleChange}
             value={email || ''}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.email}</span>
         </label>
@@ -68,23 +72,26 @@ function Register() {
             className='sign__input'
             id='password'
             name='password'
-            autocomplete='off'
+            autoComplete='off'
             required
             minLength='6'
             maxLength='20'
-            placeholder='Пароль'
+            placeholder='Минимум 6 символов: 1 заглавный, 1 строчный, 1 число'
             pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$'
             title='Пожалуйста, укажите по крайней мере 1 заглавный символ, 1 строчный символ и 1 число.'
             value={password || ''}
             onChange={handleChange}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.password}</span>
         </label>
         <button
-          className='sign__submit'
+          className={
+            isValid ? 'sign__submit' : 'sign__submit sign__submit_type_disabled'
+          }
           type='submit'
           aria-label='Кнопка отправить'
-          disabled={!isValid}
+          disabled={!isValid || isSending}
         >
           Зарегистрироваться
         </button>

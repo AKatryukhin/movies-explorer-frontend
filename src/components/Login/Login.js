@@ -2,19 +2,22 @@ import React from 'react';
 import './Login.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/header-logo.svg';
-import useFormAndValidation from '../hooks/useFormAndValidation.js';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Login() {
+function Login({ handleLogin, isSending }) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { email, password } = values;
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!email || !password) {
+      return;
+    }
     isValid &&
-      console.log('Ok', () => {
-        resetForm();
-      });
+    handleLogin({ email, password }, () => {
+      resetForm();
+    });
   }
   return (
     <section className='sign'>
@@ -44,6 +47,7 @@ function Login() {
             autoComplete='on'
             onChange={handleChange}
             value={email || ''}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.email}</span>
         </label>
@@ -54,7 +58,7 @@ function Login() {
             className='sign__input'
             id='password'
             name='password'
-            autocomplete='off'
+            autoComplete='off'
             required
             minLength='6'
             maxLength='20'
@@ -63,15 +67,19 @@ function Login() {
             title='Пожалуйста, укажите по крайней мере 1 заглавный символ, 1 строчный символ и 1 число.'
             value={password || ''}
             onChange={handleChange}
+            disabled={isSending}
           />
           <span className='sign__input-error'>{errors.password}</span>
         </label>
         <div className='sign__empty'></div>
         <button
-          className='sign__submit'
+          className={
+            isValid ? 'sign__submit' : 'sign__submit sign__submit_type_disabled'
+          }
           type='submit'
           aria-label='Кнопка отправить'
-          disabled={!isValid}
+          disabled={!isValid || isSending}
+          
         >
           Войти
         </button>

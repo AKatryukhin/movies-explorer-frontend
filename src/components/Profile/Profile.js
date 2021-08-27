@@ -1,9 +1,13 @@
 import React from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
-import useFormAndValidation from '../hooks/useFormAndValidation.js';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import Preloader from '../Preloader/Preloader';
 
-function Profile({ logout }) {
+function Profile({ logout, onUpdateUser, isLoading, isSending }) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name, email } = values;
@@ -11,52 +15,69 @@ function Profile({ logout }) {
   function handleSubmit(e) {
     e.preventDefault();
     isValid &&
-      console.log('Ok', () => {
-        resetForm();
-      });
+      onUpdateUser(
+        {
+          name: name,
+          email: email,
+        },
+        () => {
+          resetForm();
+        }
+      );
   }
 
   function handleLogout() {
-    logout();
+    logout({
+      email: currentUser.email,
+    });
   }
   return (
     <>
       <Header />
+
       <section className='profile'>
-        <h2 className='profile__title'>Привет, Александр!</h2>
-        <form
-          className='profile__form'
-          onSubmit={handleSubmit}
-          name='profile__form'
-          noValidate
-        >
-          <label className='profile__label'>
-            Имя
-            <input
-              className='profile__input'
-              name='name'
-              type='text'
-              placeholder='Имя'
-              required
-              value={name || ''}
-              onChange={handleChange}
-            />
-          </label>
-          <span className='profile__input-error'>{errors.name}</span>
-          <label className='profile__label'>
-            Почта
-            <input
-              className='profile__input'
-              name='email'
-              type='email'
-              placeholder='Email'
-              required
-              value={email || ''}
-              onChange={handleChange}
-            />
-          </label>
-          <span className='profile__input-error'>{errors.email}</span>
-        </form>
+        <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <form
+            className='profile__form'
+            onSubmit={handleSubmit}
+            name='profile__form'
+            noValidate
+          >
+            <label className='profile__label'>
+              Имя
+              <input
+                className='profile__input'
+                name='name'
+                type='text'
+                placeholder={currentUser.name}
+                required
+                minLength='2'
+                maxLength='38'
+                value={name || ''}
+                onChange={handleChange}
+                disabled={isSending}
+              />
+            </label>
+            <span className='profile__input-error'>{errors.name}</span>
+            <label className='profile__label'>
+              Email
+              <input
+                className='profile__input'
+                name='email'
+                type='email'
+                placeholder={currentUser.email}
+                required
+                value={email || ''}
+                onChange={handleChange}
+                disabled={isSending}
+              />
+            </label>
+            <span className='profile__input-error'>{errors.email}</span>
+          </form>
+        )}
         <ul className='profile__buttons'>
           <button
             type='submit'
@@ -66,9 +87,9 @@ function Profile({ logout }) {
                 : 'profile__button profile__button_type_disable'
             }
             onClick={handleSubmit}
-            disabled={!isValid}
+            disabled={!isValid || isSending}
           >
-            Редактировать
+            {isValid ? 'Сохранить' : 'Редактировать'}
           </button>
           <button
             type='button'

@@ -41,7 +41,7 @@
   border-radius: 50px;
 
   background-color: #313131;
-  background-image: url('../../images/icon__button-like-noactive.png');
+  background-image: url('../../images/icon-button-like-noactive.png');
   background-repeat: no-repeat;
   background-position: center;
 
@@ -54,5 +54,22 @@
 
 .movie__like-button_active {
   background-color: #3ddc84;
-  background-image: url('../../images/icon__button-like-active.png');
+  background-image: url('../../images/icon-button-like-active.png');
+}
+
+.movie__remove-button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50px;
+  background-color:#313131;
+  background-image: url('../../images/icon-remove.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.movie__remove-button:hover {
+  box-shadow: 0px 0px 10px rgb(216, 216, 226);
 }

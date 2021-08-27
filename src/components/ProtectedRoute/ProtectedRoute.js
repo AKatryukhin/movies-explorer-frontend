@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { AppContext } from '../contexts/AppContext';
+import { AppContext } from '../../contexts/AppContext';
 
 /*jshint -W119*/
 const ProtectedRoute = ({ component: Component, ...props }) => {
@@ -9,9 +9,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
 
   return (
     <Route>
-      {() =>
-        value.loggedIn ? <Component {...props} /> : <Redirect to='/signin' />
-      }
+      {() => (value.loggedIn ? <Component {...props} /> : <Redirect to='/' />)}
     </Route>
   );
 };

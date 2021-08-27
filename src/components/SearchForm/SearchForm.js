@@ -1,19 +1,22 @@
 import React from 'react';
 import './SearchForm.css';
-import useFormAndValidation from '../hooks/useFormAndValidation.js';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
-function SearchForm({ isSending = true, isDisabled = false }) {
+function SearchForm({
+  isLoading,
+  getMovies,
+  setIsShortMovies
+}) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
   const { name } = values;
 
   function handleSubmit(e) {
     e.preventDefault();
-    isValid &&
-      console.log('Ok', () => {
-        resetForm();
-      });
+    isValid && !isLoading &&
+      getMovies(name);
+    resetForm();
   }
 
   return (
@@ -22,10 +25,10 @@ function SearchForm({ isSending = true, isDisabled = false }) {
         <form
           className='search__form'
           onSubmit={handleSubmit}
-          name='search__form'
+          name='search_form'
           title='Поиск'
-          isValid={isValid}
-          isDisabled={!isValid || isSending}
+          noValidate
+          disabled={!isValid || isLoading}
         >
           <input
             type='text'
@@ -34,23 +37,26 @@ function SearchForm({ isSending = true, isDisabled = false }) {
             name='name'
             placeholder='Фильм'
             required
-            minLength='2'
-            maxLength='30'
+            maxLength='60'
             onChange={handleChange}
             value={name || ''}
           />
           <button
-            className='search__submit'
             type='submit'
             aria-label='Кнопка Поиск'
-            disabled={isDisabled}
+            disabled={!isValid}
+            className={`search__submit ${
+              !isValid ? 'search__submit_type_disabled' : ''
+            }`}
           >
             Поиск
           </button>
         </form>
         <span className='search__input-error'>{errors.email}</span>
 
-        <FilterCheckbox />
+        <FilterCheckbox
+          setIsShortMovies={setIsShortMovies}
+        />
       </div>
     </section>
   );

@@ -13,7 +13,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   position: fixed;
   top: 0;
   left: 0;
@@ -73,7 +73,7 @@
 }
 
 .popup-info__title {
-  max-width: 350px;
+  max-width: 400px;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -82,7 +82,7 @@
   margin: 0 auto;
   text-align: center;
   color: black;
-  background-color: rgba(64, 102, 104, 0.438);
+  background-color: rgba(187, 214, 216, 0.438);
 }
 
 @media screen and (max-width: 520px) {
