@@ -76,7 +76,7 @@ function Register({ handleRegister, isSending }) {
             required
             minLength='6'
             maxLength='20'
-            placeholder='Пароль'
+            placeholder='Минимум 6 символов: 1 заглавный, 1 строчный, 1 число'
             pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$'
             title='Пожалуйста, укажите по крайней мере 1 заглавный символ, 1 строчный символ и 1 число.'
             value={password || ''}
