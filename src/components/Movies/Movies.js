@@ -20,7 +20,6 @@ function Movies({
   const movies = value.movies;
 
   return (
-    <>
       <main className='movies'>
         <Header />
         <SearchForm
@@ -39,7 +38,6 @@ function Movies({
         )}
         <Footer />
       </main>
-    </>
   );
 }
 

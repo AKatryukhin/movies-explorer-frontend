@@ -1,4 +1,3 @@
-
 export const BASE_URL = 'https://api.movies-search.nomoredomains.club';
 
 export const BEATFILMS_URL = 'https://api.nomoreparties.co/beatfilm-movies';
@@ -22,7 +21,3 @@ export const MEDIUM_SCREEN_MOVIES_MORE = 2;
 export const NARROW_SCREEN_MOVIES = 5;
 
 export const NARROW_SCREEN_MOVIES_MORE = 2;
-
-
-
-
