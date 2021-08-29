@@ -354,68 +354,70 @@ function App() {
           movies: movies,
         }}
       >
-        <div className='page'>
-          <Switch>
-            <Route path='/signin'>
-              {loggedIn ? (
-                <Redirect to='/' />
-              ) : (
-                <Login handleLogin={handleLogin} isSending={isSending} />
-              )}
-            </Route>
-            <Route path='/signup'>
-              {loggedIn ? (
-                <Redirect to='/' />
-              ) : (
-                <Register
-                  handleRegister={handleRegister}
-                  isSending={isSending}
-                />
-              )}
-            </Route>
-            <Route exact path='/'>
-              <Main />
-            </Route>
-            <ProtectedRoute
-              path='/movies'
-              loggedIn={loggedIn}
-              component={Movies}
-              isLoading={isLoading}
-              setIsShortMovies={handleToggleShortMovies}
-              getMovies={getMovieslist}
-              onMovieLike={handleSavedMovie}
-              onMovieDelete={handleMovieDelete}
-              checkLikeStatus={checkLikeStatus}
+        <div className='background'>
+          <div className='page'>
+            <Switch>
+              <Route path='/signin'>
+                {loggedIn ? (
+                  <Redirect to='/' />
+                ) : (
+                  <Login handleLogin={handleLogin} isSending={isSending} />
+                )}
+              </Route>
+              <Route path='/signup'>
+                {loggedIn ? (
+                  <Redirect to='/' />
+                ) : (
+                  <Register
+                    handleRegister={handleRegister}
+                    isSending={isSending}
+                  />
+                )}
+              </Route>
+              <Route exact path='/'>
+                <Main />
+              </Route>
+              <ProtectedRoute
+                path='/movies'
+                loggedIn={loggedIn}
+                component={Movies}
+                isLoading={isLoading}
+                setIsShortMovies={handleToggleShortMovies}
+                getMovies={getMovieslist}
+                onMovieLike={handleSavedMovie}
+                onMovieDelete={handleMovieDelete}
+                checkLikeStatus={checkLikeStatus}
+              />
+              <ProtectedRoute
+                path='/saved-movies'
+                component={SavedMovies}
+                isLoading={isLoading}
+                loggedIn={loggedIn}
+                onMovieDelete={handleSavedMovieDelete}
+                checkLikeStatus={checkLikeStatus}
+                setIsShortMovies={handleToggleShortSavedMovies}
+                getMovies={searchSavedMovies}
+              />
+              <ProtectedRoute
+                path='/profile'
+                loggedIn={loggedIn}
+                logout={handleSignOut}
+                component={Profile}
+                onUpdateUser={handleUpdateProfile}
+                isLoading={isLoading}
+                isSending={isSending}
+              />
+              <Route path='*'>
+                <PageNotFound />
+              </Route>
+            </Switch>
+            <InfoPopup
+              isOpen={isInfoPopupOpen}
+              onClose={closeInfoPopup}
+              title={infoPopupTitle.title}
+              isError={isError}
             />
-            <ProtectedRoute
-              path='/saved-movies'
-              component={SavedMovies}
-              isLoading={isLoading}
-              loggedIn={loggedIn}
-              onMovieDelete={handleSavedMovieDelete}
-              checkLikeStatus={checkLikeStatus}
-              setIsShortMovies={handleToggleShortSavedMovies}
-              getMovies={searchSavedMovies}
-            />
-            <ProtectedRoute
-              path='/profile'
-              loggedIn={loggedIn}
-              logout={handleSignOut}
-              component={Profile}
-              onUpdateUser={handleUpdateProfile}
-              isLoading={isLoading}
-              isSending={isSending}
-            />
-            <Route path='*'>
-              <PageNotFound />
-            </Route>
-          </Switch>
-          <InfoPopup
-            isOpen={isInfoPopupOpen}
-            onClose={closeInfoPopup}
-            title={infoPopupTitle.title}
-            isError={isError}
-          />
+          </div>
         </div>
       </AppContext.Provider>
     </CurrentUserContext.Provider>
