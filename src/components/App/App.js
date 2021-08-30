@@ -78,63 +78,43 @@ function App() {
     }
   }
 
-  const handleRegister = ({ name, email, password }, onSuccess) => {
+  async function handleRegister({ name, email, password }, onSuccess) {
     setIsSending(true);
-    main
-      .register({ name, email, password })
+    try {
+      const res = await main.register({ name, email, password });
+      const resAuth = await main.authorize({ email, password });
+      setCurrentUser(resAuth);
+      openSuccessPopup('Вы успешно зарегистрировались!');
+      onSuccess();
+      setLoggedIn(true);
+      history.push('/movies');
+    } catch (err) {
+      console.log(err);
+      openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+    } finally {
+      setIsSending(false);
+    }
+  }
 
-      .then((res) => {
-        setUserData({
-          name: res.name,
-          email: res.email,
-        });
-        setCurrentUser(res);
-        openSuccessPopup('Вы успешно зарегистрировались!');
-        onSuccess();
-        main
-          .authorize({ email, password })
-          .then((res) => {
-            setCurrentUser(res);
-            setUserData({
-              email: res.email,
-            });
-            setLoggedIn(true);
-            history.push('/movies');
-          })
-          .catch((err) => {
-            console.log(err);
-            openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
-          });
-        history.push('/movies');
-      })
-      .catch((err) => {
-        console.log(err);
-        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
-      })
-      .finally(() => {
-        setIsSending(false);
-      });
-  };
-
-  const handleLogin = ({ email, password }, onSuccess) => {
+  async function handleLogin({ email, password }, onSuccess) {
     setIsSending(true);
-    main
-      .authorize({ email, password })
-      .then((res) => {
-        setCurrentUser(res);
-        setLoggedIn(true);
-        onSuccess();
-        openSuccessPopup('С возвращением!');
-        history.push('/movies');
-      })
-      .catch((err) => {
-        console.log(err);
-        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
-      })
-      .finally(() => {
-        setIsSending(false);
-      });
-  };
+    try {
+      const res = await main.authorize({ email, password });
+      const resMovie = await main.getUserMovies();
+      setCurrentUser(res);
+      setLoggedIn(true);
+      onSuccess();
+      setSavedMovies(resMovie.movies);
+      localStorage.setItem('savedMoviesList', JSON.stringify(resMovie.movies));
+      openSuccessPopup('С возвращением!');
+      history.push('/movies');
+    } catch (err) {
+      console.log(err);
+      openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+    } finally {
+      setIsSending(false);
+    }
+  }
 
   function searchMovies(name) {
     if (!name) {
