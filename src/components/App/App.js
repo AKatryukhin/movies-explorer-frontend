@@ -80,7 +80,7 @@ function App() {
   async function handleRegister({ name, email, password }, onSuccess) {
     setIsSending(true);
     try {
-      const res = await main.register({ name, email, password });
+      await main.register({ name, email, password });
       const resAuth = await main.authorize({ email, password });
       setCurrentUser(resAuth);
       openSuccessPopup('Вы успешно зарегистрировались!');
@@ -224,7 +224,7 @@ function App() {
   async function handleMovieDelete(movie) {
     const movieForDelete = savedMovies.find((i) => i.movieId === movie.id);
     try {
-      const res = await main.deleteMovie(movieForDelete._id);
+      await main.deleteMovie(movieForDelete._id);
       const NewSavedMovies = savedMovies.filter((i) => i.movieId !== movie.id);
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
@@ -235,7 +235,7 @@ function App() {
 
   async function handleSavedMovieDelete(movie) {
     try {
-      const res = await main.deleteMovie(movie._id);
+      await main.deleteMovie(movie._id);
       const NewSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
@@ -292,7 +292,7 @@ function App() {
 
   async function handleSignOut(email) {
     try {
-      const res = await main.logout(email);
+      await main.logout(email);
       setLoggedIn(false);
       setCurrentUser({ name: '', email: '' });
       localStorage.removeItem('movies');

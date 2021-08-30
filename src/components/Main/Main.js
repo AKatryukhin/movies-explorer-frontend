@@ -7,10 +7,8 @@ import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import './Main.css';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Main() {
-  const currentUser = React.useContext(CurrentUserContext);
   return (
     <>
       <Header />
