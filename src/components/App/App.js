@@ -30,11 +30,6 @@ function App() {
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
   });
   const [isError, setIsError] = useState(false);
-  const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
 
   function handleInfoPopupClick() {
     setIsInfoPopupOpen(true);
@@ -53,8 +48,10 @@ function App() {
   }
 
   useEffect(() => {
-    Promise.all([main.getProfileInfo(), main.getUserMovies()])
-      .then(([currentUserData, currentSavedMovies]) => {
+    (async () => {
+      try {
+        const currentUserData = await main.getProfileInfo();
+        const currentSavedMovies = await main.getUserMovies();
         setCurrentUser(currentUserData);
         setLoggedIn(true);
         const lastSearchList = JSON.parse(
@@ -66,8 +63,10 @@ function App() {
           'savedMoviesList',
           JSON.stringify(currentSavedMovies.movies)
         );
-      })
-      .catch((err) => console.log(err));
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   }, []);
 
   function checkLikeStatus(movie) {
@@ -137,23 +136,20 @@ function App() {
     return lastSearchList;
   }
 
-  function getMovieslist(name) {
+  async function getMovieslist(name) {
     if (loggedIn) {
       setIsLoading(true);
-      mov
-        .getMoviesCardlist()
-        .then((moviesData) => {
-          localStorage.setItem('movies', JSON.stringify(moviesData));
-          searchMovies(name);
-        })
-        .catch((err) => {
-          openErrorPopup(
-            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-          );
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+      try {
+        const moviesData = await mov.getMoviesCardlist();
+        localStorage.setItem('movies', JSON.stringify(moviesData));
+        searchMovies(name);
+      } catch (err) {
+        openErrorPopup(
+          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+        );
+      } finally {
+        setIsLoading(false);
+      }
     }
   }
 
@@ -199,11 +195,12 @@ function App() {
       window.removeEventListener('keydown', handleEscClose);
     };
   }, []);
-  function handleSavedMovie(movie) {
+
+  async function handleSavedMovie(movie) {
     const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
     const country = movie.country ? movie.country : 'Неизвестно';
-    main
-      .createMovie({
+    try {
+      const res = await main.createMovie({
         country: country,
         director: movie.director,
         duration: movie.duration,
@@ -215,44 +212,36 @@ function App() {
         movieId: movie.id,
         nameRU: movie.nameRU,
         nameEN: nameEN,
-      })
-      .then((res) => {
-        const NewSavedMovies = [res.movie, ...savedMovies];
-        setSavedMovies(NewSavedMovies);
-        localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
-      })
-      .catch((err) => {
-        console.log(err);
       });
+      const NewSavedMovies = [res.movie, ...savedMovies];
+      setSavedMovies(NewSavedMovies);
+      localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  function handleMovieDelete(movie) {
+  async function handleMovieDelete(movie) {
     const movieForDelete = savedMovies.find((i) => i.movieId === movie.id);
-    main
-      .deleteMovie(movieForDelete._id)
-      .then((res) => {
-        const NewSavedMovies = savedMovies.filter(
-          (i) => i.movieId !== movie.id
-        );
-        setSavedMovies(NewSavedMovies);
-        localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await main.deleteMovie(movieForDelete._id);
+      const NewSavedMovies = savedMovies.filter((i) => i.movieId !== movie.id);
+      setSavedMovies(NewSavedMovies);
+      localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  function handleSavedMovieDelete(movie) {
-    main
-      .deleteMovie(movie._id)
-      .then((res) => {
-        const NewSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
-        setSavedMovies(NewSavedMovies);
-        localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function handleSavedMovieDelete(movie) {
+    try {
+      const res = await main.deleteMovie(movie._id);
+      const NewSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
+      setSavedMovies(NewSavedMovies);
+      localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function handleToggleShortSavedMovies() {
@@ -281,47 +270,40 @@ function App() {
       : setSavedMovies(savedMoviesList);
   }, [isShortSasvedMovies]);
 
-  function handleUpdateProfile({ name, email }) {
+  async function handleUpdateProfile({ name, email }) {
     setIsLoading(true);
     setIsSending(true);
-    main
-      .setProfileInfo({ name, email })
-      .then((res) => {
-        if (res) {
-          setCurrentUser({
-            ...currentUser,
-            name: res.name,
-            email: res.email,
-          });
-          openSuccessPopup('Данные успешно обновлены!');
-        }
-      })
-      .catch((err) => {
-        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-        setIsSending(false);
+    try {
+      const res = await main.setProfileInfo({ name, email });
+      setCurrentUser({
+        ...currentUser,
+        name: res.name,
+        email: res.email,
       });
+      openSuccessPopup('Данные успешно обновлены!');
+    } catch (err) {
+      openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+      setIsSending(false);
+    }
   }
 
-  function handleSignOut(email) {
-    main
-      .logout(email)
-      .then(() => {
-        setLoggedIn(false);
-        setCurrentUser({ name: '', email: '' });
-        localStorage.removeItem('movies');
-        localStorage.removeItem('lastSearchList');
-        localStorage.removeItem('savedMoviesList');
-        setMovies([]);
-        setSavedMovies([]);
-        history.push('/');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function handleSignOut(email) {
+    try {
+      const res = await main.logout(email);
+      setLoggedIn(false);
+      setCurrentUser({ name: '', email: '' });
+      localStorage.removeItem('movies');
+      localStorage.removeItem('lastSearchList');
+      localStorage.removeItem('savedMoviesList');
+      setMovies([]);
+      setSavedMovies([]);
+      history.push('/');
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
