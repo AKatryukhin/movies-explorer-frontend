@@ -30,11 +30,6 @@ function App() {
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
   });
   const [isError, setIsError] = useState(false);
-  const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
 
   function handleInfoPopupClick() {
     setIsInfoPopupOpen(true);
@@ -84,10 +79,6 @@ function App() {
       .register({ name, email, password })
 
       .then((res) => {
-        setUserData({
-          name: res.name,
-          email: res.email,
-        });
         setCurrentUser(res);
         openSuccessPopup('Вы успешно зарегистрировались!');
         onSuccess();
@@ -95,9 +86,6 @@ function App() {
           .authorize({ email, password })
           .then((res) => {
             setCurrentUser(res);
-            setUserData({
-              email: res.email,
-            });
             setLoggedIn(true);
             history.push('/movies');
           })
