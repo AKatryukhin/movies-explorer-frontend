@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLocation } from 'react';
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -17,6 +17,7 @@ import { ESC_KEYCODE, SHORT_MOVIES } from '../../utils/constants';
 
 function App() {
   const history = useHistory();
+  const location = useLocation();
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -30,6 +31,7 @@ function App() {
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
   });
   const [isError, setIsError] = useState(false);
+
 
   function handleInfoPopupClick() {
     setIsInfoPopupOpen(true);
@@ -54,6 +56,7 @@ function App() {
         const currentSavedMovies = await main.getUserMovies();
         setCurrentUser(currentUserData);
         setLoggedIn(true);
+        history.push(location.pathname);
         const lastSearchList = JSON.parse(
           localStorage.getItem('lastSearchList')
         );
