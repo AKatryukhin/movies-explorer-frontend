@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useLocation } from 'react';
-import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, useHistory, Redirect, useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
