@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
+import { Route, Switch, useHistory, Redirect, useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -14,6 +14,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import * as main from '../../utils/MainApi';
 import * as mov from '../../utils/MoviesApi';
 import { ESC_KEYCODE, SHORT_MOVIES } from '../../utils/constants';
+
+
 
 function App() {
   const history = useHistory();
@@ -30,7 +32,8 @@ function App() {
     title: 'Что-то пошло не так! Попробуйте ещё раз.',
   });
   const [isError, setIsError] = useState(false);
-
+  const location = useLocation();
+  
   function handleInfoPopupClick() {
     setIsInfoPopupOpen(true);
   }
@@ -52,6 +55,7 @@ function App() {
       .then(([currentUserData, currentSavedMovies]) => {
         setCurrentUser(currentUserData);
         setLoggedIn(true);
+        history.push(location.pathname);
         const lastSearchList = JSON.parse(
           localStorage.getItem('lastSearchList')
         );
@@ -73,7 +77,7 @@ function App() {
     }
   }
 
-  const handleRegister = ({ name, email, password }, onSuccess) => {
+  function handleRegister({ name, email, password }, onSuccess) {
     setIsSending(true);
     main
       .register({ name, email, password })
@@ -104,7 +108,7 @@ function App() {
       });
   };
 
-  const handleLogin = ({ email, password }, onSuccess) => {
+  function handleLogin ({ email, password }, onSuccess) {
     setIsSending(true);
     main
       .authorize({ email, password })
