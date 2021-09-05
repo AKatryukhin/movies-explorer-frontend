@@ -19,9 +19,8 @@ function SavedMovies({
   const savedMovies = value.savedMovies;
 
   return (
-    <>
+    <main className='movies'>
       <Header />
-      <main className='movies'>
         <SearchForm
           isSearch={isSearch}
           isLoading={isLoading}
@@ -37,7 +36,6 @@ function SavedMovies({
         )}
         <Footer />
       </main>
-    </>
   );
 }
 
