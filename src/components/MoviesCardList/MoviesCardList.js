@@ -90,7 +90,7 @@ function MoviesCardList({ onMovieLike, onMovieDelete, checkLikeStatus }) {
           </div>
         </Route>
       )}
-      {savedMovies.length > 0 && (
+      {savedMovies && (
         <Route path='/saved-movies'>
           <section className='movies-cardlist section-movies movies-cardlist_type_saved'>
             {savedMovies.length > count &&
