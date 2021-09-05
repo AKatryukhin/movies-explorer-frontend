@@ -14,7 +14,7 @@ function Promo() {
           <p className='promo__subtitle'>
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
-          <Link to='/' className='promo__link'>
+          <Link to={{ pathname: 'https://practicum.yandex.ru/web/' }} target='_blank' rel='noopener noreferrer' className='promo__link'>
             <button className='promo__knowmore-button'>Узнать больше</button>
           </Link>
         </div>
