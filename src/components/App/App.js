@@ -70,11 +70,12 @@ function App() {
   }, []);
 
   function checkLikeStatus(movie) {
-    if (movie) {
+    if (savedMovies) {
       return savedMovies.some(
         (i) => i.movieId === movie.id && i.owner === currentUser._id
       );
     }
+    return false;
   }
 
   function handleRegister({ name, email, password }, onSuccess) {
