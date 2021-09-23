@@ -54,8 +54,6 @@ function App() {
     Promise.all([main.getProfileInfo(), main.getUserMovies()])
       .then(([currentUserData, currentSavedMovies]) => {
         setCurrentUser(currentUserData);
-        setLoggedIn(true);
-        history.push(location.pathname);
         const lastSearchList = JSON.parse(
           localStorage.getItem('lastSearchList')
         );
@@ -65,9 +63,11 @@ function App() {
           'savedMoviesList',
           JSON.stringify(currentSavedMovies.movies)
         );
+        setLoggedIn(true);
+        history.push(location.pathname);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn]);
 
   function checkLikeStatus(movie) {
     if (savedMovies) {
