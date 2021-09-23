@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory, Redirect, useLocation } from 'react-router-dom';
+import {
+  Route,
+  Switch,
+  useHistory,
+  Redirect,
+  useLocation,
+} from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -14,8 +20,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import * as main from '../../utils/MainApi';
 import * as mov from '../../utils/MoviesApi';
 import { ESC_KEYCODE, SHORT_MOVIES } from '../../utils/constants';
-
-
 
 function App() {
   const history = useHistory();
@@ -33,7 +37,7 @@ function App() {
   });
   const [isError, setIsError] = useState(false);
   const location = useLocation();
-  
+
   function handleInfoPopupClick() {
     setIsInfoPopupOpen(true);
   }
@@ -53,7 +57,10 @@ function App() {
   useEffect(() => {
     Promise.all([main.getProfileInfo(), main.getUserMovies()])
       .then(([currentUserData, currentSavedMovies]) => {
-        setCurrentUser(currentUserData);
+        setCurrentUser({
+          ...currentUser,
+          currentUserData,
+        });
         const lastSearchList = JSON.parse(
           localStorage.getItem('lastSearchList')
         );
@@ -84,13 +91,19 @@ function App() {
       .register({ name, email, password })
 
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser({
+          ...currentUser,
+          res,
+        });
         openSuccessPopup('Вы успешно зарегистрировались!');
         onSuccess();
         main
           .authorize({ email, password })
           .then((res) => {
-            setCurrentUser(res);
+            setCurrentUser({
+              ...currentUser,
+              res,
+            });
             setLoggedIn(true);
             history.push('/movies');
           })
@@ -107,14 +120,17 @@ function App() {
       .finally(() => {
         setIsSending(false);
       });
-  };
+  }
 
-  function handleLogin ({ email, password }, onSuccess) {
+  function handleLogin({ email, password }, onSuccess) {
     setIsSending(true);
     main
       .authorize({ email, password })
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser({
+          ...currentUser,
+          res,
+        });
         setLoggedIn(true);
         onSuccess();
         openSuccessPopup('С возвращением!');
@@ -127,7 +143,7 @@ function App() {
       .finally(() => {
         setIsSending(false);
       });
-  };
+  }
 
   function searchMovies(name) {
     if (!name) {
@@ -324,7 +340,7 @@ function App() {
       .logout(email)
       .then(() => {
         setLoggedIn(false);
-        setCurrentUser({ name: '', email: '' });
+        setCurrentUser({ ...currentUser, name: '', email: '' });
         localStorage.removeItem('movies');
         localStorage.removeItem('lastSearchList');
         localStorage.removeItem('savedMoviesList');
