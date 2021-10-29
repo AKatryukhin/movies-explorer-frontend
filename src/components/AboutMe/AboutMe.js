@@ -33,7 +33,7 @@ function AboutMe() {
               Facebook
             </Link>
             <Link
-              to={{ pathname: 'https://github.com/' }}
+              to={{ pathname: 'https://github.com/AKatryukhin/AKatryukhin/' }}
               target='_blank'
               rel='noopener noreferrer'
               className='aboutme__social-link'
